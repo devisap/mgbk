@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import IcInfoWhite from '../../../../assets/icons/ic_info_white.svg'
 
 const ButtonWithIcon = () => {

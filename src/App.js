@@ -30,40 +30,46 @@ import InputTextWithIcon from './pages/components/atoms/InputTextWithIcon';
 import LabelRequire from './pages/components/atoms/LabelRequire';
 import Button from './pages/components/atoms/Button';
 import ButtonWithIcon from './pages/components/atoms/ButtonWithIcon';
-import CheckBoxCustom from './pages/components/atoms/CheckBoxCustom';
+import CheckBox from './pages/components/atoms/CheckBox';
 import Heading1 from './pages/components/atoms/Heading1';
 import Heading2 from './pages/components/atoms/Heading2';
 import Paragraph from './pages/components/atoms/Paragraph';
+import Box from './pages/components/atoms/Box';
 
 const App: () => React$Node = () => {
   return (
     <View>
-      <Label />
-      <InputText />
-      <View style={{marginTop: 64}}>
-        <InputTextWithIcon />
-      </View>
-      <View style={{marginTop: 64}}>
-        <LabelRequire />
-      </View>
-      <View style={{marginTop: 64}}>
-        <Button />
-      </View>
-      <View style={{marginTop: 64}}>
-        <ButtonWithIcon />
-      </View>
-      <View style={{marginTop: 64}}>
-        <CheckBoxCustom />
-      </View>
-      <View style={{marginTop: 64}}>
-        <Heading1 />
-      </View>
-      <View style={{marginTop: 64}}>
-        <Heading2 />
-      </View>
-      <View style={{marginTop: 64}}>
-        <Paragraph />
-      </View>
+      <ScrollView>
+        <Label />
+        <InputText />
+        <View style={{marginTop: 64}}>
+          <InputTextWithIcon />
+        </View>
+        <View style={{marginTop: 64}}>
+          <LabelRequire />
+        </View>
+        <View style={{marginTop: 64}}>
+          <Button />
+        </View>
+        <View style={{marginTop: 64}}>
+          <ButtonWithIcon />
+        </View>
+        <View style={{marginTop: 64}}>
+          <CheckBox />
+        </View>
+        <View style={{marginTop: 64}}>
+          <Heading1 />
+        </View>
+        <View style={{marginTop: 64}}>
+          <Heading2 />
+        </View>
+        <View style={{marginTop: 64}}>
+          <Paragraph />
+        </View>
+        <View style={{marginTop: 64}}>
+          <Box />
+        </View>
+      </ScrollView>
     </View>
   );
 };
