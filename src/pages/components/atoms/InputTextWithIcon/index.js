@@ -1,11 +1,12 @@
 import React from 'react';
 import { Image, StyleSheet, TextInput, View } from 'react-native';
+import IcInfo from '../../../../assets/icons/ic_info.svg'
 
 const InputTextWithIcon = () => {
     return (
         <View style={{flex: 1}}>
             <View style={styles.inputGroup}>
-                <Image source={require('../../../../assets/icons/ic_info.jpg')} style={{marginVertical: 11}} />
+                <IcInfo />
                 <TextInput style={styles.input} placeholder="Input" placeholderStyle />
             </View>
         </View>
@@ -20,7 +21,8 @@ const styles = StyleSheet.create({
         borderRadius: 4, 
         height: 40,
         paddingLeft: 11,
-        flexDirection:"row"
+        flexDirection:"row",
+        alignItems: 'center'
     },
     input: {
         fontSize: 20,

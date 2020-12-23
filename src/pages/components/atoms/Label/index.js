@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
         fontFamily: "Lato", 
         fontWeight: "600", 
         fontSize: 20, 
-        lineHeight: 24
+        lineHeight: 24,
+        color: '#4a4a4a'
     } 
 })
 

@@ -28,6 +28,12 @@ import Label from './pages/components/atoms/Label';
 import InputText from './pages/components/atoms/InputText';
 import InputTextWithIcon from './pages/components/atoms/InputTextWithIcon';
 import LabelRequire from './pages/components/atoms/LabelRequire';
+import Button from './pages/components/atoms/Button';
+import ButtonWithIcon from './pages/components/atoms/ButtonWithIcon';
+import CheckBoxCustom from './pages/components/atoms/CheckBoxCustom';
+import Heading1 from './pages/components/atoms/Heading1';
+import Heading2 from './pages/components/atoms/Heading2';
+import Paragraph from './pages/components/atoms/Paragraph';
 
 const App: () => React$Node = () => {
   return (
@@ -39,6 +45,24 @@ const App: () => React$Node = () => {
       </View>
       <View style={{marginTop: 64}}>
         <LabelRequire />
+      </View>
+      <View style={{marginTop: 64}}>
+        <Button />
+      </View>
+      <View style={{marginTop: 64}}>
+        <ButtonWithIcon />
+      </View>
+      <View style={{marginTop: 64}}>
+        <CheckBoxCustom />
+      </View>
+      <View style={{marginTop: 64}}>
+        <Heading1 />
+      </View>
+      <View style={{marginTop: 64}}>
+        <Heading2 />
+      </View>
+      <View style={{marginTop: 64}}>
+        <Paragraph />
       </View>
     </View>
   );
