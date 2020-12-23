@@ -24,11 +24,22 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import SplashScreen from './pages/SplashScreen';
+import Label from './pages/components/atoms/Label';
+import InputText from './pages/components/atoms/InputText';
+import InputTextWithIcon from './pages/components/atoms/InputTextWithIcon';
+import LabelRequire from './pages/components/atoms/LabelRequire';
 
 const App: () => React$Node = () => {
   return (
     <View>
-      <SplashScreen />
+      <Label />
+      <InputText />
+      <View style={{marginTop: 64}}>
+        <InputTextWithIcon />
+      </View>
+      <View style={{marginTop: 64}}>
+        <LabelRequire />
+      </View>
     </View>
   );
 };
