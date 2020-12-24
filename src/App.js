@@ -23,22 +23,44 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import SplashScreen from './pages/SplashScreen';
-import Label from './pages/components/atoms/Label';
-import InputText from './pages/components/atoms/InputText';
-import InputTextWithIcon from './pages/components/atoms/InputTextWithIcon';
-import LabelRequire from './pages/components/atoms/LabelRequire';
-import Button from './pages/components/atoms/Button';
-import ButtonWithIcon from './pages/components/atoms/ButtonWithIcon';
-import CheckBox from './pages/components/atoms/CheckBox';
-import Heading1 from './pages/components/atoms/Heading1';
-import Heading2 from './pages/components/atoms/Heading2';
-import Paragraph from './pages/components/atoms/Paragraph';
-import Box from './pages/components/atoms/Box';
-import Login from './pages/Login';
+import IcAlignJustifyWhite from './components/atoms/icons/IcAlignJustifyWhite';
+import IcArrowLeftWhite from './components/atoms/icons/IcArrowLeftWhite';
+import IcArrowLongRightBlack from './components/atoms/icons/IcArrowLongRightBlack';
+import IcCalendarBlack from './components/atoms/icons/IcCalendarBlack';
+import IcEnvelope from './components/atoms/icons/IcEnvelope';
+import IcEyeBlack from './components/atoms/icons/IcEyeBlack';
+import IcHomeWhite from './components/atoms/icons/IcHomeWhite';
+import IcLock from './components/atoms/icons/IcLock';
+import IcPolygonBlack from './components/atoms/icons/IcPolygonBlack';
+import IcSigninWhite from './components/atoms/icons/IcSigninWhite';
+import IcSignoutRed from './components/atoms/icons/IcSignoutRed';
+import IcStickyNoteBlack from './components/atoms/icons/IcStickyNoteBlack';
+import IcUpload from './components/atoms/icons/IcUpload';
+import IcUser from './components/atoms/icons/IcUser';
+import IcUserBlack from './components/atoms/icons/IcUserBlack';
+import SplashScreen from './components/pages/SplashScreen';
 
 const App = () => {
-  return <Login />
+  // return <SplashScreen />
+  // return <IcAlignJustifyWhite />
+  return (
+    <View>
+      <IcArrowLeftWhite />
+      <IcArrowLongRightBlack />
+      <IcCalendarBlack />
+      <IcEnvelope />
+      <IcEyeBlack />
+      <IcHomeWhite />
+      <IcLock />
+      <IcPolygonBlack />
+      <IcSigninWhite />
+      <IcSignoutRed />
+      <IcStickyNoteBlack />
+      <IcUpload />
+      <IcUser />
+      <IcUserBlack />
+    </View>
+  )
 };
 
 export default App;
