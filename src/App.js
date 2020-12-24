@@ -35,82 +35,10 @@ import Heading1 from './pages/components/atoms/Heading1';
 import Heading2 from './pages/components/atoms/Heading2';
 import Paragraph from './pages/components/atoms/Paragraph';
 import Box from './pages/components/atoms/Box';
+import Login from './pages/Login';
 
-const App: () => React$Node = () => {
-  return (
-    <View>
-      <ScrollView>
-        <Label />
-        <InputText />
-        <View style={{marginTop: 64}}>
-          <InputTextWithIcon />
-        </View>
-        <View style={{marginTop: 64}}>
-          <LabelRequire />
-        </View>
-        <View style={{marginTop: 64}}>
-          <Button />
-        </View>
-        <View style={{marginTop: 64}}>
-          <ButtonWithIcon />
-        </View>
-        <View style={{marginTop: 64}}>
-          <CheckBox />
-        </View>
-        <View style={{marginTop: 64}}>
-          <Heading1 />
-        </View>
-        <View style={{marginTop: 64}}>
-          <Heading2 />
-        </View>
-        <View style={{marginTop: 64}}>
-          <Paragraph />
-        </View>
-        <View style={{marginTop: 64}}>
-          <Box />
-        </View>
-      </ScrollView>
-    </View>
-  );
+const App = () => {
+  return <Login />
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 
 export default App;
