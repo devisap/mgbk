@@ -38,27 +38,47 @@ import IcStickyNoteBlack from './components/atoms/icons/IcStickyNoteBlack';
 import IcUpload from './components/atoms/icons/IcUpload';
 import IcUser from './components/atoms/icons/IcUser';
 import IcUserBlack from './components/atoms/icons/IcUserBlack';
+import Heading1 from './components/atoms/texts/Heading1';
+import Heading2 from './components/atoms/texts/Heading2';
+import Paragraph from './components/atoms/texts/Paragraph';
+import Label from './components/atoms/texts/Label';
 import SplashScreen from './components/pages/SplashScreen';
+import LabelRequire from './components/atoms/texts/LabelRequire';
+import ButtonPrimary from './components/atoms/Buttons/ButtonPrimary';
+import ButtonSecondary from './components/atoms/Buttons/ButtonSecondary';
+import ButtonSuccess from './components/atoms/Buttons/ButtonSuccess';
+import LabelUnderline from './components/atoms/texts/LabelUnderline';
 
 const App = () => {
   // return <SplashScreen />
   // return <IcAlignJustifyWhite />
   return (
     <View>
-      <IcArrowLeftWhite />
-      <IcArrowLongRightBlack />
-      <IcCalendarBlack />
-      <IcEnvelope />
-      <IcEyeBlack />
-      <IcHomeWhite />
-      <IcLock />
-      <IcPolygonBlack />
-      <IcSigninWhite />
-      <IcSignoutRed />
-      <IcStickyNoteBlack />
-      <IcUpload />
-      <IcUser />
-      <IcUserBlack />
+      <ScrollView>
+        <IcArrowLeftWhite />
+        <IcArrowLongRightBlack />
+        <IcCalendarBlack />
+        <IcEnvelope />
+        <IcEyeBlack />
+        <IcHomeWhite />
+        <IcLock />
+        <IcPolygonBlack />
+        <IcSigninWhite />
+        <IcSignoutRed />
+        <IcStickyNoteBlack />
+        <IcUpload />
+        <IcUser />
+        <IcUserBlack />
+        <Heading1 />
+        <Heading2 />
+        <Paragraph />
+        <Label />
+        <LabelUnderline text={"Masuk"}/>
+        <LabelRequire />
+        <ButtonPrimary text={"Button"}/>
+        <ButtonSecondary text={"Button"} />
+        <ButtonSuccess text={"Button"} />
+      </ScrollView>
     </View>
   )
 };
