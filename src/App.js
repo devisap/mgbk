@@ -48,14 +48,20 @@ import ButtonPrimary from './components/atoms/Buttons/ButtonPrimary';
 import ButtonSecondary from './components/atoms/Buttons/ButtonSecondary';
 import ButtonSuccess from './components/atoms/Buttons/ButtonSuccess';
 import LabelUnderline from './components/atoms/texts/LabelUnderline';
+import ButtonAuth from './components/molecules/buttons/ButtonAuth';
+import EmailField from './components/molecules/forms/EmailField';
+import PasswordField from './components/molecules/forms/PasswordField';
+import RememberMeField from './components/molecules/forms/RememberMeField';
+import LoginCard from './components/organisms/LoginCard';
 
 const App = () => {
   // return <SplashScreen />
   // return <IcAlignJustifyWhite />
   return (
-    <View>
+    <View style={{backgroundColor: "#fff"}}>
       <ScrollView>
-        <IcArrowLeftWhite />
+        {/* atoms */}
+        {/* <IcArrowLeftWhite />
         <IcArrowLongRightBlack />
         <IcCalendarBlack />
         <IcEnvelope />
@@ -77,7 +83,16 @@ const App = () => {
         <LabelRequire />
         <ButtonPrimary text={"Button"}/>
         <ButtonSecondary text={"Button"} />
-        <ButtonSuccess text={"Button"} />
+        <ButtonSuccess text={"Button"} /> */}
+
+        {/* molecules */}
+        {/* <ButtonAuth text={"Login"}/>
+        <EmailField />
+        <PasswordField />
+        <RememberMeField /> */}
+
+        {/* organisms */}
+        <LoginCard />
       </ScrollView>
     </View>
   )
