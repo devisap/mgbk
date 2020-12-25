@@ -56,6 +56,13 @@ import LoginCard from './components/organisms/LoginCard';
 import OrBox from './components/molecules/OrBox';
 import LoginLayout from './components/templates/LoginLayout';
 import RegisterLayout from './components/templates/RegisterLayout';
+import ButtonMulai from './components/molecules/links/LinkMulai';
+import LinkMulai from './components/molecules/links/LinkMulai';
+import FinishingProfileCard from './components/organisms/MenuHomeCard';
+import HomeLayout from './components/templates/HomeLayout';
+import ProfileImage from './components/atoms/images/CircleImage';
+import CircleImage from './components/atoms/images/CircleImage';
+import InfoProfileCard from './components/organisms/InfoProfileCard';
 
 const App = () => {
   // return <SplashScreen />
@@ -106,10 +113,16 @@ const App = () => {
 
   return (
     // templates
-    <LoginLayout />
+    // <LoginLayout />
     // <RegisterLayout />
     // <ButtonPrimary />
     // <View></View>
+    // <LinkMulai />
+    // <FinishingProfileCard />
+    // <HomeLayout />
+    // <Login />
+    // <CircleImage />
+    <InfoProfileCard />
   )
 };
 
