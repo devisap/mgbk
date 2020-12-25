@@ -44,57 +44,72 @@ import Paragraph from './components/atoms/texts/Paragraph';
 import Label from './components/atoms/texts/Label';
 import SplashScreen from './components/pages/SplashScreen';
 import LabelRequire from './components/atoms/texts/LabelRequire';
-import ButtonPrimary from './components/atoms/Buttons/ButtonPrimary';
-import ButtonSecondary from './components/atoms/Buttons/ButtonSecondary';
-import ButtonSuccess from './components/atoms/Buttons/ButtonSuccess';
+import ButtonPrimary from './components/atoms/buttons/ButtonPrimary';
+import ButtonSecondary from './components/atoms/buttons/ButtonSecondary';
+import ButtonSuccess from './components/atoms/buttons/ButtonSuccess';
 import LabelUnderline from './components/atoms/texts/LabelUnderline';
 import ButtonAuth from './components/molecules/buttons/ButtonAuth';
 import EmailField from './components/molecules/forms/EmailField';
 import PasswordField from './components/molecules/forms/PasswordField';
 import RememberMeField from './components/molecules/forms/RememberMeField';
 import LoginCard from './components/organisms/LoginCard';
+import OrBox from './components/molecules/OrBox';
+import LoginLayout from './components/templates/LoginLayout';
+import RegisterLayout from './components/templates/RegisterLayout';
 
 const App = () => {
   // return <SplashScreen />
   // return <IcAlignJustifyWhite />
+  // return (
+  //   <View>
+  //     <ScrollView>
+  //       {/* atoms */}
+  //       {/* <IcArrowLeftWhite />
+  //       <IcArrowLongRightBlack />
+  //       <IcCalendarBlack />
+  //       <IcEnvelope />
+  //       <IcEyeBlack />
+  //       <IcHomeWhite />
+  //       <IcLock />
+  //       <IcPolygonBlack />
+  //       <IcSigninWhite />
+  //       <IcSignoutRed />
+  //       <IcStickyNoteBlack />
+  //       <IcUpload />
+  //       <IcUser />
+  //       <IcUserBlack />
+  //       <Heading1 />
+  //       <Heading2 />
+  //       <Paragraph />
+  //       <Label />
+  //       <LabelUnderline text={"Masuk"}/>
+  //       <LabelRequire />
+  //       <ButtonPrimary text={"Button"}/>
+  //       <ButtonSecondary text={"Button"} />
+  //       <ButtonSuccess text={"Button"} /> */}
+
+  //       {/* molecules */}
+  //       {/* <ButtonAuth text={"Login"}/>
+  //       <EmailField />
+  //       <PasswordField />
+  //       <RememberMeField /> */}
+
+  //       {/* organisms */}
+  //       {/* <LoginCard /> */}
+  //       {/* <OrBox /> */}
+        
+  //       {/* pages */}
+  //       <LoginLayout />
+  //     </ScrollView>
+  //   </View>
+  // )
+
   return (
-    <View style={{backgroundColor: "#fff"}}>
-      <ScrollView>
-        {/* atoms */}
-        {/* <IcArrowLeftWhite />
-        <IcArrowLongRightBlack />
-        <IcCalendarBlack />
-        <IcEnvelope />
-        <IcEyeBlack />
-        <IcHomeWhite />
-        <IcLock />
-        <IcPolygonBlack />
-        <IcSigninWhite />
-        <IcSignoutRed />
-        <IcStickyNoteBlack />
-        <IcUpload />
-        <IcUser />
-        <IcUserBlack />
-        <Heading1 />
-        <Heading2 />
-        <Paragraph />
-        <Label />
-        <LabelUnderline text={"Masuk"}/>
-        <LabelRequire />
-        <ButtonPrimary text={"Button"}/>
-        <ButtonSecondary text={"Button"} />
-        <ButtonSuccess text={"Button"} /> */}
-
-        {/* molecules */}
-        {/* <ButtonAuth text={"Login"}/>
-        <EmailField />
-        <PasswordField />
-        <RememberMeField /> */}
-
-        {/* organisms */}
-        <LoginCard />
-      </ScrollView>
-    </View>
+    // templates
+    <LoginLayout />
+    // <RegisterLayout />
+    // <ButtonPrimary />
+    // <View></View>
   )
 };
 

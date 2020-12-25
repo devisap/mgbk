@@ -5,7 +5,7 @@ import Label from '../../../atoms/texts/Label'
 
 const EmailField = () => {
     return (
-        <View>
+        <View style={{flex: 1}}>
             <Label text={"Email"} />
             <View style={{flex: 1, flexDirection: 'row'}}>
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', borderRadius: 4, borderColor: '#DBDBDB', borderWidth: 1, height: 43, marginTop: 8, paddingHorizontal: 10}}>
