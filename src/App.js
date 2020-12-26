@@ -63,6 +63,9 @@ import HomeLayout from './components/templates/HomeLayout';
 import ProfileImage from './components/atoms/images/CircleImage';
 import CircleImage from './components/atoms/images/CircleImage';
 import InfoProfileCard from './components/organisms/InfoProfileCard';
+import Heading3 from './components/atoms/texts/Heading3';
+import ButtonSubmit from './components/molecules/buttons/ButtonSubmit';
+import ProfileLayout from './components/templates/ProfileLayout';
 
 const App = () => {
   // return <SplashScreen />
@@ -122,7 +125,9 @@ const App = () => {
     // <HomeLayout />
     // <Login />
     // <CircleImage />
-    <InfoProfileCard />
+    // <InfoProfileCard />
+    // <ButtonSubmit title={"Perbarui profil"} />
+    <ProfileLayout />
   )
 };
 
