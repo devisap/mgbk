@@ -11,7 +11,7 @@ const InfoProfileCard = () => {
             </View>
             <View style={{flex: 1, borderColor: "#4a4a4a", borderWidth: 1}}></View>
             <View style={{flexDirection: 'column', alignItems: 'center', marginVertical: 16, paddingHorizontal: 16}}>
-                <Heading2 text={"Yahya Purnomo"} />
+                <Heading2 text={"Yahya Purnomo"} textAlign={"center"} />
                 <View style={{marginTop: 4}}>
                     <Heading3 text={"yahya.purnomo@gmail.com"} color={"#737373"} textAlign={"center"} />
                 </View>

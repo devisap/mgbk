@@ -8,7 +8,7 @@ const LoginLayout = () => {
         <View style={{backgroundColor: "#fff", flex: 1, flexDirection: 'row', paddingHorizontal: 17, alignItems: 'center'}}>
             <ScrollView>
                 <LoginCard />
-                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 71}}>
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 71, marginBottom: 24}}>
                     <Footer />
                 </View>
             </ScrollView>

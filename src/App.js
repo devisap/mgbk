@@ -66,6 +66,9 @@ import InfoProfileCard from './components/organisms/InfoProfileCard';
 import Heading3 from './components/atoms/texts/Heading3';
 import ButtonSubmit from './components/molecules/buttons/ButtonSubmit';
 import ProfileLayout from './components/templates/ProfileLayout';
+import DailyReportCard from './components/organisms/DailyReportCard';
+import ReportLayout from './components/templates/DailyReportLayout';
+import DailyReportLayout from './components/templates/DailyReportLayout';
 
 const App = () => {
   // return <SplashScreen />
@@ -116,7 +119,7 @@ const App = () => {
 
   return (
     // templates
-    // <LoginLayout />
+    <LoginLayout />
     // <RegisterLayout />
     // <ButtonPrimary />
     // <View></View>
@@ -127,7 +130,9 @@ const App = () => {
     // <CircleImage />
     // <InfoProfileCard />
     // <ButtonSubmit title={"Perbarui profil"} />
-    <ProfileLayout />
+    // <ProfileLayout />
+    // <DailyReportCard />
+    // <DailyReportLayout />
   )
 };
 
