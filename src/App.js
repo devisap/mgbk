@@ -119,7 +119,7 @@ const App = () => {
 
   return (
     // templates
-    <LoginLayout />
+    // <LoginLayout />
     // <RegisterLayout />
     // <ButtonPrimary />
     // <View></View>
@@ -132,7 +132,7 @@ const App = () => {
     // <ButtonSubmit title={"Perbarui profil"} />
     // <ProfileLayout />
     // <DailyReportCard />
-    // <DailyReportLayout />
+    <DailyReportLayout />
   )
 };
 
