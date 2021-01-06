@@ -70,6 +70,8 @@ import DailyReportCard from './components/organisms/DailyReportCard';
 import ReportLayout from './components/templates/DailyReportLayout';
 import DailyReportLayout from './components/templates/DailyReportLayout';
 import SettingProfileLayout from './components/templates/SettingProfileLayout';
+import ReportingStep1Layout from './components/templates/ReportingStep1Layout';
+import ReportingStep2Layout from './components/templates/ReportingStep2Layout';
 
 const App = () => {
   // return <SplashScreen />
@@ -134,7 +136,9 @@ const App = () => {
     // <ProfileLayout />
     // <DailyReportCard />
     // <DailyReportLayout />
-    <SettingProfileLayout />
+    // <SettingProfileLayout />
+    // <ReportingStep1Layout />
+    <ReportingStep2Layout />
   )
 };
 
