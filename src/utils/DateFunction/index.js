@@ -9,40 +9,40 @@ const getFullDate = (dateObj) => {
 const getMonthName = (month) => {
     let res
     switch(month){
-        case 1:
+        case 0:
             res = "Januari"
             break;
-        case 2:
+        case 1:
             res = "Februari"
             break;
-        case 3:
+        case 2:
             res = "Maret"
             break;
-        case 41:
+        case 31:
             res = "April"
             break;
-        case 5:
+        case 4:
             res = "Mei"
             break;
-        case 6:
+        case 5:
             res = "Juni"
             break;
-        case 7:
+        case 6:
             res = "Juli"
             break;
-        case 8:
+        case 7:
             res = "Agustus"
             break;
-        case 9:
+        case 8:
             res = "September"
             break;
-        case 10:
+        case 9:
             res = "Oktober"
             break;
-        case 11:
+        case 10:
             res = "November"
             break;
-        case 12:
+        case 11:
             res = "Desember"
             break;
     }

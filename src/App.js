@@ -69,6 +69,7 @@ import ProfileLayout from './components/templates/ProfileLayout';
 import DailyReportCard from './components/organisms/DailyReportCard';
 import ReportLayout from './components/templates/DailyReportLayout';
 import DailyReportLayout from './components/templates/DailyReportLayout';
+import SettingProfileLayout from './components/templates/SettingProfileLayout';
 
 const App = () => {
   // return <SplashScreen />
@@ -132,7 +133,8 @@ const App = () => {
     // <ButtonSubmit title={"Perbarui profil"} />
     // <ProfileLayout />
     // <DailyReportCard />
-    <DailyReportLayout />
+    // <DailyReportLayout />
+    <SettingProfileLayout />
   )
 };
 
