@@ -7,7 +7,7 @@ const ButtonAuth = (props) => {
     return (
         <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{backgroundColor: "#48CAE4", flex: 1, height: 42, borderRadius: 4}}>
-                <TouchableOpacity style={{flex: 1}} onPress={()=>{}}>
+                <TouchableOpacity style={{flex: 1}} onPress={props.onPress}>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                         <IcSigninWhite />
                         <View style={{marginLeft: 10}}>

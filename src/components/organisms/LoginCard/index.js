@@ -8,7 +8,7 @@ import PasswordField from '../../molecules/forms/PasswordField'
 import RememberMeField from '../../molecules/forms/RememberMeField'
 import OrBox from '../../molecules/OrBox'
 
-const LoginCard = () => {
+const LoginCard = (props) => {
     return (
         <View style={{backgroundColor: "#f5f5f5", flex: 1, paddingHorizontal: 49, borderRadius: 8}}>
             <View style={{marginTop: 35}}>
@@ -24,13 +24,13 @@ const LoginCard = () => {
                 <RememberMeField />               
             </View>
             <View style={{marginTop: 24}}>
-                <ButtonAuth text={"Login"} />
+                <ButtonAuth text={"Login"} onPress={props.onPressLogin} />
             </View>
             <View style={{marginTop: 18}}>
                 <OrBox />
             </View>
             <View style={{marginTop: 18, marginBottom: 35}}>
-                <ButtonSecondary text={"Daftar"} />
+                <ButtonSecondary onPress={props.onPressDaftar} text={"Daftar"} />
             </View>
         </View>
     )

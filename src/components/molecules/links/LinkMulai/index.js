@@ -6,7 +6,7 @@ import LabelUnderline from '../../../atoms/texts/LabelUnderline'
 const LinkMulai = (props) => {
     return (
         <View>
-            <TouchableWithoutFeedback onPress={() => {}}>
+            <TouchableWithoutFeedback onPress={props.onPress}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <LabelUnderline text={props.title? props.title : "Lorem"} />
                     <View style={{marginLeft: 7}}>

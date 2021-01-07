@@ -9,9 +9,6 @@ const ProfileLayout = () => {
     return (
         <View style={{backgroundColor: "#fff", flex: 1}}>
             <ScrollView>
-                <View>
-                    <Navbar pageName={"Profil"} />
-                </View>
                 <View style={{paddingHorizontal: 32, marginTop: 24}}>
                     <View style={{flexDirection: "column", alignItems: 'center'}}>
                         <CircleImage />

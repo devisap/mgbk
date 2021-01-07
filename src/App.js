@@ -15,7 +15,7 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native';
 import {
   Header,
   LearnMoreLinks,
@@ -72,6 +72,7 @@ import DailyReportLayout from './components/templates/DailyReportLayout';
 import SettingProfileLayout from './components/templates/SettingProfileLayout';
 import ReportingStep1Layout from './components/templates/ReportingStep1Layout';
 import ReportingStep2Layout from './components/templates/ReportingStep2Layout';
+import Router from './config/router';
 
 const App = () => {
   // return <SplashScreen />
@@ -138,7 +139,9 @@ const App = () => {
     // <DailyReportLayout />
     // <SettingProfileLayout />
     // <ReportingStep1Layout />
-    <ReportingStep2Layout />
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
   )
 };
 

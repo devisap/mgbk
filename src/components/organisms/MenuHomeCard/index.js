@@ -21,7 +21,7 @@ const MenuHomeCard = (props) => {
                 <View style={{borderColor: "#4a4a4a", borderWidth: 1}}></View>
             </View>
             <View style={{flexDirection: 'row', justifyContent: 'flex-end', marginVertical: 20, marginRight: 20}}>
-                <LinkMulai />
+                <LinkMulai onPress={props.onPress} title={"Mulai"} />
             </View>
         </View>
     )

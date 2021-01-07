@@ -11,7 +11,6 @@ import Navbar from '../Navbar'
 const ReportingStep2Layout = () => {
     return (
         <View>
-            <Navbar pageName={"Kegiatan"} />
             <ScrollView>
                 <View style={{paddingHorizontal: 32, marginBottom: 100}}>
                     <View style={{marginTop: 24}}>

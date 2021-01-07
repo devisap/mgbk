@@ -3,11 +3,11 @@ import { ScrollView, View } from 'react-native'
 import RegisterCard from '../../organisms/RegisterCard'
 import Footer from '../Footer'
 
-const RegisterLayout = () => {
+const RegisterLayout = (props) => {
     return (
         <View style={{backgroundColor: "#fff", flex: 1, flexDirection: 'row', paddingHorizontal: 17, alignItems: 'center'}}>
             <ScrollView>
-                <RegisterCard />
+                <RegisterCard onPressDaftar={props.onPressDaftar} onPressLogin={props.onPressLogin} />
                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 71, marginBottom: 24}}>
                     <Footer />
                 </View>

@@ -13,7 +13,6 @@ import Navbar from '../Navbar'
 const SettingProfileLayout = () => {
     return (
         <View>
-            <Navbar pageName={"Pengaturan Profil"} />
             <ScrollView>
                 <View style={{paddingHorizontal: 32, marginBottom: 100}}>
                     <View style={{marginTop: 24}}>

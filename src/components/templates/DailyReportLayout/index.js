@@ -93,7 +93,6 @@ const DailyReportLayout = () => {
     
     return (
         <View style={{flex: 1}}>
-            <Navbar pageName={"Laporan"} />
             <ScrollView>
                 <View  style={{paddingHorizontal: 32}}>
                     <View style={{marginTop: 24}}>
