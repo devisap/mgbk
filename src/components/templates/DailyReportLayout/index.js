@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Button, ScrollView, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native'
-import {Picker} from '@react-native-picker/picker';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ButtonSubmit from '../../molecules/buttons/ButtonSubmit'
 import ReportCard from '../../organisms/ReportCard'
@@ -42,7 +41,7 @@ const DailyReportLayout = () => {
         <View style={{backgroundColor: '#fff', flex: 1}}>
             <View style={{flex: 1}}>
                 <ScrollView>
-                    <View  style={{paddingHorizontal: 32}}>
+                    <View  style={{paddingHorizontal: 32, marginBottom: 24}}>
                         <View style={{marginTop: 39}}>
                             <Text style={{fontFamily: "Lato", fontSize: 16, color: "#4a4a4a"}}>Laporan Sekolah: SMK NEGERI 4 MALANG</Text>
                         </View>
@@ -82,7 +81,7 @@ const DailyReportLayout = () => {
                     </View>
                 </ScrollView>
             </View>
-            <View>
+            <View style={{borderTopWidth: 1.5, borderTopColor: 'rgba(10, 10, 10, 0.15)'}}>
                 <View style={{marginVertical: 16, marginHorizontal: 32}}>
                     <ButtonSubmit title={"Cetak Semua"} />
                 </View>

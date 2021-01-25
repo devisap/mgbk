@@ -19,6 +19,15 @@ const ProfileForm = () => {
             <View style={{marginTop: 24}}>
                 <UploadField label={"Logo Sekolah"} />
             </View>
+            <View style={{marginTop: 24}}>
+                <BasicField label={"Alamat Sekolah"} placeholder={"Alamat Sekolah"} />
+            </View>
+            <View style={{marginTop: 24}}>
+                <BasicField label={"Nama Kepala Sekolah"} placeholder={"Nama Kepala Sekolah"} />
+            </View>
+            <View style={{marginTop: 24}}>
+                <BasicField label={"Tambahan Informasi"} placeholder={"Tambahan Informasi"} />
+            </View>
         </View>
     )
 }

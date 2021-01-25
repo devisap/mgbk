@@ -18,7 +18,7 @@ const getMonthName = (month) => {
         case 2:
             res = "Maret"
             break;
-        case 31:
+        case 3:
             res = "April"
             break;
         case 4:

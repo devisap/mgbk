@@ -6,7 +6,7 @@ import Heading3 from '../../../atoms/texts/Heading3'
 const ButtonSubmit = (props) => {
     return (
         <View>
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
                 <View style={{backgroundColor: "#FFDD57", flexDirection: 'row', paddingHorizontal: 16, paddingVertical: 16, borderRadius: 6, alignItems: 'center'}}>
                     <View style={{flex: 1}}>
                         <Heading3 text={props.title? props.title : "Lorem Ipsum"} fontWeight={"bold"} />

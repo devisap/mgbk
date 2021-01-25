@@ -7,7 +7,9 @@ const SettingProfile = ({navigation}) => {
         alert(screen);
     }
     return (
-        <SettingProfileLayout />
+        <View style={{backgroundColor: "#fff", flex: 1}}>
+            <SettingProfileLayout />
+        </View>
     )
 }
 

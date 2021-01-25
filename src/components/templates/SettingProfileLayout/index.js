@@ -21,16 +21,6 @@ const SettingProfileLayout = () => {
                     <View style={{marginTop: 32}}>
                         <ProfileForm />
                     </View>
-                    <View style={{flex: 1, borderColor: "#4a4a4a", borderStyle: "solid", borderWidth: 1, marginTop: 18}}></View>
-                    <View style={{marginTop: 18}}>
-                        <BasicField label={"Username"} placeholder={"Username"} />
-                    </View>
-                    <View style={{marginTop: 24}}>
-                        <BasicField label={"Email"} placeholder={"Email"} />
-                    </View>
-                    <View style={{marginTop: 24}}>
-                        <PasswordFieldWithIcon />
-                    </View>
                     <View style={{marginTop: 24}}>
                         <ButtonSuccess text={"Simpan"} />
                     </View>
