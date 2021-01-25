@@ -66,7 +66,6 @@ import InfoProfileCard from './components/organisms/InfoProfileCard';
 import Heading3 from './components/atoms/texts/Heading3';
 import ButtonSubmit from './components/molecules/buttons/ButtonSubmit';
 import ProfileLayout from './components/templates/ProfileLayout';
-import DailyReportCard from './components/organisms/DailyReportCard';
 import ReportLayout from './components/templates/DailyReportLayout';
 import DailyReportLayout from './components/templates/DailyReportLayout';
 import SettingProfileLayout from './components/templates/SettingProfileLayout';

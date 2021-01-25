@@ -5,7 +5,7 @@ import Heading3 from '../../atoms/texts/Heading3'
 import Paragraph from '../../atoms/texts/Paragraph'
 import LinkMulai from '../../molecules/links/LinkMulai'
 
-const DailyReportCard = (props) => {
+const ReportCard = (props) => {
     return (
         <View style={styles.box}>
             <View style={{paddingHorizontal: 16}}>
@@ -17,13 +17,9 @@ const DailyReportCard = (props) => {
                         <Text style={{color: "#737373", fontSize: 12, fontFamily: "Lato"}}>{props.date? props.date : "dd MM YY"}</Text>
                     </View>
                 </View>
-                <View style={{marginTop: 8}}>
+                <View style={{marginTop: 8, marginBottom: 26}}>
                     <Heading3 color={"#737373"} text={props.content? props.content : "Uraian kegiatan Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam eos ea et sit ad laborum ipsum earum sequi odio sed..."}/>
                 </View>
-            </View>
-            <View style={{flex: 1, borderColor: "#4a4a4a", borderWidth: 1, marginTop: 8}}></View>
-            <View style={{alignItems: 'flex-end', marginVertical: 16, paddingHorizontal: 16}}>
-                <LinkMulai title={"Cetak"} />
             </View>
         </View>
     )
@@ -46,4 +42,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default DailyReportCard
+export default ReportCard

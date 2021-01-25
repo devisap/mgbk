@@ -82,7 +82,7 @@ const Router = () => {
             />
             <Stack.Screen name={"DailyReport"} component={DailyReport} 
                 options={{
-                    title : "Laporan",
+                    title : "Laporan Harian",
                     headerStyle: {
                         backgroundColor: "#48CAE4",
                         
