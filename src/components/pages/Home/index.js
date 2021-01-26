@@ -9,7 +9,7 @@ const Home = ({navigation}) => {
     return (
         <HomeLayout  
             onPressLengkapiProfil={() => linkWithoutBack('SettingProfile')} 
-            onPressBuatLaporan={() => linkWithoutBack('ReportingStep1')} 
+            onPressBuatLaporan={() => linkWithoutBack('CreateReport')} 
             onPressCetakLaporan={() => linkWithoutBack('DailyReport')} 
         />
     )

@@ -72,8 +72,8 @@ import SettingProfileLayout from './components/templates/SettingProfileLayout';
 import ReportingStep1Layout from './components/templates/ReportingStep1Layout';
 import ReportingStep2Layout from './components/templates/ReportingStep2Layout';
 import Router from './config/router';
-import CreateLayout from './components/templates/CreateLayout';
 import DateField from './components/molecules/forms/DateField';
+import CreateReportLayout from './components/templates/CreateReportLayout';
 
 const App = () => {
   // return <SplashScreen />
@@ -140,10 +140,10 @@ const App = () => {
     // <DailyReportLayout />
     // <SettingProfileLayout />
     // <ReportingStep1Layout />
-    // <NavigationContainer>
-    //   <Router />
-    // </NavigationContainer>
-    <CreateLayout />
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
+    // <CreateReportLayout />
     // <DateField />
   )
 };

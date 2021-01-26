@@ -2,7 +2,7 @@ import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
 import {
     SplashScreen, Login, Register, Home,
-    SettingProfile, ReportingStep1, DailyReport
+    SettingProfile, CreateReport, DailyReport
 } from '../../components/pages'
 
 
@@ -52,23 +52,20 @@ const Router = () => {
                 options={{
                     title : "Pengaturan Profil",
                     headerStyle: {
-                        backgroundColor: "#48CAE4",
-                        
+                        backgroundColor: '#48CAE4'
                     },
                     headerTitleStyle: {
                         fontFamily: "Lato",
                         color: "#fff",
                         fontSize: 20
                     },
-                    headerBackTitleStyle: {
-                        color: "#fff",
-                        backgroundColor: "#fff"
-                    }
+                    headerBackTitle: "tes",
+                    headerTintColor: '#fff'
                 }}
             />
-            <Stack.Screen name={"ReportingStep1"} component={ReportingStep1} 
+            <Stack.Screen name={"CreateReport"} component={CreateReport} 
                 options={{
-                    title : "Profil",
+                    title : "Kegiatan",
                     headerStyle: {
                         backgroundColor: "#48CAE4",
                         
@@ -77,7 +74,8 @@ const Router = () => {
                         fontFamily: "Lato",
                         color: "#fff",
                         fontSize: 20
-                    }
+                    },
+                    headerTintColor: '#fff'
                 }}
             />
             <Stack.Screen name={"DailyReport"} component={DailyReport} 
@@ -91,7 +89,8 @@ const Router = () => {
                         fontFamily: "Lato",
                         color: "#fff",
                         fontSize: 20
-                    }
+                    },
+                    headerTintColor: '#fff'
                 }}
             />
         </Stack.Navigator>

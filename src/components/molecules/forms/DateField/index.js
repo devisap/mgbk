@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, Text } from 'react-native'
 import IcCalendarBlack from '../../../atoms/icons/IcCalendarBlack'
 import Heading3 from '../../../atoms/texts/Heading3'
 import DateFunction from '../../../../utils/DateFunction'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Label from '../../../atoms/texts/Label'
 import IcDropdown from '../../../atoms/icons/IcDropdown'
+import Heading2 from '../../../atoms/texts/Heading2'
 
 const DateField = (props) => {
     // set mode date
@@ -39,9 +40,9 @@ const DateField = (props) => {
             <Label text={props.label} />
             <View style={{marginTop: 8}}>
                 <TouchableOpacity activeOpacity={0.5} onPress={() => showDatepicker()} style={{flex: 1, borderColor: '#DBDBDB', borderWidth: 1, borderRadius: 6, paddingLeft: 16}}>
-                    <View style={{marginVertical: 16}}>
-                        <Heading3 text={dateString} />
-                        <View style={{position: "absolute", right: 16, bottom: 2}}>
+                    <View>
+                        <Text style={{fontFamily: "Lato", fontSize: 20, color: "#242424", marginVertical: 7}}>{dateString}</Text>
+                        <View style={{position: "absolute", right: 16, top: 15}}>
                             <IcDropdown />
                         </View>
                     </View>
