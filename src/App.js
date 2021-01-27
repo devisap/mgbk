@@ -74,7 +74,6 @@ import ReportingStep2Layout from './components/templates/ReportingStep2Layout';
 import Router from './config/router';
 import DateField from './components/molecules/forms/DateField';
 import CreateReportLayout from './components/templates/CreateReportLayout';
-
 const App = () => {
   // return <SplashScreen />
   // return <IcAlignJustifyWhite />
@@ -142,6 +141,7 @@ const App = () => {
     // <ReportingStep1Layout />
     <NavigationContainer>
       <Router />
+      {/* <Drawer /> */}
     </NavigationContainer>
     // <CreateReportLayout />
     // <DateField />

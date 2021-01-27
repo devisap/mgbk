@@ -6,5 +6,6 @@ import ReportingStep1 from './ReportingStep1'
 import SettingProfile from './SettingProfile'
 import DailyReport from './DailyReport'
 import CreateReport from './CreateReport'
+import Profile from './Profile'
 
-export {Login, SplashScreen, Register, Home, ReportingStep1, SettingProfile, DailyReport, CreateReport}
+export {Login, SplashScreen, Register, Home, ReportingStep1, SettingProfile, DailyReport, CreateReport, Profile}

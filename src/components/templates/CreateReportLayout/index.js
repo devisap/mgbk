@@ -10,6 +10,7 @@ import SelectField from '../../molecules/forms/SelectField'
 import Label from '../../atoms/texts/Label'
 import { TextInput } from 'react-native-gesture-handler'
 import UploadField from '../../molecules/forms/UploadField'
+import ButtonSuccess from '../../atoms/buttons/ButtonSuccess'
 
 const CreateReportLayout = () => {
     return (
@@ -40,6 +41,9 @@ const CreateReportLayout = () => {
                         </View>
                         <View style={{marginTop: 24}}>
                             <UploadField label={"Dokumen Kegiatan"} />
+                        </View>
+                        <View style={{marginTop: 24}}>
+                            <ButtonSuccess text={"Simpan"} />
                         </View>
                     </View>
                 </ScrollView>

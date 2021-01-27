@@ -1,17 +1,22 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import HomeLayout from '../../templates/HomeLayout'
 
 const Home = ({navigation}) => {
-    const linkWithoutBack = (screen) => {
-        navigation.navigate(screen);
-    }
     return (
-        <HomeLayout  
-            onPressLengkapiProfil={() => linkWithoutBack('SettingProfile')} 
-            onPressBuatLaporan={() => linkWithoutBack('CreateReport')} 
-            onPressCetakLaporan={() => linkWithoutBack('DailyReport')} 
-        />
+        <View>
+            <View style={{flex: 1, height:50}}>
+                <Text>Tes</Text>
+            </View>
+            <ScrollView>
+                <HomeLayout  
+                    onPressLengkapiProfil={() => navigation.navigate('Profile')} 
+                    onPressBuatLaporan={() => navigation.navigate('CreateReport')} 
+                    onPressCetakLaporan={() => navigation.navigate('DailyReport')} 
+                />
+            </ScrollView>
+        </View>
     )
 }
 

@@ -5,7 +5,7 @@ import ButtonSubmit from '../../molecules/buttons/ButtonSubmit'
 import InfoProfileCard from '../../organisms/InfoProfileCard'
 import Navbar from '../Navbar'
 
-const ProfileLayout = () => {
+const ProfileLayout = (props) => {
     return (
         <View style={{backgroundColor: "#fff", flex: 1}}>
             <ScrollView>
@@ -17,7 +17,7 @@ const ProfileLayout = () => {
                         <InfoProfileCard />
                     </View>
                     <View style={{marginTop: 24}}>
-                        <ButtonSubmit title={"Perbarui Profil"} />
+                        <ButtonSubmit onPress={props.onPressSettingProfile} title={"Perbarui Profil"} />
                     </View>
                 </View>
             </ScrollView>
