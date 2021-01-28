@@ -1,30 +1,34 @@
 import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import {
     SplashScreen, Login, Register, Home,
     SettingProfile, CreateReport, DailyReport,
     Profile
 } from '../../components/pages'
 import { startClock } from 'react-native-reanimated';
-import { Button } from 'react-native';
+import { Button, View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-const HomeDrawer = () => {
+const HomeDrawer = ({navigation}) => {
     return(
         <Drawer.Navigator
+            drawerContent={(props) => <CustomDrawerContent {...props} />}
             drawerContentOptions =  {{
                 activeTintColor: "#48CAE4",
-                itemStyle: {
-
+                labelStyle: {
+                    fontFamily: 'Lato',
+                    color: '#4a4a4a',
+                    fontSize: 20
                 }
             }}
         >
-          <Drawer.Screen name="Home" component={Home} 
+          <Drawer.Screen name="Home" component={HomeStack} 
             options={{
                 drawerLabel: "Home",
                 drawerIcon: ({focused}) => (
@@ -57,6 +61,43 @@ const HomeDrawer = () => {
             }}
           />
         </Drawer.Navigator>
+    )
+}
+
+const CustomDrawerContent = (props) => {
+    return (
+        <DrawerContentScrollView {...props}>
+          <View style={{marginVertical: 18, marginLeft: 20}}>
+              <Text style={{fontFamily: 'Lato', fontSize: 20, color: "#4a4a4a"}}>MGBK Malang</Text>
+          </View>
+          <DrawerItemList {...props} />
+          <TouchableOpacity onPress={() => alert('Keluar')}>
+            <View style={{flexDirection: 'row', paddingLeft: 18, marginVertical: 10}}>
+                <Icon name="sign-out" size={18} color="#FF3860" />
+                <View style={{marginLeft: 30}}>
+                    <Text style={{fontFamily: 'Lato', fontSize: 20, color: "#FF3860"}}>Sign Out</Text>
+                </View>
+            </View>
+          </TouchableOpacity>
+        </DrawerContentScrollView>
+    );
+}
+
+const HomeStack = ({navigation}) => {
+    return(
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={Home} 
+                options={{
+                    headerTintColor: "#fff",
+                    headerStyle: {
+                        backgroundColor: "#48CAE4"
+                    },
+                    headerLeft: () => (
+                        <Icon.Button  name="align-justify" iconStyle={{marginLeft: 12, marginTop: 5}} backgroundColor="#48CAE4" size={18} color={'#fff'} onPress={() => navigation.openDrawer()} />
+                    )
+                }}
+            />
+        </Stack.Navigator>
     )
 }
 
