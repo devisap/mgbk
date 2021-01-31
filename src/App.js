@@ -74,6 +74,9 @@ import ReportingStep2Layout from './components/templates/ReportingStep2Layout';
 import Router from './config/router';
 import DateField from './components/molecules/forms/DateField';
 import CreateReportLayout from './components/templates/CreateReportLayout';
+import ForgotPasswordCard from './components/organisms/ForgotPasswordCard';
+import ForgotPasswordLayout from './components/templates/ForgotPasswordLayout';
+import ForgotPassword from './components/organisms/ForgotPasswordCard';
 const App = () => {
   // return <SplashScreen />
   // return <IcAlignJustifyWhite />
@@ -143,6 +146,9 @@ const App = () => {
       <Router />
       {/* <Drawer /> */}
     </NavigationContainer>
+    // <ForgotPasswordCard />
+    // <ForgotPasswordLayout />
+    // <ForgotPassword />
     // <CreateReportLayout />
     // <DateField />
   )

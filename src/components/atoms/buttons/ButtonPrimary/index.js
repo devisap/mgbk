@@ -8,7 +8,7 @@ const ButtonPrimary = (props) => {
     return (
         <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{backgroundColor: "#48CAE4", flex: 1, height: 42, borderRadius: 4}}>
-                <TouchableOpacity style={{flex: 1}} onPress={() => alert("ilham")}>
+                <TouchableOpacity style={{flex: 1}} onPress={() => alert("Oke")}>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                         <View style={{marginLeft: 10}}>
                             <Label color={"white"} text={props.text? props.text : "Label"} />

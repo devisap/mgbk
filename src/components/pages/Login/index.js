@@ -3,9 +3,6 @@ import { StyleSheet, View } from 'react-native'
 import LoginLayout from '../../templates/LoginLayout'
 
 const Login = ({navigation}) => {
-    const linkToWithBack = (screen) => {
-        navigation.navigate(screen);
-    }
     const linkToWithoutBack = (screen) => {
         navigation.replace(screen);
     }

@@ -1,14 +1,13 @@
 import React from 'react'
-import { ScrollView, View } from 'react-native'
-import LoginCard from '../../organisms/LoginCard'
-import Footer from '../Footer'
+import { View, ScrollView } from 'react-native'
+import Footer from '../../atoms/icons/Footer'
+import ForgotPasswordCard from '../../organisms/ForgotPasswordCard'
 
-const LoginLayout = (props) => {
-
-    return (
+const ForgotPasswordLayout = (props) => {
+    return(
         <View style={{backgroundColor: "#fff", flex: 1, flexDirection: 'row', paddingHorizontal: 17, alignItems: 'center'}}>
             <ScrollView>
-                <LoginCard onPressLogin={props.onPressLogin} onPressDaftar={props.onPressDaftar} />
+                <ForgotPasswordCard onPressLogin={props.onPressLogin} onPressForgot={props.onPressForgot} />
                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 71, marginBottom: 24}}>
                     <Footer />
                 </View>
@@ -17,4 +16,4 @@ const LoginLayout = (props) => {
     )
 }
 
-export default LoginLayout
+export default ForgotPasswordLayout
