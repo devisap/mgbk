@@ -1,22 +1,53 @@
-import React from 'react'
-import { TextInput, View } from 'react-native'
-import IcUser from '../../../atoms/icons/IcUser'
+import React, { useState } from 'react'
+import { StyleSheet, TextInput, View } from 'react-native'
 import Label from '../../../atoms/texts/Label'
+import Icon from 'react-native-vector-icons/FontAwesome'
+
 
 const UsernameField = () => {
+    const [isFocused, setIsFocused] = useState(false)
+
     return (
         <View style={{flex: 1}}>
             <Label text={"Username"} />
-            <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', borderRadius: 4, borderColor: '#DBDBDB', borderWidth: 1, height: 43, marginTop: 8, paddingHorizontal: 10}}>
-                    <IcUser />
-                    <View style={{marginLeft: 10, marginTop:5}}>
-                        <TextInput style={{fontFamily: "Lato", color: '#000', fontSize: 16, marginRight: 24}} placeholder={"Username"} selectionColor={"#48CAE4"}/>
-                    </View>
+            <View style={{marginTop: 8}}>
+                <View style={{position: 'absolute', left:11, top: 10}}>
+                    <Icon name="user" size={16} color={isFocused == true? '#48CAE4' : '#DBDBDB'} />
                 </View>
+                <TextInput 
+                    style={isFocused == true? styles.focused : styles.notFocused} 
+                    placeholder={"Username"} 
+                    selectionColor={"#48CAE4"}
+                    onFocus={() => setIsFocused(true)}
+                    onEndEditing={() => setIsFocused(false)}
+                />
             </View>
         </View>
     )
 }
 
+const styles = StyleSheet.create({
+    notFocused: {
+        flex: 1,
+        height: 38,
+        fontFamily: "Lato", 
+        color: '#000', 
+        fontSize: 16, 
+        paddingLeft: 37,
+        borderWidth: 1,
+        borderRadius: 4,
+        borderColor: '#DBDBDB'
+    },
+    focused: {
+        flex: 1,
+        height: 38,
+        fontFamily: "Lato", 
+        color: '#000', 
+        fontSize: 16, 
+        paddingLeft: 37,
+        borderWidth: 1,
+        borderRadius: 4,
+        borderColor: '#48CAE4'
+    }
+})
 export default UsernameField

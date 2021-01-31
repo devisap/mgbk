@@ -75,7 +75,7 @@ const WeeklyReportStack = ({navigation}) => {
         <Stack.Navigator initialRouteName="DailyReport">
             <Stack.Screen name={"DailyReport"} component={DailyReport} 
                 options={{
-                    title : "Laporan Harian",
+                    title : "Laporan Mingguan",
                     headerStyle: {
                         backgroundColor: "#48CAE4",
                         
@@ -98,7 +98,7 @@ const MonthlyReportStack = ({navigation}) => {
         <Stack.Navigator initialRouteName="DailyReport">
             <Stack.Screen name={"DailyReport"} component={DailyReport} 
                 options={{
-                    title : "Laporan Harian",
+                    title : "Laporan Bulanan",
                     headerStyle: {
                         backgroundColor: "#48CAE4",
                         
@@ -121,7 +121,7 @@ const SemesterReportStack = ({navigation}) => {
         <Stack.Navigator initialRouteName="DailyReport">
             <Stack.Screen name={"DailyReport"} component={DailyReport} 
                 options={{
-                    title : "Laporan Harian",
+                    title : "Laporan Semesteran",
                     headerStyle: {
                         backgroundColor: "#48CAE4",
                         
@@ -144,7 +144,7 @@ const YearlyReportStack = ({navigation}) => {
         <Stack.Navigator initialRouteName="DailyReport">
             <Stack.Screen name={"DailyReport"} component={DailyReport} 
                 options={{
-                    title : "Laporan Harian",
+                    title : "Laporan Tahunan",
                     headerStyle: {
                         backgroundColor: "#48CAE4",
                         

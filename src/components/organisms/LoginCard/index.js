@@ -30,9 +30,9 @@ const LoginCard = (props) => {
                     <PasswordField isFocus={currInputFocus == 'password'? true: false} />
                 </View>
             </TouchableOpacity>
-            <View style={{marginTop: 24}}>
+            {/* <View style={{marginTop: 24}}>
                 <RememberMeField />               
-            </View>
+            </View> */}
             <View style={{marginTop: 24}}>
                 <ButtonAuth text={"Login"} onPress={props.onPressLogin} />
             </View>
