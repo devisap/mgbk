@@ -1,7 +1,10 @@
 import React from 'react';
 import { Text, View, StyleSheet, StatusBar } from 'react-native';
 
-const SplashScreen = () => {
+const SplashScreen = ({navigation}) => {
+    setTimeout(() => {
+        navigation.replace('Login')
+    }, 2000);
     return (
         <View style={{backgroundColor: "#48CAE4", flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <StatusBar hidden></StatusBar>

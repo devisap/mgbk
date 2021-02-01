@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
-import IcCalendarBlack from '../../../atoms/icons/IcCalendarBlack'
-import Heading3 from '../../../atoms/texts/Heading3'
 import DateFunction from '../../../../utils/DateFunction'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Label from '../../../atoms/texts/Label'
-import IcDropdown from '../../../atoms/icons/IcDropdown'
-import Heading2 from '../../../atoms/texts/Heading2'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 const DateField = (props) => {
     // set mode date
@@ -39,11 +36,11 @@ const DateField = (props) => {
         <View>
             <Label text={props.label} />
             <View style={{marginTop: 8}}>
-                <TouchableOpacity activeOpacity={0.5} onPress={() => showDatepicker()} style={{flex: 1, borderColor: '#DBDBDB', borderWidth: 1, borderRadius: 6, paddingLeft: 16}}>
-                    <View>
-                        <Text style={{fontFamily: "Lato", fontSize: 20, color: "#242424", marginVertical: 7}}>{dateString}</Text>
-                        <View style={{position: "absolute", right: 16, top: 15}}>
-                            <IcDropdown />
+                <TouchableOpacity activeOpacity={0.5} onPress={() => showDatepicker()}>
+                    <View style={{flex: 1, height: 38, borderColor: '#DBDBDB', borderWidth: 1, borderRadius: 6, paddingLeft: 16, justifyContent: 'center'}}>
+                        <Text style={{fontFamily: "Lato", fontSize: 16, color: "#242424", marginVertical: 7}}>{dateString}</Text>
+                        <View style={{position: "absolute", right: 16, top: 10}}>
+                            <Icon name="chevron-down" size={16} color="#48CAE4" />
                         </View>
                     </View>
                 </TouchableOpacity>

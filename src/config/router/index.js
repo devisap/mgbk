@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 
 const Router = () => {
     return(
-        <Stack.Navigator initialRouteName="ForgotPassword">
+        <Stack.Navigator initialRouteName="Splash">
             <Stack.Screen name={"Register"} component={Register} 
                 options={{
                     headerShown: false,
