@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
 import Label from '../../../atoms/texts/Label'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 
-const UsernameField = () => {
+const UsernameField = (props) => {
     const [isFocused, setIsFocused] = useState(false)
+    const [value, setValue] = useState(props.value? props.value : '')
+
+    useEffect(() => {
+        if(props.onChangeValue)
+            props.onChangeValue(value)
+    }, [value])
 
     return (
         <View style={{flex: 1}}>
@@ -20,6 +26,7 @@ const UsernameField = () => {
                     selectionColor={"#48CAE4"}
                     onFocus={() => setIsFocused(true)}
                     onEndEditing={() => setIsFocused(false)}
+                    onChangeText={(text) => setValue(text)}
                 />
             </View>
         </View>

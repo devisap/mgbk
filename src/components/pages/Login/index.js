@@ -7,7 +7,7 @@ const Login = ({navigation}) => {
         navigation.replace(screen);
     }
     return (
-        <LoginLayout onPressLogin={() => linkToWithoutBack('Home')} onPressDaftar={() => linkToWithoutBack('Register')} />
+        <LoginLayout navigation={navigation} />
     )
 }
 

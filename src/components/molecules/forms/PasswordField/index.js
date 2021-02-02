@@ -4,6 +4,12 @@ import Label from '../../../atoms/texts/Label'
 
 const PasswordField = (props) => {
     const [isFocused, setIsFocused] = useState(false)
+    const [value, setValue] = useState('')
+
+    useEffect(() => {
+        if(props.onChangeValue)
+            props.onChangeValue(value)
+    })
 
     return (
         <View style={{flex: 1}}>
@@ -16,6 +22,7 @@ const PasswordField = (props) => {
                     selectionColor={"#48CAE4"}
                     onFocus={() => setIsFocused(true)}
                     onEndEditing={() => setIsFocused(false)}
+                    onChangeText={(text) => {setValue(text)}}
                 />
             </View>
         </View>

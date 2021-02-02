@@ -7,7 +7,7 @@ const RegisterLayout = (props) => {
     return (
         <View style={{backgroundColor: "#fff", flex: 1, flexDirection: 'row', paddingHorizontal: 17, alignItems: 'center'}}>
             <ScrollView>
-                <RegisterCard onPressDaftar={props.onPressDaftar} onPressLogin={props.onPressLogin} />
+                <RegisterCard navigation={props.navigation} />
                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 71, marginBottom: 24}}>
                     <Footer />
                 </View>

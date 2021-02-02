@@ -5,6 +5,12 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 const EmailField = (props) => {
     const [isFocused, setIsFocused] = useState(false)
+    const [value, setValue] = useState(props.value? props.value : '')
+
+    useEffect(() => {
+        if(props.onChangeValue)
+            props.onChangeValue(value)
+    }, [value])
 
     return (
         <View style={{flex: 1}}>
@@ -13,13 +19,14 @@ const EmailField = (props) => {
                 <View style={{position: 'absolute', left: 11, top: 10}}>
                     <Icon name="envelope" size={16} color={isFocused == true?'#48CAE4':'#DBDBDB'} />
                 </View>
-                <TextInput 
+                <TextInput
                     style={isFocused == true? styles.focused:styles.notFocused} 
                     placeholder={"Email"} 
                     selectionColor={"#48CAE4"}
                     onFocus={() => setIsFocused(true)}
                     onEndEditing={() => setIsFocused(false)}
                     keyboardType='email-address'
+                    onChangeText={text => setValue(text)}
                 />
             </View>
         </View>
