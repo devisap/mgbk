@@ -6,7 +6,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Label from '../../../atoms/texts/Label';
 
 const SelectField = (props) => {
-    const [selectItem, setSelectedItem] = useState('uk');
+    const [selectedItem, setSelectedItem] = useState('');
     const [colorFocused, setColorFocused] = useState('#DBDBDB')
     const [items, setItems] = useState([
         {label: 'Item1', value: 'item1'},
@@ -15,16 +15,18 @@ const SelectField = (props) => {
     ])
 
     useEffect(() => {
-        axios({
-            method: 'get',
-            url: 'https://api-mgbk.bgskr-project.my.id/activity'
-        })
-        .then(function(res){
-            console.log(res.data.data)
-            const listData = res.data.data.map(obj => ({label: obj.kegiatan, value: obj.id_kegiatan}))
-            setItems(listData)
-        })
+        if(props.items)
+            setItems(props.items)
+        if(props.value)
+            setSelectedItem(props.value)
+        else
+            setSelectedItem('')
     }, [])
+
+    useEffect(() => {
+    if(props.onChangeValue)
+        props.onChangeValue(selectedItem)        
+    }, [selectedItem])
 
     return (
         <View>
@@ -36,7 +38,7 @@ const SelectField = (props) => {
                     searchablePlaceholder={props.label? `Cari ${props.label}`:`Cari Item`}
                     searchablePlaceholderTextColor="gray"
                     seachableStyle={{}}
-                    // defaultValue={selectItem}
+                    defaultValue={selectedItem}
                     containerStyle={{height: 38}}
                     style={{borderWidth: 1, borderColor: colorFocused}}
                     itemStyle={{

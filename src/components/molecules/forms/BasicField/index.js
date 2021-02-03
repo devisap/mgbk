@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
 import { useState } from 'react/cjs/react.development'
 import Label from '../../../atoms/texts/Label'
 
 const BasicField = (props) => {
     const [isFocused, setIsFocused] = useState(false)
+    const [value, setValue] = useState(props.value? props.value : '')
+
+    // useEffect(() => {
+    //     if(props.value)
+    //         setValue(props.value)
+    // }, [])
+
+    useEffect(() => {
+        if(props.onChangeValue)
+            props.onChangeValue(value)
+    }, [value])
+
     return (
         <View style={{flex: 1}}>
             <Label text={props.label} />
@@ -15,6 +27,8 @@ const BasicField = (props) => {
                     selectionColor={"#48CAE4"}
                     onFocus={() => setIsFocused(true)}
                     onEndEditing={() => setIsFocused(false)}
+                    value={value}
+                    onChangeText={(value) => setValue(value)}
                 />
             </View>
         </View>

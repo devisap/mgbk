@@ -1,39 +1,61 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { ScrollView, Text, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import MenuHomeCard from '../../organisms/MenuHomeCard'
+import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
 const HomeLayout = (props) => {
     const [isProfileVerified, setIsProfileVerified] = useState(false)
+    const [isFetched, setIsFetched] = useState(false)
 
     useEffect(() => {
         axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/user/profile/'+8,
+            url: 'https://api-mgbk.bgskr-project.my.id/user/profile/'+7,
             method: 'get'
         })
         .then((res) => {
             setIsProfileVerified(res.data.status)
+            setIsFetched(true)
         })
     })
 
     return (
-        <View style={{backgroundColor: "#fff", flex: 1}}>
+        <View>
             <ScrollView>
-                <View style={{paddingHorizontal: 13}}>
+                <View style={{flex: 1, paddingHorizontal: 13}}>
                     {
-                        isProfileVerified == false?
-                            <View style={{marginTop: 24, marginBottom: 12}}>
-                                <MenuHomeCard onPress={props.onPressLengkapiProfil} title={"Lengkapi Profil"} content={"Lengkapi profil sebelum mengirimkan laporan"}/>
-                            </View>
+                        isFetched == false?
+                        <View>
+                            <SkeletonPlaceholder>
+                                <View style={{marginTop: 24, marginBottom: 12}}>
+                                    <View style={{width: '100%', height: 180, borderRadius: 4}}></View>
+                                </View>
+                                <View style={{marginVertical: 12}}>
+                                    <View style={{width: '100%', height: 180, borderRadius: 4}}></View>
+                                </View>
+                                <View style={{marginVertical: 12}}>
+                                    <View style={{width: '100%', height: 180, borderRadius: 4}}></View>
+                                </View>
+                            </SkeletonPlaceholder>
+                        </View>
                         :
-                            void 0
+                        <View>
+                            {
+                                isProfileVerified == false?
+                                    <View style={{marginTop: 24, marginBottom: 12}}>
+                                        <MenuHomeCard onPress={props.onPressLengkapiProfil} title={"Lengkapi Profil"} content={"Lengkapi profil sebelum mengirimkan laporan"}/>
+                                    </View>
+                                :
+                                    void 0
+                            }
+                            <View style={{marginVertical: 12}}>
+                                <MenuHomeCard onPress={props.onPressBuatLaporan} title={"Buat Laproan"} content={"Buat laporan kegiatan untuk dikirimkan"}/>
+                            </View>
+                            <View style={{marginVertical: 12}}>
+                                <MenuHomeCard onPress={props.onPressCetakLaporan} title={"Cetak Laporan"} content={"Cetak laporan kegiatan"}/>
+                            </View>
+                        </View>
                     }
-                    <View style={{marginVertical: 12}}>
-                        <MenuHomeCard onPress={props.onPressBuatLaporan} title={"Buat Laproan"} content={"Buat laporan kegiatan untuk dikirimkan"}/>
-                    </View>
-                    <View style={{marginVertical: 12}}>
-                        <MenuHomeCard onPress={props.onPressCetakLaporan} title={"Cetak Laporan"} content={"Cetak laporan kegiatan"}/>
-                    </View>
                 </View>
             </ScrollView>
         </View>

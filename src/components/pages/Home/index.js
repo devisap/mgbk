@@ -5,17 +5,12 @@ import HomeLayout from '../../templates/HomeLayout'
 
 const Home = ({navigation}) => {
     return (
-        <View>
-            <View style={{flex: 1, height:50}}>
-                <Text>Tes</Text>
-            </View>
-            <ScrollView>
-                <HomeLayout  
-                    onPressLengkapiProfil={() => navigation.navigate('Profile')} 
-                    onPressBuatLaporan={() => navigation.navigate('CreateReport')} 
-                    onPressCetakLaporan={() => navigation.navigate('DailyReport')} 
-                />
-            </ScrollView>
+        <View style={{flex: 1, backgroundColor: '#fff'}}>
+            <HomeLayout  
+                onPressLengkapiProfil={() => navigation.navigate('Profile')} 
+                onPressBuatLaporan={() => navigation.navigate('CreateReport')} 
+                onPressCetakLaporan={() => navigation.navigate('DailyReport')} 
+            />
         </View>
     )
 }
