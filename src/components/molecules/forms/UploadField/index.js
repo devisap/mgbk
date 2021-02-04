@@ -2,18 +2,22 @@ import React from 'react'
 import { Text, TextInput, View } from 'react-native'
 import Label from '../../../atoms/texts/Label'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import CircleImage from '../../../atoms/images/CircleImage'
 
 const UploadField = (props) => {
     return (
         <View style={{flex: 1}}>
             <Label text={props.label? props.label : ""} />
+            <View style={{marginVertical: 8, flexDirection: 'column', alignItems: 'center'}}>
+                <CircleImage source={props.source} />
+            </View>
             <View style={{flex: 1, flexDirection: 'row'}}>
                 <View style={{flex: 1, flexDirection: 'row', backgroundColor: "#F5F5F5", alignItems: 'center', borderTopLeftRadius: 4, borderBottomLeftRadius: 4, borderColor: '#DBDBDB', borderWidth: 1, height: 43, marginTop: 8, paddingHorizontal: 10}}>
                     <Icon name="upload" size={16} color="#BABABA" />
                     <Text style={{fontFamily: "Lato", color: '#bababa', fontSize: 16, marginRight: 24, marginLeft: 8}}>Pilih File...</Text>
                 </View>
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', borderTopRightRadius: 4, borderBottomRightRadius: 4, borderColor: '#DBDBDB', borderWidth: 1, height: 43, marginTop: 8, paddingHorizontal: 10}}>
-                    <TextInput style={{fontFamily: "Lato", color: '#4a4a4a', fontSize: 16}} editable={false}>gambar1.jpg</TextInput>
+                    <TextInput style={{fontFamily: "Lato", color: '#4a4a4a', fontSize: 16}} editable={false}>{props.fileName? props.fileName: 'gambar1.jpg'}</TextInput>
                 </View>
             </View>
         </View>

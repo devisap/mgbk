@@ -1,6 +1,6 @@
 import React, {useState, useEffect
 } from 'react'
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import ButtonSecondary from '../../atoms/buttons/ButtonSecondary'
 import Heading1 from '../../atoms/texts/Heading1'
 import ButtonAuth from '../../molecules/buttons/ButtonAuth'
@@ -12,6 +12,8 @@ import ValidationComponent from 'react-native-form-validator'
 import Loader from '../../molecules/Loader'
 import axios from 'axios'
 import ErrorLabel from '../../molecules/ErrorLabel'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry'
 
 const LoginCard = (props) => {
     const [emailValue, setEmailValue] = useState('')
@@ -19,6 +21,7 @@ const LoginCard = (props) => {
     const [isLoader, setIsLoader] = useState(false)
     const [isErrReq, setIsErrReq] = useState(false)
     const [msgErrReq, setMsgErrReq] = useState('')
+    const [isLoggedIn, setIsLoggedIn] = useState('t')
 
     onChangeEmailValue = (value) => {setEmailValue(value)}
     onChangePassValue = (value) => {setPassValue(value)}
@@ -36,6 +39,7 @@ const LoginCard = (props) => {
             if(res.data.status){
                 setIsErrReq(false)
                 setMsgErrReq('')
+                storeData(res.data.data.id_user, res.data.data.email)
                 props.navigation.replace('Home')
             }else{
                 setIsErrReq(true)
@@ -43,6 +47,27 @@ const LoginCard = (props) => {
             }
             setIsLoader(false)
         })
+    }
+
+    const storeData = async(id_user, email) => {
+        try {
+            await AsyncStorage.setItem('ID_USER', ""+id_user)
+            await AsyncStorage.setItem('EMAIL', ""+email)
+            await AsyncStorage.setItem('IS_LOGGED_IN', 'y')
+        } catch (error) {
+            alert(error)
+        }
+    }
+
+    const getData = async() => {
+        try {
+            let IS_LOGGED_IN = await AsyncStorage.getItem('IS_LOGGED_IN')
+            if(IS_LOGGED_IN !== null && IS_LOGGED_IN == 'y') {
+                props.navigation.replace('Home')
+            }
+        } catch (error) {
+            alert(error)
+        }
     }
 
     return (

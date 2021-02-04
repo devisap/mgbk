@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Text, View } from 'react-native';
 import { useState } from 'react';
 import Collapsible from 'react-native-collapsible';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Drawer = createDrawerNavigator();
 
 const HomeDrawer = ({navigation, route}) => {
@@ -44,6 +45,15 @@ const CustomDrawerContent = (props) => {
     drawerClick = (stack) => {
         props.navigation.navigate(stack);
         setCurrentDrawer(stack)
+    }
+
+    const logout = async() => {
+        try {
+            await AsyncStorage.clear()
+            props.navigation.replace('Login')
+        } catch (error) {
+            alert(error)
+        }
     }
 
     return (
@@ -129,7 +139,7 @@ const CustomDrawerContent = (props) => {
             icon={({focused}) => <Icon name="user" size={18} color={focused? '#48CAE4' : '#4a4a4a'} /> } 
             labelStyle={{fontFamily: "Lato", fontSize: 20, color: "#4a4a4a", marginLeft: 3}} 
             onPress={() => drawerClick('Profile')} />
-          <TouchableOpacity onPress={() => alert("keluar")}>
+          <TouchableOpacity onPress={() => logout()}>
             <View style={{flexDirection: 'row', paddingLeft: 18, marginVertical: 18}}>
                 <View style={{justifyContent: 'center'}}>
                     <Icon name="sign-out" size={18} color="#FF3860" />

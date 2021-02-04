@@ -3,21 +3,50 @@ import axios from 'axios'
 import { ScrollView, View } from 'react-native'
 import MenuHomeCard from '../../organisms/MenuHomeCard'
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeLayout = (props) => {
-    const [isProfileVerified, setIsProfileVerified] = useState(false)
+    const [isProfileVerified, setIsProfileVerified] = useState('f')
     const [isFetched, setIsFetched] = useState(false)
 
     useEffect(() => {
+        hasProfile()
+    }, [])
+
+    const getDataProfile = (idUser) => {
         axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/user/profile/'+7,
+            url: 'https://api-mgbk.bgskr-project.my.id/user/profile/'+idUser,
             method: 'get'
         })
-        .then((res) => {
-            setIsProfileVerified(res.data.status)
+        .then(async(res) => {
+            if(res.data.status){
+                setIsProfileVerified('t')
+                await AsyncStorage.setItem('IS_PROFILE_VERIFIED', 't')
+                await AsyncStorage.setItem('DATA_USER', JSON.stringify(res.data.data))
+                const DATA_USER = await AsyncStorage.getItem('DATA_USER')
+            }else{
+                setIsProfileVerified('f')
+                await AsyncStorage.setItem('IS_PROFILE_VERIFIED', 'f')
+            }
             setIsFetched(true)
         })
-    })
+    }
+
+    const hasProfile = async() => {
+        try {
+            const IS_PROFILE_VERIFIED = await AsyncStorage.getItem('IS_PROFILE_VERIFIED')
+            const ID_USER = await AsyncStorage.getItem('ID_USER')
+            if(IS_PROFILE_VERIFIED != null){
+                setIsProfileVerified(IS_PROFILE_VERIFIED)
+                setIsFetched(true)
+            }else{
+                getDataProfile(ID_USER)
+            }
+
+        } catch (error) {
+            
+        }
+    }
 
     return (
         <View>
@@ -41,7 +70,7 @@ const HomeLayout = (props) => {
                         :
                         <View>
                             {
-                                isProfileVerified == false?
+                                isProfileVerified == 'f'?
                                     <View style={{marginTop: 24, marginBottom: 12}}>
                                         <MenuHomeCard onPress={props.onPressLengkapiProfil} title={"Lengkapi Profil"} content={"Lengkapi profil sebelum mengirimkan laporan"}/>
                                     </View>
