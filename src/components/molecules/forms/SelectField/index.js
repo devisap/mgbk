@@ -17,6 +17,7 @@ const SelectField = (props) => {
     useEffect(() => {
         if(props.items)
             setItems(props.items)
+            
         if(props.value)
             setSelectedItem(props.value)
         else

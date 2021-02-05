@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
     HomeStack, CreateReportStack, DailyReportStack,
     WeeklyReportStack, MonthlyReportStack, SemesterReportStack,
-    YearlyReportStack, ProfileStack
+    YearlyReportStack, ProfileStack, SettingProfileStack
 } from '../stack'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Text, View } from 'react-native';
@@ -34,6 +34,7 @@ const HomeDrawer = ({navigation, route}) => {
           <Drawer.Screen name="SemesterReport" component={SemesterReportStack} />
           <Drawer.Screen name="YearlyReport" component={YearlyReportStack} />
           <Drawer.Screen name="Profile" component={ProfileStack} />
+          <Drawer.Screen name="SettingProfile" component={SettingProfileStack} />
         </Drawer.Navigator>
     )
 }

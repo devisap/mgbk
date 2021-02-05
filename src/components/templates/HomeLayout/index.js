@@ -23,7 +23,6 @@ const HomeLayout = (props) => {
                 setIsProfileVerified('t')
                 await AsyncStorage.setItem('IS_PROFILE_VERIFIED', 't')
                 await AsyncStorage.setItem('DATA_USER', JSON.stringify(res.data.data))
-                const DATA_USER = await AsyncStorage.getItem('DATA_USER')
             }else{
                 setIsProfileVerified('f')
                 await AsyncStorage.setItem('IS_PROFILE_VERIFIED', 'f')

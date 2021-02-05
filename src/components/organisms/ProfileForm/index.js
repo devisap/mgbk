@@ -11,79 +11,90 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const ProfileForm = (props) => {
     const [listSchool, setListSchool] = useState([])
-    const [namaValue, setNamaValue] = useState('')
-    const [fotoProfilValue, setFotoProfilValue] = useState('')
-    const [asalSekolahValue, setAsalSekolahValue] = useState('')
-    const [logoSekolahValue, setLogoSekolahValue] = useState('')
-    const [alamatSekolahValue, setAlamatSekolah] = useState('')
-    const [namaKepalaSekolahValue, setNamaKepalaSekolahValue] = useState('')
-    const [tambahanInformasiValue, setTambahanInformasiValue] = useState('')
+    const [dataProfile, setDataProfile] = useState({})
     const [isFetched, setIsFetched] = useState(false)
 
     useEffect(() => {
-        
-        // axios({
-        //     url: 'https://api-mgbk.bgskr-project.my.id/user/profile/'+7,
-        //     method: 'get'
-        // })
-        // .then((res) => {
-        //     if(res.data.status){
-        //         setNamaValue(res.data.data.nama_lengkap)
-        //         setAsalSekolahValue(res.data.data.id_sekolah)
-        //         setAlamatSekolah(res.data.data.alamat_sekolah)
-        //         setNamaKepalaSekolahValue(res.data.data.nama_kepala_sekolah)
-        //         setTambahanInformasiValue(res.data.data.tambahan_informasi)
-        //         setIsFetched(true)
-        //     }else{
-        //         setIsFetched(true)
-        //     }
-        // })
         getProfile()
     }, [])
 
-    const onChangeNamaValue = (value) => setNamaValue(value)
-    const onChangeAsalSekolahValue = (value) => setAsalSekolahValue(value)
-    const onChangeAlamatSekolahValue = (value) => setAlamatSekolah(value)
-    const onChangeNamaKepalaSekolahValue = (value) => setNamaKepalaSekolahValue(value)
-    const onChangeTambahanInformasiValue = (value) => setTambahanInformasiValue(value)
-    
-    const getDataProfile = async() => {
+    useEffect(() => {
+        console.log(dataProfile)
+    }, [dataProfile])
+
+    onChangeNamaLengkap = val => {
+        let newDatas = {...dataProfile}
+        newDatas.nama_lengkap = val
+        setDataProfile(newDatas)
+    }
+    onChangeAlamatSekolah = val => {
+        let newDatas = {...dataProfile}
+        newDatas.alamat_sekolah = val
+        setDataProfile(newDatas)
+    }
+    onChangeNamaKepalaSekolah = val => {
+        let newDatas = {...dataProfile}
+        newDatas.nama_kepala_sekolah = val
+        setDataProfile(newDatas)
+    }
+    onChangeTambahanInformasi = val => {
+        let newDatas = {...dataProfile}
+        newDatas.tambahan_informasi = val
+        setDataProfile(newDatas)
+    }
+    onChangeAsalSekolah = val => {
+        let newDatas = {...dataProfile}
+        newDatas.id_sekolah = val
+        setDataProfile(newDatas)
+    }
+
+    const getProfile = async() => {
         try {
+            const DATA_USER = await AsyncStorage.getItem('DATA_USER')
             const IS_PROFILE_VERIFIED = await AsyncStorage.getItem('IS_PROFILE_VERIFIED')
-            if(IS_PROFILE_VERIFIED != null && IS_PROFILE_VERIFIED == 't'){
-                const DATA_USER = JSON.parse(await AsyncStorage.getItem('DATA_USER'))
-                setNamaValue(DATA_USER.nama_lengkap)
-                setFotoProfilValue(DATA_USER.foto_profil)
-                setAsalSekolahValue(DATA_USER.id_sekolah)
-                setLogoSekolahValue(DATA_USER.logo_sekolah)
-                setAlamatSekolah(DATA_USER.alamat_sekolah)
-                setNamaKepalaSekolahValue(DATA_USER.nama_kepala_sekolah)
-                setTambahanInformasiValue(DATA_USER.tambahan_informasi)
+            await getListSchool()
+            if(IS_PROFILE_VERIFIED == 't'){
+                const dataProfile = JSON.parse(DATA_USER)
+                setDataProfile({
+                    nama_lengkap: dataProfile.nama_lengkap,
+                    foto_profil: dataProfile.foto_profil,
+                    id_sekolah: dataProfile.id_sekolah,
+                    logo_sekolah: dataProfile.logo_sekolah,
+                    alamat_sekolah: dataProfile.alamat_sekolah,
+                    nama_kepala_sekolah: dataProfile.nama_kepala_sekolah,
+                    tambahan_informasi: dataProfile.tambahan_informasi
+                })
                 setIsFetched(true)
             }else{
+                setDataProfile({
+                    nama_lengkap: '',
+                    foto_profil: '',
+                    id_sekolah: '',
+                    logo_sekolah: '',
+                    alamat_sekolah: '',
+                    nama_kepala_sekolah: '',
+                    tambahan_informasi: ''
+                })
                 setIsFetched(true)
             }
-
-
         } catch (error) {
             alert(error)
         }
     }
 
-    const getProfile = () => {
-        axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/school/',
-            method: 'get'
-        })
-        .then((res) => {
-            const list = res.data.data.map(obj => ({label: obj.nama_sekolah, value: obj.id_sekolah}))
-            setListSchool(list)
-            getDataProfile()
-        })
+    const getListSchool = async() => {
+        await axios.get('https://api-mgbk.bgskr-project.my.id/school')
+            .then(res => {
+                const list = res.data.data.map(obj => ({label: obj.nama_sekolah, value: obj.id_sekolah}))
+                setListSchool(list)
+                console.log(res.data.data)
+                console.log(list)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
-
-
-
+    
     return (
         <View>
             {
@@ -130,35 +141,35 @@ const ProfileForm = (props) => {
                 :
                 <View>
                     <View>
-                        <BasicField value={namaValue} onChangeValue={onChangeNamaValue} label={"Nama Lengkap"} placeholder={"Nama Lengkap"} />
+                        <BasicField value={dataProfile.nama_lengkap} onChangeValue={onChangeNamaLengkap} label={"Nama Lengkap"} placeholder={"Nama Lengkap"} />
                     </View>
                     <View style={{marginTop: 24}}>
                         {
-                            fotoProfilValue != ''?
-                            <UploadField label={"Foto Profil"} source={`https://api-mgbk.bgskr-project.my.id/upload/user/fotoProfil/${fotoProfilValue}`} fileName={fotoProfilValue} />
+                            dataProfile.foto_profil != ''?
+                            <UploadField label={"Foto Profil"} source={`https://api-mgbk.bgskr-project.my.id/upload/user/fotoProfil/${dataProfile.foto_profil}`} fileName={dataProfile.foto_profil} />
                             :
-                            <UploadField label={"Foto Profil"} fileName={fotoProfilValue} />
+                            <UploadField label={"Foto Profil"} fileName={dataProfile.foto_profil} />
                         }
                     </View>
                     <View style={{marginTop: 24}}>
-                        <SelectField items={listSchool} value={asalSekolahValue} onChangeValue={onChangeAsalSekolahValue} label={"Asal Sekolah"}/>
+                        <SelectField items={listSchool} onChangeValue={onChangeAsalSekolah} value={dataProfile.id_sekolah} label={"Asal Sekolah"}/>
                     </View>
                     <View style={{marginTop: 24}}>
                         {
-                            logoSekolahValue != ''?
-                            <UploadField label={"Logo Sekolah"} source={`https://api-mgbk.bgskr-project.my.id/upload/user/logoSekolah/${logoSekolahValue}`} fileName={logoSekolahValue} />
+                            dataProfile.logo_sekolah != ''?
+                            <UploadField label={"Logo Sekolah"} source={`https://api-mgbk.bgskr-project.my.id/upload/user/logoSekolah/${dataProfile.logo_sekolah}`} fileName={dataProfile.logo_sekolah} />
                             :
-                            <UploadField label={"Logo Sekolah"} fileName={logoSekolahValue} />
+                            <UploadField label={"Logo Sekolah"} fileName={dataProfile.logo_sekolah} />
                         }
                     </View>
                     <View style={{marginTop: 24}}>
-                        <BasicField value={alamatSekolahValue} onChangeValue={onChangeAlamatSekolahValue} label={"Alamat Sekolah"} placeholder={"Alamat Sekolah"} />
+                        <BasicField value={dataProfile.alamat_sekolah} onChangeValue={onChangeAlamatSekolah} label={"Alamat Sekolah"} placeholder={"Alamat Sekolah"} />
                     </View>
                     <View style={{marginTop: 24}}>
-                        <BasicField value={namaKepalaSekolahValue} onChangeValue={onChangeNamaKepalaSekolahValue} label={"Nama Kepala Sekolah"} placeholder={"Nama Kepala Sekolah"} />
+                        <BasicField value={dataProfile.nama_kepala_sekolah} onChangeValue={onChangeNamaKepalaSekolah} label={"Nama Kepala Sekolah"} placeholder={"Nama Kepala Sekolah"} />
                     </View>
                     <View style={{marginTop: 24}}>
-                        <BasicField value={tambahanInformasiValue} onChangeValue={onChangeTambahanInformasiValue} label={"Tambahan Informasi"} placeholder={"Tambahan Informasi"} />
+                        <BasicField value={dataProfile.tambahan_informasi} label={"Tambahan Informasi"} onChangeValue={onChangeTambahanInformasi} placeholder={"Tambahan Informasi"} />
                     </View>
                     <View style={{marginTop: 24}}>
                         <ButtonSuccess text={"Simpan"} />

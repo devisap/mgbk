@@ -181,6 +181,14 @@ const ProfileStack = ({navigation}) => {
                     headerLeft: () => <Icon.Button  name="align-justify" iconStyle={{marginLeft: 12, marginTop: 5}} backgroundColor="#48CAE4" size={18} color={'#fff'} onPress={() => navigation.openDrawer()} />
                 }}
             />
+            
+        </Stack.Navigator>
+    )
+}
+
+const SettingProfileStack = ({navigation}) => {
+    return(
+        <Stack.Navigator initialRouteName="SettingProfile">
             <Stack.Screen name={"SettingProfile"} component={SettingProfile} 
                 options={{
                     title : "Pengaturan Profil",
@@ -192,7 +200,8 @@ const ProfileStack = ({navigation}) => {
                         color: "#fff",
                         fontSize: 20
                     },
-                    headerTintColor: '#fff'
+                    headerTintColor: '#fff',
+                    headerLeft: () => <Icon.Button  name="arrow-left" iconStyle={{marginLeft: 12, marginTop: 5}} backgroundColor="#48CAE4" size={18} color={'#fff'} onPress={() => navigation.navigate('Profile')} />
                 }}
             />
         </Stack.Navigator>
@@ -202,4 +211,4 @@ const ProfileStack = ({navigation}) => {
 export {
     HomeStack, CreateReportStack, DailyReportStack,
     WeeklyReportStack, MonthlyReportStack, SemesterReportStack,
-    YearlyReportStack, ProfileStack}
+    YearlyReportStack, ProfileStack, SettingProfileStack}
