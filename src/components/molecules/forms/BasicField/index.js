@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
-import { useState } from 'react/cjs/react.development'
 import Label from '../../../atoms/texts/Label'
 
 const BasicField = (props) => {

@@ -47,6 +47,16 @@ const ProfileForm = (props) => {
         newDatas.id_sekolah = val
         setDataProfile(newDatas)
     }
+    onChangeFotoProfile = val => {
+        let newDatas = {...dataProfile}
+        newDatas.foto_profil = val
+        setDataProfile(newDatas)
+    }
+    onChangeLogoSekolah = val => {
+        let newDatas = {...dataProfile}
+        newDatas.logo_sekolah = val
+        setDataProfile(newDatas)
+    }
 
     const getProfile = async() => {
         try {
@@ -57,9 +67,9 @@ const ProfileForm = (props) => {
                 const dataProfile = JSON.parse(DATA_USER)
                 setDataProfile({
                     nama_lengkap: dataProfile.nama_lengkap,
-                    foto_profil: dataProfile.foto_profil,
+                    foto_profil: `https://api-mgbk.bgskr-project.my.id/upload/user/fotoProfil/${dataProfile.foto_profil}`,
                     id_sekolah: dataProfile.id_sekolah,
-                    logo_sekolah: dataProfile.logo_sekolah,
+                    logo_sekolah: `https://api-mgbk.bgskr-project.my.id/upload/user/fotoProfil/${dataProfile.logo_sekolah}`,
                     alamat_sekolah: dataProfile.alamat_sekolah,
                     nama_kepala_sekolah: dataProfile.nama_kepala_sekolah,
                     tambahan_informasi: dataProfile.tambahan_informasi
@@ -144,23 +154,13 @@ const ProfileForm = (props) => {
                         <BasicField value={dataProfile.nama_lengkap} onChangeValue={onChangeNamaLengkap} label={"Nama Lengkap"} placeholder={"Nama Lengkap"} />
                     </View>
                     <View style={{marginTop: 24}}>
-                        {
-                            dataProfile.foto_profil != ''?
-                            <UploadField label={"Foto Profil"} source={`https://api-mgbk.bgskr-project.my.id/upload/user/fotoProfil/${dataProfile.foto_profil}`} fileName={dataProfile.foto_profil} />
-                            :
-                            <UploadField label={"Foto Profil"} fileName={dataProfile.foto_profil} />
-                        }
+                        <UploadField label={"Foto Profil"} onChangeValue={onChangeFotoProfile} source={dataProfile.foto_profil} fileName={dataProfile.foto_profil} />
                     </View>
                     <View style={{marginTop: 24}}>
                         <SelectField items={listSchool} onChangeValue={onChangeAsalSekolah} value={dataProfile.id_sekolah} label={"Asal Sekolah"}/>
                     </View>
                     <View style={{marginTop: 24}}>
-                        {
-                            dataProfile.logo_sekolah != ''?
-                            <UploadField label={"Logo Sekolah"} source={`https://api-mgbk.bgskr-project.my.id/upload/user/logoSekolah/${dataProfile.logo_sekolah}`} fileName={dataProfile.logo_sekolah} />
-                            :
-                            <UploadField label={"Logo Sekolah"} fileName={dataProfile.logo_sekolah} />
-                        }
+                        <UploadField label={"Logo Sekolah"} source={dataProfile.logo_sekolah} onChangeValue={onChangeLogoSekolah} fileName={dataProfile.logo_sekolah} />
                     </View>
                     <View style={{marginTop: 24}}>
                         <BasicField value={dataProfile.alamat_sekolah} onChangeValue={onChangeAlamatSekolah} label={"Alamat Sekolah"} placeholder={"Alamat Sekolah"} />
