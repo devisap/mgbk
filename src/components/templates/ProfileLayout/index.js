@@ -22,7 +22,7 @@ const ProfileLayout = (props) => {
         const EMAIL = await AsyncStorage.getItem('EMAIL')
         let dataUser = JSON.parse(DATA_USER)
         if(IS_PROFILE_VERIFIED == 't'){
-            setFotoProfil(`https://api-mgbk.bgskr-project.my.id/upload/user/fotoProfil/${dataUser.foto_profil}`)
+            setFotoProfil(`https://api-mgbk.bgskr-project.my.id/upload/fotoProfil/${dataUser.foto_profil}`)
             setNamaLengkap(dataUser.nama_lengkap)
             setEmail(EMAIL)
             setIsFetched(true)

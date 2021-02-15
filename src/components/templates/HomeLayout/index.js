@@ -4,6 +4,10 @@ import { ScrollView, View } from 'react-native'
 import MenuHomeCard from '../../organisms/MenuHomeCard'
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import HasProfile from '../../../config/storage/HasProfile'
+import GetDataBasic from '../../../config/storage/GetDataBasic';
+import {getDataProfileApi} from '../../../config/api/user'
+import StoreDataProfile from '../../../config/storage/StoreDataProfile';
 
 const HomeLayout = (props) => {
     const [isProfileVerified, setIsProfileVerified] = useState('f')
@@ -69,12 +73,10 @@ const HomeLayout = (props) => {
                         :
                         <View>
                             {
-                                isProfileVerified == 'f'?
+                                isProfileVerified == 'f'&&
                                     <View style={{marginTop: 24, marginBottom: 12}}>
                                         <MenuHomeCard onPress={props.onPressLengkapiProfil} title={"Lengkapi Profil"} content={"Lengkapi profil sebelum mengirimkan laporan"}/>
                                     </View>
-                                :
-                                    void 0
                             }
                             <View style={{marginVertical: 12}}>
                                 <MenuHomeCard onPress={props.onPressBuatLaporan} title={"Buat Laproan"} content={"Buat laporan kegiatan untuk dikirimkan"}/>

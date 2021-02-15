@@ -8,12 +8,12 @@ import EmailField from '../../molecules/forms/EmailField'
 import PasswordField from '../../molecules/forms/PasswordField'
 import RememberMeField from '../../molecules/forms/RememberMeField'
 import OrBox from '../../molecules/OrBox'
-import ValidationComponent from 'react-native-form-validator'
 import Loader from '../../molecules/Loader'
 import axios from 'axios'
 import ErrorLabel from '../../molecules/ErrorLabel'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry'
+import { loginApi } from '../../../config/api/user'
+import StoreDataBasic from '../../../config/storage/StoreDataBasic'
 
 const LoginCard = (props) => {
     const [emailValue, setEmailValue] = useState('')
@@ -27,47 +27,27 @@ const LoginCard = (props) => {
     onChangePassValue = (value) => {setPassValue(value)}
     onSubmit = () => {
         setIsLoader(true)
-        axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/user/login',
-            method: 'post',
-            data: {
-                email: emailValue,
-                password: passValue
-            }
+        loginApi({
+            email: emailValue,
+            pass: passValue
         })
-        .then((res) => {
+        .then(res => {
             if(res.data.status){
                 setIsErrReq(false)
                 setMsgErrReq('')
-                storeData(res.data.data.id_user, res.data.data.email)
+                StoreDataBasic(res.data.data)
                 props.navigation.replace('Home')
             }else{
                 setIsErrReq(true)
                 setMsgErrReq(res.data.message)
             }
+        })
+        .catch(err => {
+            alert(err)
+        })
+        .finally(() => {
             setIsLoader(false)
         })
-    }
-
-    const storeData = async(id_user, email) => {
-        try {
-            await AsyncStorage.setItem('ID_USER', ""+id_user)
-            await AsyncStorage.setItem('EMAIL', ""+email)
-            await AsyncStorage.setItem('IS_LOGGED_IN', 'y')
-        } catch (error) {
-            alert(error)
-        }
-    }
-
-    const getData = async() => {
-        try {
-            let IS_LOGGED_IN = await AsyncStorage.getItem('IS_LOGGED_IN')
-            if(IS_LOGGED_IN !== null && IS_LOGGED_IN == 'y') {
-                props.navigation.replace('Home')
-            }
-        } catch (error) {
-            alert(error)
-        }
     }
 
     return (

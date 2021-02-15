@@ -6,6 +6,7 @@ import CircleImage from '../../../atoms/images/CircleImage'
 import ImagePicker from 'react-native-image-crop-picker';
 import RBSheet from "react-native-raw-bottom-sheet";
 import Heading2 from '../../../atoms/texts/Heading2'
+import RandomString from '../../../../utils/RandomString'
 
 
 const UploadField = (props) => {
@@ -13,7 +14,7 @@ const UploadField = (props) => {
     
     useEffect(() => {
         if(props.onChangeValue)
-          props.onChangeValue(image.uri)
+          props.onChangeValue(image)
     }, [image])
 
     const pickSingleWithCamera = (mediaType = 'photo') => {
@@ -56,12 +57,11 @@ const UploadField = (props) => {
           height: 512,
         })
           .then((img) => {
-            console.log('received cropped image', img);
+            // console.log('received cropped image', img);
             setImage({
                 uri: img.path,
-                width: img.width,
-                height: img.height,
-                mime: img.mime,
+                name: `${RandomString(8)}.${img.mime.replace('image/', '')}`,
+                type: img.mime,
             });
           })
           .catch((e) => {

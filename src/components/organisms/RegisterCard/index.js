@@ -11,6 +11,7 @@ import RememberMeField from '../../molecules/forms/RememberMeField'
 import UsernameField from '../../molecules/forms/UsernameField'
 import OrBox from '../../molecules/OrBox'
 import Loader from '../../molecules/Loader'
+import { registerApi } from '../../../config/api/user'
 
 const RegisterCard = (props) => {
     const [usernameValue, setUsernameValue] = useState('') 
@@ -26,25 +27,26 @@ const RegisterCard = (props) => {
 
     onSubmit = () => {
         setIsLoader(true)
-        axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/user/register',
-            method: 'post',
-            data: {
-                name: usernameValue,
-                email: emailValue,
-                password: passValue
-            }
+        registerApi({
+            name: usernameValue,
+            email: emailValue,
+            pass: passValue
         })
-        .then((res) => {
+        .then(res => {
             if(res.data.status){
                 setIsErrReq(false)
                 setMsgErrReq('')
-                props.navigation.replace('Home')
+                props.navigation.replace('Login')
             }else{
                 setIsErrReq(true)
                 setMsgErrReq(res.data.message)
                 console.log(res.data)
             }
+        })
+        .catch(err => {
+            alert(err)
+        })
+        .finally(() => {
             setIsLoader(false)
         })
     }

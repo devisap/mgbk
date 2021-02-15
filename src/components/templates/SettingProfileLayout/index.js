@@ -4,7 +4,7 @@ import { View, ScrollView } from 'react-native'
 import Heading2 from '../../atoms/texts/Heading2'
 import ProfileForm from '../../organisms/ProfileForm'
 
-const SettingProfileLayout = () => {
+const SettingProfileLayout = (props) => {
     return (
         <View>
             <ScrollView>
@@ -13,7 +13,7 @@ const SettingProfileLayout = () => {
                         <Heading2 text={"Perbarui Profile"} />
                     </View>
                     <View style={{marginTop: 32}}>
-                        <ProfileForm />
+                        <ProfileForm navigation={props.navigation} />
                     </View>
                 </View>
             </ScrollView>
