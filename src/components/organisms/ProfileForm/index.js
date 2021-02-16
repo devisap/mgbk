@@ -9,6 +9,7 @@ import ButtonSuccess from '../../atoms/buttons/ButtonSuccess'
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Loader from '../../molecules/Loader'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 const ProfileForm = (props) => {
@@ -16,6 +17,7 @@ const ProfileForm = (props) => {
     const [dataProfile, setDataProfile] = useState({})
     const [isFetched, setIsFetched] = useState(false)
     const [isLoader, setIsLoader] = useState(false)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         getProfile()
@@ -161,6 +163,7 @@ const ProfileForm = (props) => {
         .then(res => {
             if(res.data.status){
                 setProfile()
+                dispatch({type: "SET_ISPROFILEVERIFIED", value: res.data.status})
                 props.navigation.navigate('Home')
             }else{
                 console.log(res.data)

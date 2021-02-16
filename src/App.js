@@ -77,6 +77,8 @@ import CreateReportLayout from './components/templates/CreateReportLayout';
 import ForgotPasswordCard from './components/organisms/ForgotPasswordCard';
 import ForgotPasswordLayout from './components/templates/ForgotPasswordLayout';
 import ForgotPassword from './components/organisms/ForgotPasswordCard';
+import { Provider } from 'react-redux';
+import store from './config/redux/store'
 const App = () => {
   // return <SplashScreen />
   // return <IcAlignJustifyWhite />
@@ -142,10 +144,12 @@ const App = () => {
     // <DailyReportLayout />
     // <SettingProfileLayout />
     // <ReportingStep1Layout />
-    <NavigationContainer>
-      <Router />
-      {/* <Drawer /> */}
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Router />
+        {/* <Drawer /> */}
+      </NavigationContainer>
+    </Provider>
     // <ForgotPasswordCard />
     // <ForgotPasswordLayout />
     // <ForgotPassword />

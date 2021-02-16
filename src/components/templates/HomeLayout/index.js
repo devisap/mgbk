@@ -8,10 +8,13 @@ import HasProfile from '../../../config/storage/HasProfile'
 import GetDataBasic from '../../../config/storage/GetDataBasic';
 import {getDataProfileApi} from '../../../config/api/user'
 import StoreDataProfile from '../../../config/storage/StoreDataProfile';
+import { useDispatch, useSelector } from 'react-redux';
 
 const HomeLayout = (props) => {
     const [isProfileVerified, setIsProfileVerified] = useState('f')
     const [isFetched, setIsFetched] = useState(false)
+    const globalState = useSelector(state => state)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         hasProfile()
@@ -24,13 +27,12 @@ const HomeLayout = (props) => {
         })
         .then(async(res) => {
             if(res.data.status){
-                setIsProfileVerified('t')
                 await AsyncStorage.setItem('IS_PROFILE_VERIFIED', 't')
                 await AsyncStorage.setItem('DATA_USER', JSON.stringify(res.data.data))
             }else{
-                setIsProfileVerified('f')
                 await AsyncStorage.setItem('IS_PROFILE_VERIFIED', 'f')
             }
+            dispatch({type: "SET_ISPROFILEVERIFIED", value: res.data.status})
             setIsFetched(true)
         })
     }
@@ -40,7 +42,7 @@ const HomeLayout = (props) => {
             const IS_PROFILE_VERIFIED = await AsyncStorage.getItem('IS_PROFILE_VERIFIED')
             const ID_USER = await AsyncStorage.getItem('ID_USER')
             if(IS_PROFILE_VERIFIED != null){
-                setIsProfileVerified(IS_PROFILE_VERIFIED)
+                // setIsProfileVerified(IS_PROFILE_VERIFIED)
                 setIsFetched(true)
             }else{
                 getDataProfile(ID_USER)
@@ -73,7 +75,7 @@ const HomeLayout = (props) => {
                         :
                         <View>
                             {
-                                isProfileVerified == 'f'&&
+                                globalState.isProfileVerified == false&&
                                     <View style={{marginTop: 24, marginBottom: 12}}>
                                         <MenuHomeCard onPress={props.onPressLengkapiProfil} title={"Lengkapi Profil"} content={"Lengkapi profil sebelum mengirimkan laporan"}/>
                                     </View>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect
 } from 'react'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 import ButtonSecondary from '../../atoms/buttons/ButtonSecondary'
 import Heading1 from '../../atoms/texts/Heading1'
 import ButtonAuth from '../../molecules/buttons/ButtonAuth'
@@ -14,6 +14,7 @@ import ErrorLabel from '../../molecules/ErrorLabel'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loginApi } from '../../../config/api/user'
 import StoreDataBasic from '../../../config/storage/StoreDataBasic'
+import { useSelector } from 'react-redux'
 
 const LoginCard = (props) => {
     const [emailValue, setEmailValue] = useState('')
@@ -22,6 +23,7 @@ const LoginCard = (props) => {
     const [isErrReq, setIsErrReq] = useState(false)
     const [msgErrReq, setMsgErrReq] = useState('')
     const [isLoggedIn, setIsLoggedIn] = useState('t')
+    const globalState = useSelector(state => state)
 
     onChangeEmailValue = (value) => {setEmailValue(value)}
     onChangePassValue = (value) => {setPassValue(value)}
@@ -56,6 +58,7 @@ const LoginCard = (props) => {
                 isLoader == true? <Loader /> : void 0
             }
             <View style={{marginTop: 35}}>
+                {/* <Text>{globalState.isProfileVerified == true? 'true' : 'false'}</Text> */}
                 <Heading1 text={"Login"} />
             </View>
             { 
