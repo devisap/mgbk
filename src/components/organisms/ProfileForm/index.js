@@ -149,8 +149,7 @@ const ProfileForm = (props) => {
             formData.append('nama_kepala_sekolah', dataProfile.nama_kepala_sekolah)
             formData.append('tambahan_informasi', dataProfile.tambahan_informasi)
         }
-
-        console.log(JSON.stringify(formData))
+        
         axios({
             url: 'https://api-mgbk.bgskr-project.my.id/user/profile',
             method: 'post',

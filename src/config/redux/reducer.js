@@ -5,7 +5,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     if(action.type == "SET_ISPROFILEVERIFIED"){
         return {
-            isProfileVerified: action.inputValue
+            isProfileVerified: action.value
         }
     }
     return state

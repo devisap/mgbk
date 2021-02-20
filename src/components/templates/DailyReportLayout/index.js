@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ButtonSubmit from '../../molecules/buttons/ButtonSubmit'
 import ReportCard from '../../organisms/ReportCard'
-import Navbar from '../Navbar'
-import IcPlusWhite from '../../../components/atoms/icons/IcPlusWhite'
-import IcPolygonBlack from '../../atoms/icons/IcPolygonBlack';
 import Heading3 from '../../atoms/texts/Heading3';
 import IcCalendarBlack from '../../atoms/icons/IcCalendarBlack';
 import DateFunction from '../../../utils/DateFunction'
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import ImgNoData from '../../../assets/images/no_data.svg'
+import Loader from '../../molecules/Loader'
 
 const DailyReportLayout = () => {
     // set mode date
@@ -17,6 +19,11 @@ const DailyReportLayout = () => {
     const [date, setDate] = useState(new Date());
     const [dateString, setDateString] = useState(DateFunction(new Date()))
     const [show, setShow] = useState(false);
+    
+    const [isFetched, setIsFetched] = useState(false)
+    const [reports, setReports] = useState()
+    const [isReportEmpty, setIsReportEmpty] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
 
     const onChange = (event, selectedDate) => {
@@ -36,16 +43,80 @@ const DailyReportLayout = () => {
     const showDatepicker = () => {
         showMode('date');
     };
+
+    useEffect(() => {
+        getReport()
+    }, [date])
+
+    const getReport = async() => {
+        setIsFetched(false)
+        const dataUser = JSON.parse(await AsyncStorage.getItem('DATA_USER'))
+        const tglTransaksi = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+        axios({
+            url: `https://api-mgbk.bgskr-project.my.id/report/by-date/${tglTransaksi}`,
+            method: 'get',
+            params: {
+                id_user: dataUser.id_user,
+                id_sekolah: dataUser.id_sekolah
+            }
+        })
+        .then(res => {
+            if(res.data.status){
+                const lstData = res.data.data.map((obj, id) => 
+                    <View key={id} style={{marginTop: 24}}>
+                        <ReportCard title={obj.kegiatan} content={obj.uraian} date={DateFunction(new Date(obj.tgl_transaksi))}/>
+                    </View>    
+                )
+                setReports(lstData)
+                setIsReportEmpty(false)
+            }else{
+                setIsReportEmpty(true)
+            }
+        })
+        .catch(err => {
+            alert(err)
+        })
+        .finally(() => {
+            setIsFetched(true)
+        })
+    }
+
+    const printReport = async() => {
+        setIsLoading(true)
+        const dataUser = JSON.parse(await AsyncStorage.getItem('DATA_USER'))
+        const tglTransaksi = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+        axios({
+            url: `https://api-mgbk.bgskr-project.my.id/print-report/by-date/${tglTransaksi}`,
+            method: 'get',
+            params: {
+                id_user: dataUser.id_user,
+                id_sekolah: dataUser.id_sekolah
+            },
+            responseType: 'blob'
+        })
+        .then(res => {
+            console.log()
+        })
+        .catch(err => {
+
+        })
+        .finally(() => {
+            setIsLoading(false)
+        })
+    }
     
     return (
         <View style={{backgroundColor: '#fff', flex: 1}}>
             <View style={{flex: 1}}>
                 <ScrollView>
                     <View  style={{paddingHorizontal: 32, marginBottom: 24}}>
+                        {
+                            isLoading == true&& <Loader />
+                        }
                         <View style={{marginTop: 39}}>
                             <Text style={{fontFamily: "Lato", fontSize: 16, color: "#4a4a4a"}}>Laporan Sekolah: SMK NEGERI 4 MALANG</Text>
                         </View>
-                        <View style={{marginTop: 24}}>
+                        <View style={{marginTop: 24, marginBottom: 12}}>
                             <TouchableOpacity onPress={() => showDatepicker()} style={{flex: 1, backgroundColor: "#f5f5f5", borderRadius: 6, paddingLeft: 16}}>
                                 <View style={{marginVertical: 16}}>
                                     <Heading3 text={dateString} />
@@ -65,25 +136,47 @@ const DailyReportLayout = () => {
                             onChange={onChange}
                             />
                         )}
-                        <View style={{marginTop: 36}}>
-                            <ReportCard title={"Kegiatan A"} date={"22 Desember 2020"}/>
-                        </View>
-                        <View style={{marginTop: 24}}>
-                            <ReportCard title={"Kegiatan B"} date={"22 Desember 2020"}/>
-                        </View>
-                        <View style={{marginTop: 24}}>
-                            <ReportCard title={"Kegiatan V"} date={"22 Desember 2020"}/>
-                        </View>
-                        <View style={{marginTop: 24}}>
-                            <ReportCard title={"Kegiatan V"} date={"22 Desember 2020"}/>
-                        </View>
-                        
+                        {
+                            isFetched == false?
+                            <SkeletonPlaceholder>
+                                <View style={{marginTop: 24}}>
+                                    <View style={{width: '100%', height: 135, borderRadius: 8}} />
+                                </View>
+                                <View style={{marginTop: 24}}>
+                                    <View style={{width: '100%', height: 135, borderRadius: 8}} />
+                                </View>
+                                <View style={{marginTop: 24}}>
+                                    <View style={{width: '100%', height: 135, borderRadius: 8}} />
+                                </View>
+                                <View style={{marginTop: 24}}>
+                                    <View style={{width: '100%', height: 135, borderRadius: 8}} />
+                                </View>
+                                <View style={{marginTop: 24}}>
+                                    <View style={{width: '100%', height: 135, borderRadius: 8}} />
+                                </View>
+                            </SkeletonPlaceholder>
+                            :
+                            <View>
+                                {
+                                    isReportEmpty == false?
+                                    reports
+                                    :
+                                    <View style={{marginTop: 24, alignItems: 'center'}}>
+                                        <ImgNoData width={150} height={150} />
+                                        <View style={{marginTop: 24}}>
+
+                                            <Text>Tidak ada data</Text>
+                                        </View>
+                                    </View>
+                                }
+                            </View>
+                        }
                     </View>
                 </ScrollView>
             </View>
             <View style={{borderTopWidth: 1.5, borderTopColor: 'rgba(10, 10, 10, 0.15)'}}>
                 <View style={{marginVertical: 16, marginHorizontal: 32}}>
-                    <ButtonSubmit title={"Cetak Semua"} />
+                    <ButtonSubmit title={"Cetak Semua"} onPress={() => printReport()} />
                 </View>
             </View>
         </View>

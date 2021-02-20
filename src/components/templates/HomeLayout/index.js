@@ -46,6 +46,7 @@ const HomeLayout = (props) => {
                 setIsFetched(true)
             }else{
                 getDataProfile(ID_USER)
+                
             }
 
         } catch (error) {
