@@ -60,7 +60,7 @@ const CreateReportLayout = () => {
         formData.append('id_user', await AsyncStorage.getItem('ID_USER'))
         formData.append('id_sekolah', dataUser.id_sekolah)
         formData.append('id_kegiatan', reportData.kegiatan)
-        formData.append('tgl_transaksi', `${reportData.tanggal.getFullYear()}-${reportData.tanggal.getMonth()}-${reportData.tanggal.getDate()}`)
+        formData.append('tgl_transaksi', `${reportData.tanggal.getFullYear()}-${reportData.tanggal.getMonth()+1}-${reportData.tanggal.getDate()}`)
         formData.append('detail', reportData.detail)
 
         let x = 1

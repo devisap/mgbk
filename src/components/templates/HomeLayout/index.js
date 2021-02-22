@@ -13,10 +13,11 @@ import { useDispatch, useSelector } from 'react-redux';
 const HomeLayout = (props) => {
     const [isProfileVerified, setIsProfileVerified] = useState('f')
     const [isFetched, setIsFetched] = useState(false)
-    const globalState = useSelector(state => state)
+    const globalState = useSelector(state => state.ProfileVerifiedReducer)
     const dispatch = useDispatch()
 
     useEffect(() => {
+        console.log(globalState)
         hasProfile()
     }, [])
 
@@ -29,10 +30,17 @@ const HomeLayout = (props) => {
             if(res.data.status){
                 await AsyncStorage.setItem('IS_PROFILE_VERIFIED', 't')
                 await AsyncStorage.setItem('DATA_USER', JSON.stringify(res.data.data))
+                dispatch({type: "SET_ISPROFILEVERIFIED", value: true})
+                dispatch({type: 'SET_PROFILES', value: res.data.data})
             }else{
                 await AsyncStorage.setItem('IS_PROFILE_VERIFIED', 'f')
+                dispatch({type: "SET_ISPROFILEVERIFIED", value: false})
             }
-            dispatch({type: "SET_ISPROFILEVERIFIED", value: res.data.status})
+        })
+        .catch(err => {
+            alert(err)
+        })
+        .finally(() => {
             setIsFetched(true)
         })
     }
@@ -40,13 +48,20 @@ const HomeLayout = (props) => {
     const hasProfile = async() => {
         try {
             const IS_PROFILE_VERIFIED = await AsyncStorage.getItem('IS_PROFILE_VERIFIED')
-            const ID_USER = await AsyncStorage.getItem('ID_USER')
             if(IS_PROFILE_VERIFIED != null){
-                // setIsProfileVerified(IS_PROFILE_VERIFIED)
+                const dataUser = JSON.parse(await AsyncStorage.getItem("DATA_USER"))
+                if(IS_PROFILE_VERIFIED == 't')
+                    dispatch({type: "SET_ISPROFILEVERIFIED", value: true})
+                else
+                    dispatch({type: "SET_ISPROFILEVERIFIED", value: false})
+
+                if(dataUser != null){
+                    dispatch({type: 'SET_PROFILES', value: dataUser})
+                }
                 setIsFetched(true)
             }else{
+                const ID_USER = await AsyncStorage.getItem('ID_USER')
                 getDataProfile(ID_USER)
-                
             }
 
         } catch (error) {

@@ -7,7 +7,7 @@ const InfoProfileCard = (props) => {
     return (
         <View style={styles.box}>
             <View style={{marginVertical: 16, paddingHorizontal: 16}}>
-                <Heading3 text={"SMA Negeri 1 Kota Malang"} color={"#737373"} textAlign={"center"} />
+                <Heading3 text={props.namaSekolah} color={"#737373"} textAlign={"center"} />
             </View>
             <View style={{flex: 1, borderColor: "#4a4a4a", borderWidth: 1}}></View>
             <View style={{flexDirection: 'column', alignItems: 'center', marginVertical: 16, paddingHorizontal: 16}}>

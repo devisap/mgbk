@@ -51,7 +51,7 @@ const DailyReportLayout = () => {
     const getReport = async() => {
         setIsFetched(false)
         const dataUser = JSON.parse(await AsyncStorage.getItem('DATA_USER'))
-        const tglTransaksi = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+        const tglTransaksi = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
         axios({
             url: `https://api-mgbk.bgskr-project.my.id/report/by-date/${tglTransaksi}`,
             method: 'get',
@@ -164,8 +164,7 @@ const DailyReportLayout = () => {
                                     <View style={{marginTop: 24, alignItems: 'center'}}>
                                         <ImgNoData width={150} height={150} />
                                         <View style={{marginTop: 24}}>
-
-                                            <Text>Tidak ada data</Text>
+                                            <Text style={{fontFamily: 'Lato', color: '#4a4a4a', fontSize: 20}}>Tidak ada data</Text>
                                         </View>
                                     </View>
                                 }

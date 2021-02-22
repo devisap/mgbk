@@ -13,7 +13,7 @@ const BasicField = (props) => {
 
     useEffect(() => {
         if(props.onChangeValue)
-            props.onChangeValue(value)
+            props.onChangeValue(props.inputType, value)
     }, [value])
 
     return (

@@ -11,6 +11,7 @@ import { Text, View } from 'react-native';
 import { useState } from 'react';
 import Collapsible from 'react-native-collapsible';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from 'react-redux';
 const Drawer = createDrawerNavigator();
 
 const HomeDrawer = ({navigation, route}) => {
@@ -42,6 +43,7 @@ const HomeDrawer = ({navigation, route}) => {
 const CustomDrawerContent = (props) => {
     const [collapsed, setCollapsed] = useState(true)
     const [currentDrawer, setCurrentDrawer] = useState('Home')
+    const dispatch = useDispatch()
 
     drawerClick = (stack) => {
         props.navigation.navigate(stack);
@@ -51,6 +53,7 @@ const CustomDrawerContent = (props) => {
     const logout = async() => {
         try {
             await AsyncStorage.clear()
+            dispatch({type: 'SET_PROFILES', value: {}})
             props.navigation.replace('Login')
         } catch (error) {
             alert(error)

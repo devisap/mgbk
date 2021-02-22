@@ -14,7 +14,7 @@ const UploadField = (props) => {
     
     useEffect(() => {
         if(props.onChangeValue)
-          props.onChangeValue(image)
+          props.onChangeValue(props.inputType, image)
     }, [image])
 
     const pickSingleWithCamera = (mediaType = 'photo') => {

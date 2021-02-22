@@ -6,7 +6,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Label from '../../../atoms/texts/Label';
 
 const SelectField = (props) => {
-    const [selectedItem, setSelectedItem] = useState(props.value? props.value : '');
+    const [selectedItem, setSelectedItem] = useState('');
     const [colorFocused, setColorFocused] = useState('#DBDBDB')
     const [items, setItems] = useState([
         {label: 'Item1', value: 'item1'},
@@ -17,6 +17,9 @@ const SelectField = (props) => {
     useEffect(() => {
         if(props.items)
             setItems(props.items)
+        if(props.value)
+            setSelectedItem(props.value)
+
     }, [])
 
     useEffect(() => {

@@ -27,6 +27,13 @@ const ProfileForm = (props) => {
         console.log(dataProfile)
     }, [dataProfile])
 
+    onChangeValue = (inpuType, value) => {
+        setDataProfile({
+            ...dataProfile,
+            [inpuType]: value
+        })
+    }
+
     onChangeNamaLengkap = val => {
         let newDatas = {...dataProfile}
         newDatas.nama_lengkap = val
@@ -111,6 +118,7 @@ const ProfileForm = (props) => {
             .then(res => {
                 const list = res.data.data.map(obj => ({label: obj.nama_sekolah, value: obj.id_sekolah}))
                 setListSchool(list)
+                console.log(list)
             })
             .catch(err => {
                 console.log(err)
@@ -187,6 +195,7 @@ const ProfileForm = (props) => {
             if(res.data.status){
                 await AsyncStorage.setItem('IS_PROFILE_VERIFIED', 't')
                 await AsyncStorage.setItem('DATA_USER', JSON.stringify(res.data.data))
+                dispatch({type: 'SET_PROFILES', value: res.data.data})
             }else{
                 await AsyncStorage.setItem('IS_PROFILE_VERIFIED', 'f')
             }
@@ -242,25 +251,25 @@ const ProfileForm = (props) => {
                         isLoader == true? <Loader /> : void 0
                     }
                     <View>
-                        <BasicField value={dataProfile.nama_lengkap} onChangeValue={onChangeNamaLengkap} label={"Nama Lengkap"} placeholder={"Nama Lengkap"} />
+                        <BasicField value={dataProfile.nama_lengkap} onChangeValue={onChangeValue} inputType={'nama_lengkap'} label={"Nama Lengkap"}  placeholder={"Nama Lengkap"} />
                     </View>
                     <View style={{marginTop: 24}}>
-                        <UploadField label={"Foto Profil"} onChangeValue={onChangeFotoProfile} source={dataProfile.foto_profil.uri} fileName={dataProfile.foto_profil.name} />
+                        <UploadField label={"Foto Profil"} onChangeValue={onChangeValue} inputType={'foto_profil'} source={dataProfile.foto_profil.uri} fileName={dataProfile.foto_profil.name} />
                     </View>
                     <View style={{marginTop: 24}}>
-                        <SelectField items={listSchool} onChangeValue={onChangeAsalSekolah} value={dataProfile.id_sekolah} label={"Asal Sekolah"}/>
+                        <SelectField  items={listSchool} value={dataProfile.id_sekolah} onChangeValue={onChangeValue}  inputType={"id_sekolah"} label={"Asal Sekolah"}/>
                     </View>
                     <View style={{marginTop: 24}}>
-                        <UploadField label={"Logo Sekolah"} source={dataProfile.logo_sekolah.uri} onChangeValue={onChangeLogoSekolah} fileName={dataProfile.logo_sekolah.name} />
+                        <UploadField label={"Logo Sekolah"} source={dataProfile.logo_sekolah.uri} onChangeValue={onChangeValue} inputType={'logo_sekolah'} fileName={dataProfile.logo_sekolah.name} />
                     </View>
                     <View style={{marginTop: 24}}>
-                        <BasicField value={dataProfile.alamat_sekolah} onChangeValue={onChangeAlamatSekolah} label={"Alamat Sekolah"} placeholder={"Alamat Sekolah"} />
+                        <BasicField value={dataProfile.alamat_sekolah} onChangeValue={onChangeValue} inputType={'alamat_sekolah'} label={"Alamat Sekolah"} placeholder={"Alamat Sekolah"} />
                     </View>
                     <View style={{marginTop: 24}}>
-                        <BasicField value={dataProfile.nama_kepala_sekolah} onChangeValue={onChangeNamaKepalaSekolah} label={"Nama Kepala Sekolah"} placeholder={"Nama Kepala Sekolah"} />
+                        <BasicField value={dataProfile.nama_kepala_sekolah} onChangeValue={onChangeValue} inputType={'nama_kepala_sekolah'} label={"Nama Kepala Sekolah"} placeholder={"Nama Kepala Sekolah"} />
                     </View>
                     <View style={{marginTop: 24}}>
-                        <BasicField value={dataProfile.tambahan_informasi} label={"Tambahan Informasi"} onChangeValue={onChangeTambahanInformasi} placeholder={"Tambahan Informasi"} />
+                        <BasicField value={dataProfile.tambahan_informasi} label={"Tambahan Informasi"} onChangeValue={onChangeValue} inputType={'tambahan_informasi'} placeholder={"Tambahan Informasi"} />
                     </View>
                     <View style={{marginTop: 24}}>
                         <ButtonSuccess text={"Simpan"} onPress={() => postData()} />
