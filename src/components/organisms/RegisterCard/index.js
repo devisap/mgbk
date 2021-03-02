@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { View } from 'react-native'
+import { Alert, View } from 'react-native'
 import ButtonSecondary from '../../atoms/buttons/ButtonSecondary'
 import Heading1 from '../../atoms/texts/Heading1'
 import ButtonAuth from '../../molecules/buttons/ButtonAuth'
@@ -36,7 +36,14 @@ const RegisterCard = (props) => {
             if(res.data.status){
                 setIsErrReq(false)
                 setMsgErrReq('')
-                props.navigation.replace('Login')
+                Alert.alert(
+                    "Info",
+                    res.data.message,
+                    [
+                        { text: "OK", onPress: () => props.navigation.replace('Login') }
+                    ],
+                    { cancelable: false }
+                );
             }else{
                 setIsErrReq(true)
                 setMsgErrReq(res.data.message)

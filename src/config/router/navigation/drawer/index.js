@@ -7,11 +7,11 @@ import {
     YearlyReportStack, ProfileStack, SettingProfileStack
 } from '../stack'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import { useState } from 'react';
 import Collapsible from 'react-native-collapsible';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const Drawer = createDrawerNavigator();
 
 const HomeDrawer = ({navigation, route}) => {
@@ -44,6 +44,7 @@ const CustomDrawerContent = (props) => {
     const [collapsed, setCollapsed] = useState(true)
     const [currentDrawer, setCurrentDrawer] = useState('Home')
     const dispatch = useDispatch()
+    const globalState = useSelector(state => state.ProfileVerifiedReducer.isProfileVerified)
 
     drawerClick = (stack) => {
         props.navigation.navigate(stack);
@@ -57,6 +58,22 @@ const CustomDrawerContent = (props) => {
             props.navigation.replace('Login')
         } catch (error) {
             alert(error)
+        }
+    }
+
+    const CheckReportNavigate = (page) => {
+        if(globalState){
+            props.navigation.navigate(page);
+                        setCurrentDrawer(page)
+        }else{
+            Alert.alert(
+                "Info",
+                "Mohon untuk melengkapi data profil",
+                [
+                    { text: "OK", onPress: () => '' }
+                ],
+                { cancelable: false }
+            );
         }
     }
 
@@ -79,7 +96,7 @@ const CustomDrawerContent = (props) => {
             activeTintColor="#48CAE4"
             icon={({focused}) => <Icon name="plus" size={18} color={focused? '#48CAE4' : '#4a4a4a'} /> } 
             labelStyle={{fontFamily: "Lato", fontSize: 20, color: "#4a4a4a"}} 
-            onPress={() => drawerClick('CreateReport')} />
+            onPress={() => CheckReportNavigate('CreateReport')} />
 
           <TouchableOpacity onPress={() => setCollapsed(!collapsed)}>
             <View style={{flexDirection: 'row', paddingLeft: 18, marginVertical: 18}}>
@@ -105,35 +122,35 @@ const CustomDrawerContent = (props) => {
                     label="Harian" 
                     activeTintColor="#48CAE4"
                     labelStyle={{fontFamily: "Lato", fontSize: 20, color: "#4a4a4a", marginLeft: 50}} 
-                    onPress={() => drawerClick('DailyReport')} 
+                    onPress={() => CheckReportNavigate('DailyReport')} 
                 />
                 <DrawerItem 
                     focused={currentDrawer == 'WeeklyReport'? true:false} 
                     label="Mingguan" 
                     activeTintColor="#48CAE4"
                     labelStyle={{fontFamily: "Lato", fontSize: 20, color: "#4a4a4a", marginLeft: 50}} 
-                    onPress={() => drawerClick('WeeklyReport')} 
+                    onPress={() => CheckReportNavigate('WeeklyReport')} 
                 />
                 <DrawerItem 
                     focused={currentDrawer == 'MonthlyReport'? true:false} 
                     label="Bulanan" 
                     activeTintColor="#48CAE4"
                     labelStyle={{fontFamily: "Lato", fontSize: 20, color: "#4a4a4a", marginLeft: 50}} 
-                    onPress={() => drawerClick('MonthlyReport')} 
+                    onPress={() => CheckReportNavigate('MonthlyReport')} 
                 />
                 <DrawerItem 
                     focused={currentDrawer == 'SemesterReport'? true:false} 
                     label="Semesteran" 
                     activeTintColor="#48CAE4"
                     labelStyle={{fontFamily: "Lato", fontSize: 20, color: "#4a4a4a", marginLeft: 50}} 
-                    onPress={() => drawerClick('SemesterReport')} 
+                    onPress={() => CheckReportNavigate('SemesterReport')} 
                 />
                 <DrawerItem 
                     focused={currentDrawer == 'YearlyReport'? true:false} 
                     label="Tahunan" 
                     activeTintColor="#48CAE4"
                     labelStyle={{fontFamily: "Lato", fontSize: 20, color: "#4a4a4a", marginLeft: 50}} 
-                    onPress={() => drawerClick('YearlyReport')} 
+                    onPress={() => CheckReportNavigate('YearlyReport')} 
                 />
           </Collapsible>
           <DrawerItem 

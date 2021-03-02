@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import { Alert, View } from 'react-native'
 import Heading2 from '../../atoms/texts/Heading2'
 import BasicField from '../../molecules/forms/BasicField'
 import UploadField from '../../molecules/forms/UploadField'
@@ -171,7 +171,14 @@ const ProfileForm = (props) => {
             if(res.data.status){
                 setProfile()
                 dispatch({type: "SET_ISPROFILEVERIFIED", value: res.data.status})
-                props.navigation.navigate('Home')
+                Alert.alert(
+                    "Info",
+                    res.data.message,
+                    [
+                        { text: "OK", onPress: () => props.navigation.navigate('Profile') }
+                    ],
+                    { cancelable: false }
+                );
             }else{
                 console.log(res.data)
             }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, TouchableOpacity, ScrollView } from 'react-native'
+import { View, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import Heading2 from '../../atoms/texts/Heading2'
 import DateField from '../../molecules/forms/DateField'
 import SelectField from '../../molecules/forms/SelectField'
@@ -12,7 +12,7 @@ import Loader from '../../molecules/Loader'
 import DateFunction from '../../../utils/DateFunction'
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder'
 
-const CreateReportLayout = () => {
+const CreateReportLayout = (props) => {
     const [listActivity, setListActivity] = useState({})
     const [isLoading, setIsLoading] = useState(false)
     const [isFetched, setIsFetched] = useState(false)
@@ -87,7 +87,14 @@ const CreateReportLayout = () => {
                     detail: '',
                     dokumen: {}
                 })
-                alert('berhasil')
+                Alert.alert(
+                    "Info",
+                    res.data.message,
+                    [
+                        { text: "OK", onPress: () => props.navigation.navigate('Home') }
+                    ],
+                    { cancelable: false }
+                );
             }
 
             alert(res.data.message)

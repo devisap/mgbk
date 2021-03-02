@@ -3,7 +3,7 @@ import CreateReportLayout from '../../templates/CreateReportLayout'
 
 const CreateReport = ({navigation}) => {
     return (
-        <CreateReportLayout />
+        <CreateReportLayout navigation={navigation} />
     )
 }
 

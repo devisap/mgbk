@@ -55,10 +55,10 @@ const ProfileLayout = (props) => {
                         :
                         <View>
                             <View style={{flexDirection: "column", alignItems: 'center'}}>
-                                <CircleImage source={`https://api-mgbk.bgskr-project.my.id/upload/fotoProfil/${globalState.foto_profil}`} />
+                                <CircleImage source={globalState.foto_profil?`https://api-mgbk.bgskr-project.my.id/upload/fotoProfil/${globalState.foto_profil}`: ''}/>
                             </View>
                             <View style={{marginTop: 24}}>
-                                <InfoProfileCard namaLengkap={globalState.nama_lengkap} namaSekolah={globalState.nama_sekolah} email={globalState.email} />
+                                <InfoProfileCard namaLengkap={globalState.nama_lengkap? globalState.nama_lengkap : '---'} namaSekolah={globalState.nama_sekolah? globalState.nama_sekolah: '---'} email={globalState.email? globalState.email: '---'} />
                             </View>
                             <View style={{marginVertical: 24}}>
                                 <ButtonSubmit onPress={props.onPressSettingProfile} title={"Perbarui Profil"} />

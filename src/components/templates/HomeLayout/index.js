@@ -97,7 +97,7 @@ const HomeLayout = (props) => {
                                     </View>
                             }
                             <View style={{marginVertical: 12}}>
-                                <MenuHomeCard onPress={props.onPressBuatLaporan} title={"Buat Laproan"} content={"Buat laporan kegiatan untuk dikirimkan"}/>
+                                <MenuHomeCard onPress={props.onPressBuatLaporan} title={"Buat Laporan"} content={"Buat laporan kegiatan untuk dikirimkan"}/>
                             </View>
                             <View style={{marginVertical: 12}}>
                                 <MenuHomeCard onPress={props.onPressCetakLaporan} title={"Cetak Laporan"} content={"Cetak laporan kegiatan"}/>
