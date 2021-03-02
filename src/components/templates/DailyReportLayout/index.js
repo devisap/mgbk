@@ -11,6 +11,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import ImgNoData from '../../../assets/images/no_data.svg'
 import Loader from '../../molecules/Loader'
+import RNFetchBlob from 'rn-fetch-blob'
+import { useSelector } from 'react-redux';
 
 const DailyReportLayout = () => {
     // set mode date
@@ -24,6 +26,8 @@ const DailyReportLayout = () => {
     const [reports, setReports] = useState()
     const [isReportEmpty, setIsReportEmpty] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    
+    const globalState = useSelector(state => state.ProfilesReducer.datas)
 
 
     const onChange = (event, selectedDate) => {
@@ -83,26 +87,34 @@ const DailyReportLayout = () => {
 
     const printReport = async() => {
         setIsLoading(true)
-        const dataUser = JSON.parse(await AsyncStorage.getItem('DATA_USER'))
-        const tglTransaksi = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-        axios({
-            url: `https://api-mgbk.bgskr-project.my.id/print-report/by-date/${tglTransaksi}`,
-            method: 'get',
-            params: {
-                id_user: dataUser.id_user,
-                id_sekolah: dataUser.id_sekolah
-            },
-            responseType: 'blob'
-        })
-        .then(res => {
-            console.log()
-        })
-        .catch(err => {
+        const tglTransaksi = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
 
-        })
-        .finally(() => {
+        const android = RNFetchBlob.android
+        let dirs = RNFetchBlob.fs.dirs
+        RNFetchBlob.config({
+            fileCache : true,
+            // android only options, these options be a no-op on IOS
+            addAndroidDownloads : {
+              // Show notification when response data transmitted
+              notification : true,
+              // Title of download notification
+              title : 'Great ! Download Success ! :O ',
+              // File description (not notification description)
+              description : 'PDF CUY.',
+              mime : 'application/pdf',
+              // Make the file scannable  by media scanner
+              mediaScannable : true,
+            },
+            path : dirs.DownloadDir + `/Laporan Harian - ${globalState.nama_lengkap}.pdf`
+          })
+          .fetch('GET', `https://api-mgbk.bgskr-project.my.id/print-report/by-date/${tglTransaksi}?id_user=${globalState.id_user}&id_sekolah=${globalState.id_sekolah}`)
+          .then(res => {
+            android.actionViewIntent(res.path(), 'application/pdf')
+            console.log(res.path())
+          })
+          .finally(() => {
             setIsLoading(false)
-        })
+          })
     }
     
     return (
