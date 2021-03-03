@@ -157,7 +157,8 @@ const CreateReportLayout = (props) => {
                                 </View>
                                 <View style={{marginTop: 24}}>
                                     <DocumentField
-                                        fileName={docFileName} 
+                                        // fileName={reportData.dokumen !== {} ? reportData.dokumen[0].name : ''} 
+                                        fileName={''} 
                                         onChangeValue={onChangeValue} 
                                         inputType={"dokumen"} 
                                         label={"Dokumen Kegiatan"} />

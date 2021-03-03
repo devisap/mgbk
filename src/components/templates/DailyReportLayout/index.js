@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ButtonSubmit from '../../molecules/buttons/ButtonSubmit'
 import ReportCard from '../../organisms/ReportCard'
@@ -86,35 +86,46 @@ const DailyReportLayout = () => {
     }
 
     const printReport = async() => {
-        setIsLoading(true)
-        const tglTransaksi = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
-
-        const android = RNFetchBlob.android
-        let dirs = RNFetchBlob.fs.dirs
-        RNFetchBlob.config({
-            fileCache : true,
-            // android only options, these options be a no-op on IOS
-            addAndroidDownloads : {
-              // Show notification when response data transmitted
-              notification : true,
-              // Title of download notification
-              title : 'Great ! Download Success ! :O ',
-              // File description (not notification description)
-              description : 'PDF CUY.',
-              mime : 'application/pdf',
-              // Make the file scannable  by media scanner
-              mediaScannable : true,
-            },
-            path : dirs.DownloadDir + `/Laporan Harian - ${globalState.nama_lengkap}.pdf`
-          })
-          .fetch('GET', `https://api-mgbk.bgskr-project.my.id/print-report/by-date/${tglTransaksi}?id_user=${globalState.id_user}&id_sekolah=${globalState.id_sekolah}`)
-          .then(res => {
-            android.actionViewIntent(res.path(), 'application/pdf')
-            console.log(res.path())
-          })
-          .finally(() => {
-            setIsLoading(false)
-          })
+        if(!isReportEmpty){
+            setIsLoading(true)
+            const tglTransaksi = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+    
+            const android = RNFetchBlob.android
+            let dirs = RNFetchBlob.fs.dirs
+            RNFetchBlob.config({
+                fileCache : true,
+                // android only options, these options be a no-op on IOS
+                addAndroidDownloads : {
+                  // Show notification when response data transmitted
+                  notification : true,
+                  // Title of download notification
+                  title : 'Download Success !',
+                  // File description (not notification description)
+                  description : 'PDF CUY.',
+                  mime : 'application/pdf',
+                  // Make the file scannable  by media scanner
+                  mediaScannable : true,
+                },
+                path : dirs.DownloadDir + `/Laporan Harian - ${globalState.nama_lengkap}.pdf`
+              })
+              .fetch('GET', `https://api-mgbk.bgskr-project.my.id/print-report/by-date/${tglTransaksi}?id_user=${globalState.id_user}&id_sekolah=${globalState.id_sekolah}`)
+              .then(res => {
+                android.actionViewIntent(res.path(), 'application/pdf')
+                console.log(res.path())
+              })
+              .finally(() => {
+                setIsLoading(false)
+              })
+        }else{
+            Alert.alert(
+                "Info",
+                "Tidak ada data",
+                [
+                    { text: "OK", onPress: () => '' }
+                ],
+                { cancelable: false }
+            );
+        }
     }
     
     return (
@@ -125,9 +136,9 @@ const DailyReportLayout = () => {
                         {
                             isLoading == true&& <Loader />
                         }
-                        <View style={{marginTop: 39}}>
+                        {/* <View style={{marginTop: 39}}>
                             <Text style={{fontFamily: "Lato", fontSize: 16, color: "#4a4a4a"}}>Laporan Sekolah: SMK NEGERI 4 MALANG</Text>
-                        </View>
+                        </View> */}
                         <View style={{marginTop: 24, marginBottom: 12}}>
                             <TouchableOpacity onPress={() => showDatepicker()} style={{flex: 1, backgroundColor: "#f5f5f5", borderRadius: 6, paddingLeft: 16}}>
                                 <View style={{marginVertical: 16}}>

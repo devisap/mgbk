@@ -9,7 +9,10 @@ const DocumentField = (props) => {
     useEffect(() => {
       if(props.onChangeValue)
         props.onChangeValue(props.inputType, value)
+      
+      console.log(value)
     }, [value])
+
     const pickFile = async() => {
       try {
         const results = await DocumentPicker.pickMultiple({
