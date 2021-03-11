@@ -8,5 +8,6 @@ import DailyReport from './DailyReport'
 import CreateReport from './CreateReport'
 import Profile from './Profile'
 import ForgotPassword from './ForgotPassword'
+import AddSchool from './AddSchool'
 
-export {Login, SplashScreen, Register, Home, ReportingStep1, SettingProfile, DailyReport, CreateReport, Profile, ForgotPassword}
+export {Login, SplashScreen, Register, Home, ReportingStep1, SettingProfile, DailyReport, CreateReport, Profile, ForgotPassword, AddSchool}

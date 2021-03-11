@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
     HomeStack, CreateReportStack, DailyReportStack,
     WeeklyReportStack, MonthlyReportStack, SemesterReportStack,
-    YearlyReportStack, ProfileStack, SettingProfileStack
+    YearlyReportStack, ProfileStack, SettingProfileStack, AddSchoolStack
 } from '../stack'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Alert, Text, View } from 'react-native';
@@ -34,6 +34,7 @@ const HomeDrawer = ({navigation, route}) => {
           <Drawer.Screen name="MonthlyReport" component={MonthlyReportStack} />
           <Drawer.Screen name="SemesterReport" component={SemesterReportStack} />
           <Drawer.Screen name="YearlyReport" component={YearlyReportStack} />
+          <Drawer.Screen name="AddSchool" component={AddSchoolStack} />
           <Drawer.Screen name="Profile" component={ProfileStack} />
           <Drawer.Screen name="SettingProfile" component={SettingProfileStack} />
         </Drawer.Navigator>
@@ -160,6 +161,13 @@ const CustomDrawerContent = (props) => {
             icon={({focused}) => <Icon name="user" size={18} color={focused? '#48CAE4' : '#4a4a4a'} /> } 
             labelStyle={{fontFamily: "Lato", fontSize: 20, color: "#4a4a4a", marginLeft: 3}} 
             onPress={() => drawerClick('Profile')} />
+          <DrawerItem 
+            focused={currentDrawer == 'AddSchool'? true:false} 
+            label="Tambah Sekolah" 
+            activeTintColor="#48CAE4"
+            icon={({focused}) => <Icon name="building" size={18} color={focused? '#48CAE4' : '#4a4a4a'} /> } 
+            labelStyle={{fontFamily: "Lato", fontSize: 20, color: "#4a4a4a", marginLeft: 3}} 
+            onPress={() => drawerClick('AddSchool')} />
           <TouchableOpacity onPress={() => logout()}>
             <View style={{flexDirection: 'row', paddingLeft: 18, marginVertical: 18}}>
                 <View style={{justifyContent: 'center'}}>

@@ -32,7 +32,6 @@ const BasicField = (props) => {
 const styles = StyleSheet.create({
     notFocused:{
         flex: 1,
-        height: 38,
         fontFamily: "Lato", 
         color: '#000', 
         fontSize: 16,
@@ -43,7 +42,6 @@ const styles = StyleSheet.create({
     },
     focused:{
         flex: 1,
-        height: 38,
         fontFamily: "Lato", 
         color: '#000', 
         fontSize: 16,

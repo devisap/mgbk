@@ -1,7 +1,7 @@
 import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
 import {
-    Home, SettingProfile, CreateReport, DailyReport, Profile
+    Home, SettingProfile, CreateReport, DailyReport, Profile, AddSchool
 } from '../../../../components/pages'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -208,7 +208,29 @@ const SettingProfileStack = ({navigation}) => {
     )
 }
 
+const AddSchoolStack = ({navigation}) => {
+    return(
+        <Stack.Navigator initialRouteName="AddSchool">
+            <Stack.Screen name={"AddSchool"} component={AddSchool} 
+                options={{
+                    title : "Tambah Sekolah",
+                    headerStyle: {
+                        backgroundColor: '#48CAE4'
+                    },
+                    headerTitleStyle: {
+                        fontFamily: "Lato",
+                        color: "#fff",
+                        fontSize: 20
+                    },
+                    headerTintColor: '#fff',
+                    headerLeft: () => <Icon.Button  name="align-justify" iconStyle={{marginLeft: 12, marginTop: 5}} backgroundColor="#48CAE4" size={18} color={'#fff'} onPress={() => navigation.openDrawer()} />
+                }}
+            />
+        </Stack.Navigator>
+    )
+}
+
 export {
     HomeStack, CreateReportStack, DailyReportStack,
     WeeklyReportStack, MonthlyReportStack, SemesterReportStack,
-    YearlyReportStack, ProfileStack, SettingProfileStack}
+    YearlyReportStack, ProfileStack, SettingProfileStack, AddSchoolStack}

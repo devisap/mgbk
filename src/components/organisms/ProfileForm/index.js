@@ -10,6 +10,7 @@ import SkeletonPlaceholder from 'react-native-skeleton-placeholder'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Loader from '../../molecules/Loader'
 import { useDispatch, useSelector } from 'react-redux'
+import TagsField from '../../molecules/forms/TagsField'
 
 
 const ProfileForm = (props) => {
@@ -24,7 +25,7 @@ const ProfileForm = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log(dataProfile)
+        // console.log(dataProfile)
     }, [dataProfile])
 
     onChangeValue = (inpuType, value) => {
@@ -32,42 +33,6 @@ const ProfileForm = (props) => {
             ...dataProfile,
             [inpuType]: value
         })
-    }
-
-    onChangeNamaLengkap = val => {
-        let newDatas = {...dataProfile}
-        newDatas.nama_lengkap = val
-        setDataProfile(newDatas)
-    }
-    onChangeAlamatSekolah = val => {
-        let newDatas = {...dataProfile}
-        newDatas.alamat_sekolah = val
-        setDataProfile(newDatas)
-    }
-    onChangeNamaKepalaSekolah = val => {
-        let newDatas = {...dataProfile}
-        newDatas.nama_kepala_sekolah = val
-        setDataProfile(newDatas)
-    }
-    onChangeTambahanInformasi = val => {
-        let newDatas = {...dataProfile}
-        newDatas.tambahan_informasi = val
-        setDataProfile(newDatas)
-    }
-    onChangeAsalSekolah = val => {
-        let newDatas = {...dataProfile}
-        newDatas.id_sekolah = val
-        setDataProfile(newDatas)
-    }
-    onChangeFotoProfile = val => {
-        let newDatas = {...dataProfile}
-        newDatas.foto_profil = val
-        setDataProfile(newDatas)
-    }
-    onChangeLogoSekolah = val => {
-        let newDatas = {...dataProfile}
-        newDatas.logo_sekolah = val
-        setDataProfile(newDatas)
     }
 
     const getProfile = async() => {
@@ -78,6 +43,7 @@ const ProfileForm = (props) => {
             await getListSchool()
             if(IS_PROFILE_VERIFIED == 't'){
                 const dataProfile = JSON.parse(DATA_USER)
+                console.log(dataProfile)
                 setDataProfile({
                     id_user: ID_USER,
                     nama_lengkap: dataProfile.nama_lengkap,
@@ -86,6 +52,7 @@ const ProfileForm = (props) => {
                         name: dataProfile.foto_profil
                     },
                     id_sekolah: dataProfile.id_sekolah,
+                    kelas_pengampu: dataProfile.kelas_pengampu,
                     logo_sekolah: {
                         uri: `https://api-mgbk.bgskr-project.my.id/upload/logoSekolah/${dataProfile.logo_sekolah}`,
                         name: dataProfile.logo_sekolah
@@ -101,6 +68,7 @@ const ProfileForm = (props) => {
                     nama_lengkap: '',
                     foto_profil: {uri: '', name: ''},
                     id_sekolah: '',
+                    kelas_pengampu: '',
                     logo_sekolah: {uri: '', name: ''},
                     alamat_sekolah: '',
                     nama_kepala_sekolah: '',
@@ -118,10 +86,10 @@ const ProfileForm = (props) => {
             .then(res => {
                 const list = res.data.data.map(obj => ({label: obj.nama_sekolah, value: obj.id_sekolah}))
                 setListSchool(list)
-                console.log(list)
+                // console.log(list)
             })
             .catch(err => {
-                console.log(err)
+                // console.log(err)
             })
     }
 
@@ -144,6 +112,7 @@ const ProfileForm = (props) => {
             formData.append('id_user', dataProfile.id_user)
             formData.append('nama_lengkap', dataProfile.nama_lengkap)
             formData.append('id_sekolah', dataProfile.id_sekolah)
+            formData.append('kelas_pengampu', dataProfile.kelas_pengampu)
             formData.append('alamat_sekolah', dataProfile.alamat_sekolah)
             formData.append('nama_kepala_sekolah', dataProfile.nama_kepala_sekolah)
             formData.append('tambahan_informasi', dataProfile.tambahan_informasi)
@@ -152,6 +121,7 @@ const ProfileForm = (props) => {
             formData.append('nama_lengkap', dataProfile.nama_lengkap)
             formData.append('foto_profil', dataProfile.foto_profil)
             formData.append('id_sekolah', dataProfile.id_sekolah)
+            formData.append('kelas_pengampu', dataProfile.kelas_pengampu)
             formData.append('logo_sekolah', dataProfile.logo_sekolah)
             formData.append('alamat_sekolah', dataProfile.alamat_sekolah)
             formData.append('nama_kepala_sekolah', dataProfile.nama_kepala_sekolah)
@@ -180,7 +150,7 @@ const ProfileForm = (props) => {
                     { cancelable: false }
                 );
             }else{
-                console.log(res.data)
+                // console.log(res.data)
             }
         })
         .catch(err => {
@@ -265,6 +235,9 @@ const ProfileForm = (props) => {
                     </View>
                     <View style={{marginTop: 24}}>
                         <SelectField  items={listSchool} value={dataProfile.id_sekolah} onChangeValue={onChangeValue}  inputType={"id_sekolah"} label={"Asal Sekolah"}/>
+                    </View>
+                    <View style={{marginTop: 24}}>
+                        <TagsField value={dataProfile.kelas_pengampu} onChangeValue={onChangeValue} inputType={'kelas_pengampu'} />
                     </View>
                     <View style={{marginTop: 24}}>
                         <UploadField label={"Logo Sekolah"} source={dataProfile.logo_sekolah.uri} onChangeValue={onChangeValue} inputType={'logo_sekolah'} fileName={dataProfile.logo_sekolah.name} />

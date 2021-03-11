@@ -41,9 +41,9 @@ const DateField = (props) => {
             <Label text={props.label} />
             <View style={{marginTop: 8}}>
                 <TouchableOpacity activeOpacity={0.5} onPress={() => showDatepicker()}>
-                    <View style={{flex: 1, height: 38, borderColor: '#DBDBDB', borderWidth: 1, borderRadius: 6, paddingLeft: 16, justifyContent: 'center'}}>
+                    <View style={{flex: 1, height: 48, borderColor: '#DBDBDB', borderWidth: 1, borderRadius: 6, paddingLeft: 16, justifyContent: 'center'}}>
                         <Text style={{fontFamily: "Lato", fontSize: 16, color: "#242424", marginVertical: 7}}>{dateString}</Text>
-                        <View style={{position: "absolute", right: 16, top: 10}}>
+                        <View style={{position: "absolute", right: 16, top: 13}}>
                             <Icon name="chevron-down" size={16} color="#48CAE4" />
                         </View>
                     </View>

@@ -145,13 +145,13 @@ const App = () => {
     // <DailyReportLayout />
     // <SettingProfileLayout />
     // <ReportingStep1Layout />
-    // <Provider store={store}>
-    //   <NavigationContainer>
-    //     <Router />
-    //     {/* <Drawer /> */}
-    //   </NavigationContainer>
-    // </Provider>
-    <AddSchool />
+    <Provider store={store}>
+      <NavigationContainer>
+        <Router />
+        {/* <Drawer /> */}
+      </NavigationContainer>
+    </Provider>
+    // <AddSchool />
     // <ForgotPasswordCard />
     // <ForgotPasswordLayout />
     // <ForgotPassword />

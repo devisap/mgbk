@@ -38,7 +38,7 @@ const SelectField = (props) => {
                     searchablePlaceholderTextColor="gray"
                     seachableStyle={{}}
                     defaultValue={selectedItem}
-                    containerStyle={{height: 38}}
+                    containerStyle={{height: 48}}
                     style={{borderWidth: 1, borderColor: colorFocused}}
                     itemStyle={{
                         justifyContent: 'flex-start',
@@ -53,7 +53,7 @@ const SelectField = (props) => {
                     onOpen={() => setColorFocused('#48CAE4')}
                     onClose={() => setColorFocused('#DBDBDB')}
                 />
-                <View style={{position: "absolute", right: 16, top: 10}}>
+                <View style={{position: "absolute", right: 16, top: 13}}>
                     <Icon name="chevron-down" size={16} color="#48CAE4" />
                 </View>
             </View>
