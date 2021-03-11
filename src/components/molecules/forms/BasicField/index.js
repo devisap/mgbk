@@ -6,11 +6,6 @@ const BasicField = (props) => {
     const [isFocused, setIsFocused] = useState(false)
     const [value, setValue] = useState(props.value? props.value : '')
 
-    // useEffect(() => {
-    //     if(props.value)
-    //         setValue(props.value)
-    // }, [])
-
     useEffect(() => {
         if(props.onChangeValue)
             props.onChangeValue(props.inputType, value)

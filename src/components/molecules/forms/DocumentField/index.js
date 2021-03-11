@@ -5,12 +5,10 @@ import Label from '../../../atoms/texts/Label'
 import DocumentPicker from 'react-native-document-picker';
 
 const DocumentField = (props) => {
-    const [value, setValue] = useState({})
+    const [value, setValue] = useState([{name: ''}])
     useEffect(() => {
       if(props.onChangeValue)
         props.onChangeValue(props.inputType, value)
-      
-      console.log(value)
     }, [value])
 
     const pickFile = async() => {

@@ -22,8 +22,8 @@ const CreateReportLayout = (props) => {
         detail: '',
         dokumen: {}
     })
-    const [docFileName, setDocFileName] = useState('')
-
+    const [docFilename, setDocFilename] = useState('')
+    
     useEffect(() => {
         axios({
             url: 'https://api-mgbk.bgskr-project.my.id/activity',
@@ -46,6 +46,9 @@ const CreateReportLayout = (props) => {
     }, [reportData])
 
     const onChangeValue = (inputType, value) => {
+        if(inputType == 'dokumen'){
+            setDocFilename(value[0].name)
+        }
         setReportData({
             ...reportData,
             [inputType]: value
@@ -68,7 +71,6 @@ const CreateReportLayout = (props) => {
             formData.append('upload_doc_'+x, obj)
             x++
         }
-        console.log(JSON.stringify(formData))
         setIsLoading(true)
         axios({
             url: 'https://api-mgbk.bgskr-project.my.id/report',
@@ -80,25 +82,18 @@ const CreateReportLayout = (props) => {
             data: formData
         })
         .then(res => {
-            if(res.data.status){
-                setReportData({
-                    tanggal: new Date(),
-                    kegiatan: '',
-                    detail: '',
-                    dokumen: {}
-                })
+            if(res.data.status == true){
                 Alert.alert(
                     "Info",
                     res.data.message,
                     [
-                        { text: "OK", onPress: () => props.navigation.navigate('Home') }
+                        { text: "OK", onPress: () =>  props.navigation.replace('Home')}
                     ],
                     { cancelable: false }
                 );
+            }else{
+                alert(res.data.status)
             }
-
-            alert(res.data.message)
-            console.log(res.data)
         })
         .catch(err => {
             alert(err)
@@ -157,8 +152,8 @@ const CreateReportLayout = (props) => {
                                 </View>
                                 <View style={{marginTop: 24}}>
                                     <DocumentField
-                                        // fileName={reportData.dokumen !== {} ? reportData.dokumen[0].name : ''} 
-                                        fileName={''} 
+                                        fileName={docFilename} 
+                                        // fileName={''} 
                                         onChangeValue={onChangeValue} 
                                         inputType={"dokumen"} 
                                         label={"Dokumen Kegiatan"} />
