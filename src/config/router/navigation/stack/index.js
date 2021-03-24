@@ -1,7 +1,7 @@
 import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
 import {
-    Home, SettingProfile, CreateReport, DailyReport, Profile, AddSchool
+    Home, SettingProfile, CreateReport, DailyReport, WeeklyReport, MonthlyReport, Profile, AddSchool
 } from '../../../../components/pages'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -72,8 +72,8 @@ const DailyReportStack = ({navigation}) => {
 }
 const WeeklyReportStack = ({navigation}) => {
     return(
-        <Stack.Navigator initialRouteName="DailyReport">
-            <Stack.Screen name={"DailyReport"} component={DailyReport} 
+        <Stack.Navigator initialRouteName="WeeklyReport">
+            <Stack.Screen name={"WeeklyReport"} component={WeeklyReport} 
                 options={{
                     title : "Laporan Mingguan",
                     headerStyle: {
@@ -95,8 +95,8 @@ const WeeklyReportStack = ({navigation}) => {
 
 const MonthlyReportStack = ({navigation}) => {
     return(
-        <Stack.Navigator initialRouteName="DailyReport">
-            <Stack.Screen name={"DailyReport"} component={DailyReport} 
+        <Stack.Navigator initialRouteName="MonthlyReport">
+            <Stack.Screen name={"MonthlyReport"} component={MonthlyReport} 
                 options={{
                     title : "Laporan Bulanan",
                     headerStyle: {
