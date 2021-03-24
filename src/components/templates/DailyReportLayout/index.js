@@ -89,33 +89,40 @@ const DailyReportLayout = () => {
         if(!isReportEmpty){
             setIsLoading(true)
             const tglTransaksi = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
-    
-            const android = RNFetchBlob.android
-            let dirs = RNFetchBlob.fs.dirs
-            RNFetchBlob.config({
-                fileCache : true,
-                // android only options, these options be a no-op on IOS
-                addAndroidDownloads : {
-                  // Show notification when response data transmitted
-                  notification : true,
-                  // Title of download notification
-                  title : 'Download Success !',
-                  // File description (not notification description)
-                  description : 'PDF CUY.',
-                  mime : 'application/pdf',
-                  // Make the file scannable  by media scanner
-                  mediaScannable : true,
-                },
-                path : dirs.DownloadDir + `/Laporan Harian - ${globalState.nama_lengkap}.pdf`
-              })
-              .fetch('GET', `https://api-mgbk.bgskr-project.my.id/print-report/by-date/${tglTransaksi}?id_user=${globalState.id_user}&id_sekolah=${globalState.id_sekolah}`)
-              .then(res => {
-                android.actionViewIntent(res.path(), 'application/pdf')
-                console.log(res.path())
-              })
-              .finally(() => {
+            axios({
+                url: `https://api-mgbk.bgskr-project.my.id/print-report/by-date/${tglTransaksi}?id_user=${globalState.id_user}&id_sekolah=${globalState.id_sekolah}`,
+                method: 'get',
+            })
+            .then(res => {
+                const fileName = res.data.data.split('/')[3]
+                const android = RNFetchBlob.android
+                let dirs = RNFetchBlob.fs.dirs
+                RNFetchBlob.config({
+                    fileCache : true,
+                    // android only options, these options be a no-op on IOS
+                    addAndroidDownloads : {
+                        useDownloadManager : true,
+                        title : fileName,
+                        description : `${fileName} berhasil dicetak`,
+                        mime : 'application/pdf',
+                        mediaScannable : true,
+                        notification : true,
+                        path : `${dirs.DownloadDir}/${fileName}`
+                    },
+                  })
+                  .fetch('GET', `https://api-mgbk.bgskr-project.my.id/${res.data.data}`)
+                //   .then(res => {
+                    android.actionViewIntent(res.path(), 'application/pdf')
+                    console.log(res.path())
+                //   })
+            })
+            .catch(err => {
+                alert(err)
+            })
+            .finally(() => {
                 setIsLoading(false)
-              })
+            })
+            
         }else{
             Alert.alert(
                 "Info",

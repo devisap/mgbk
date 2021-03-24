@@ -15,7 +15,8 @@ const SplashScreen = ({navigation}) => {
     return (
         <View style={{backgroundColor: "#48CAE4", flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <StatusBar hidden></StatusBar>
-            <Text style={styles.text}>MGBK MALANG</Text>
+            <Text style={styles.text}>MGBK SMA</Text>
+            <Text style={styles.text}>KOTA MALANG</Text>
         </View>
     );
 }
