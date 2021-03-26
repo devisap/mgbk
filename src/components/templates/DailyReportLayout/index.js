@@ -5,7 +5,7 @@ import ButtonSubmit from '../../molecules/buttons/ButtonSubmit'
 import ReportCard from '../../organisms/ReportCard'
 import Heading3 from '../../atoms/texts/Heading3';
 import IcCalendarBlack from '../../atoms/icons/IcCalendarBlack';
-import DateFunction from '../../../utils/DateFunction'
+import {getFullDate} from '../../../utils/DateFunction'
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
@@ -19,7 +19,7 @@ const DailyReportLayout = () => {
     const [mode, setMode] = useState('date');
     // date daily
     const [date, setDate] = useState(new Date());
-    const [dateString, setDateString] = useState(DateFunction(new Date()))
+    const [dateString, setDateString] = useState(getFullDate(new Date()))
     const [show, setShow] = useState(false);
     
     const [isFetched, setIsFetched] = useState(false)
@@ -35,7 +35,7 @@ const DailyReportLayout = () => {
         setShow(Platform.OS === 'ios');
         
         setDate(currentDate);
-        setDateString(DateFunction(currentDate));
+        setDateString(getFullDate(currentDate));
     };
 
     const showMode = (currentMode) => {
@@ -68,7 +68,7 @@ const DailyReportLayout = () => {
             if(res.data.status){
                 const lstData = res.data.data.map((obj, id) => 
                     <View key={id} style={{marginTop: 24}}>
-                        <ReportCard title={obj.kegiatan} content={obj.uraian} date={DateFunction(new Date(obj.tgl_transaksi))}/>
+                        <ReportCard title={obj.kegiatan} content={obj.uraian} date={getFullDate(new Date(obj.tgl_transaksi))}/>
                     </View>    
                 )
                 setReports(lstData)
@@ -111,10 +111,9 @@ const DailyReportLayout = () => {
                     },
                   })
                   .fetch('GET', `https://api-mgbk.bgskr-project.my.id/${res.data.data}`)
-                //   .then(res => {
-                    android.actionViewIntent(res.path(), 'application/pdf')
-                    console.log(res.path())
-                //   })
+                  .then(res => {
+                    alert('Berhasil mencetak laporan!')
+                  })
             })
             .catch(err => {
                 alert(err)

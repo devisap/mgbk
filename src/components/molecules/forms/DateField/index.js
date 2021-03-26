@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
-import DateFunction from '../../../../utils/DateFunction'
+import {getFullDate} from '../../../../utils/DateFunction'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Label from '../../../atoms/texts/Label'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -10,7 +10,7 @@ const DateField = (props) => {
     const [mode, setMode] = useState('date');
     // date daily
     const [date, setDate] = useState(new Date());
-    const [dateString, setDateString] = useState(DateFunction(new Date()))
+    const [dateString, setDateString] = useState(getFullDate(new Date()))
     const [show, setShow] = useState(false);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const DateField = (props) => {
         setShow(Platform.OS === 'ios');
         
         setDate(currentDate);
-        setDateString(DateFunction(currentDate));
+        setDateString(getFullDate(currentDate));
     };
 
     const showMode = (currentMode) => {
