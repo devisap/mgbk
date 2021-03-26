@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const ReportEkuivalen = () => {
+const ReportEkuivalen = (props) => {
+    const [activity, setActivity] = useState([])
+    const [equivalent, setEquivalent] = useState([])
+
+    useEffect(() => {
+        console.log(props.items)
+        // if(props.items){
+        //     const lstActivity 
+        // }
+    }, [])
+
     return (
         <View style={style.box}>
             <View style={{flexDirection: 'row', marginVertical: 16, paddingHorizontal: 16}}>

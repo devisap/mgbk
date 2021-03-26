@@ -19,8 +19,8 @@ const SelectFilterField = (props) => {
     }, [])
 
     useEffect(() => {
-    if(props.onChangeValue)
-        props.onChangeValue(props.inputType ,selectedItem)        
+        if(props.onChangeValue)
+            props.onChangeValue(selectedItem)        
     }, [selectedItem])
 
     return (
