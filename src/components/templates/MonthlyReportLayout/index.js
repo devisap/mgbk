@@ -7,7 +7,9 @@ import ImgNoData from '../../../assets/images/no_data.svg'
 import ReportEkuivalen from '../../organisms/ReportEkuivalen'
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder'
 import axios from 'axios'
+import RNFetchBlob from 'rn-fetch-blob'
 import { useSelector } from 'react-redux'
+import Loader from '../../molecules/Loader'
 
 const MonthlyReportLayout = () => {
     const [month, setMonth] = useState('');
@@ -19,6 +21,7 @@ const MonthlyReportLayout = () => {
     const [isFetched, setIsFetched] = useState(false)
     const [isReportEmpty, setIsReportEmpty] = useState(false)
     const [isMDFetched, setIsMDFetched] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const globalState = useSelector(state => state.ProfilesReducer.datas)
 
@@ -110,11 +113,69 @@ const MonthlyReportLayout = () => {
 
     }
 
+    const printReport = async() => {
+        if(!isReportEmpty){
+            setIsLoading(true)
+            axios({
+                url: `https://api-mgbk.bgskr-project.my.id/print-report/by-month`,
+                params: {
+                    id_user: globalState.id_user,
+                    id_sekolah: globalState.id_sekolah,
+                    month: month, 
+                    year: year
+                },
+                method: 'get'
+            })
+            .then(res => {
+                console.log(res)
+                const fileName = res.data.data.split('/')[3]
+                const android = RNFetchBlob.android
+                let dirs = RNFetchBlob.fs.dirs
+                RNFetchBlob.config({
+                    fileCache : true,
+                    // android only options, these options be a no-op on IOS
+                    addAndroidDownloads : {
+                        useDownloadManager : true,
+                        title : fileName,
+                        description : `${fileName} berhasil dicetak`,
+                        mime : 'application/pdf',
+                        mediaScannable : true,
+                        notification : true,
+                        path : `${dirs.DownloadDir}/${fileName}`
+                    },
+                  })
+                  .fetch('GET', `https://api-mgbk.bgskr-project.my.id/${res.data.data}`)
+                  .then(res => {
+                    alert('Berhasil mencetak laporan!')
+                  })
+            })
+            .catch(err => {
+                alert(err)
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+            
+        }else{
+            Alert.alert(
+                "Info",
+                "Tidak ada data",
+                [
+                    { text: "OK", onPress: () => '' }
+                ],
+                { cancelable: false }
+            );
+        }
+    }
+
     return (
         <View style={{backgroundColor: '#fff', flex: 1}}>
             <View style={{flex: 1}}>
                 <ScrollView>
                     <View style={{flex: 1, paddingHorizontal: 32, marginBottom: 24}}>
+                        {
+                            isLoading == true&& <Loader />
+                        }
                         {
                             isMDFetched == false?
                             <View>
@@ -176,7 +237,7 @@ const MonthlyReportLayout = () => {
             </View>
             <View style={{borderTopWidth: 1.5, borderTopColor: 'rgba(10, 10, 10, 0.15)'}}>
                 <View style={{marginVertical: 16, marginHorizontal: 32}}>
-                    <ButtonSubmit title={"Cetak Semua"} onPress={() => alert('berhasil')} />
+                    <ButtonSubmit title={"Cetak Semua"} onPress={() => printReport()} />
                 </View>
             </View>
         </View>
