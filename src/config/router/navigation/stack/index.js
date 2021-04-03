@@ -1,7 +1,7 @@
 import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
 import {
-    Home, SettingProfile, CreateReport, DailyReport, WeeklyReport, MonthlyReport, Profile, AddSchool
+    Home, SettingProfile, CreateReport, DailyReport, WeeklyReport, MonthlyReport, YearlyReport, Profile, AddSchool
 } from '../../../../components/pages'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -141,8 +141,8 @@ const SemesterReportStack = ({navigation}) => {
 
 const YearlyReportStack = ({navigation}) => {
     return(
-        <Stack.Navigator initialRouteName="DailyReport">
-            <Stack.Screen name={"DailyReport"} component={DailyReport} 
+        <Stack.Navigator initialRouteName="YearlyReport">
+            <Stack.Screen name={"YearlyReport"} component={YearlyReport} 
                 options={{
                     title : "Laporan Tahunan",
                     headerStyle: {

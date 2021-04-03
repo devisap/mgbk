@@ -7,6 +7,7 @@ import SettingProfile from './SettingProfile'
 import DailyReport from './DailyReport'
 import WeeklyReport from './WeeklyReport'
 import MonthlyReport from './MonthlyReport'
+import YearlyReport from './YearlyReport'
 import CreateReport from './CreateReport'
 import Profile from './Profile'
 import ForgotPassword from './ForgotPassword'
@@ -15,7 +16,7 @@ import AddSchool from './AddSchool'
 export {
     Login, SplashScreen, Register, 
     Home, ReportingStep1, SettingProfile,
-    DailyReport, WeeklyReport, MonthlyReport,
+    DailyReport, WeeklyReport, MonthlyReport, YearlyReport,
     CreateReport, Profile, ForgotPassword,
     AddSchool
 }
