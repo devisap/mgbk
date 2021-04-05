@@ -11,7 +11,18 @@ import RNFetchBlob from 'rn-fetch-blob'
 import { useSelector } from 'react-redux'
 import Loader from '../../molecules/Loader'
 
-const YearlyReportLayout = () => {
+const SemesterReportLayout = () => {
+    const [semester, setSemester] = useState('1');
+    const [semesters, setSemesters] = useState([
+        {
+            label: 'Semester 1',
+            value: '1'
+        },
+        {
+            label: 'Semester 2',
+            value: '2'
+        }
+    ]);
     const [year, setYear] = useState('')
     const [years, setYears] = useState([])
     const [reports, setReports] = useState()
@@ -29,14 +40,18 @@ const YearlyReportLayout = () => {
 
     useEffect(() => {
         fetchData()
-    }, [year])
+    }, [semester, year])
 
+    const onChangeValueSemester = value => {
+        setSemester(value)
+    }
     const onChangeValueYear = value => {
         setYear(value)
     }
 
     const getMasterData = async() => {
         const y = new Date().getFullYear()
+
         let lstYear = []
         for(let x = y; x >= 1970; x--){
             let temp = {label: ""+x, value: ""+x}
@@ -51,10 +66,11 @@ const YearlyReportLayout = () => {
     const fetchData = async() => {
         setIsFetched(false)
         axios({
-            url: `https://api-mgbk.bgskr-project.my.id/report/by-year`,
+            url: `https://api-mgbk.bgskr-project.my.id/report/by-semester`,
             params: {
                 id_user: globalState.id_user,
                 id_sekolah: globalState.id_sekolah,
+                semester: semester, 
                 year: year
             },
             method: 'get',
@@ -100,10 +116,11 @@ const YearlyReportLayout = () => {
         if(!isReportEmpty){
             setIsLoading(true)
             axios({
-                url: `https://api-mgbk.bgskr-project.my.id/print-report/by-year`,
+                url: `https://api-mgbk.bgskr-project.my.id/print-report/by-semester`,
                 params: {
                     id_user: globalState.id_user,
                     id_sekolah: globalState.id_sekolah,
+                    semester: semester, 
                     year: year
                 },
                 method: 'get'
@@ -165,12 +182,18 @@ const YearlyReportLayout = () => {
                                     <View style={{marginTop: 24}}>
                                         <View style={{width: '100%', height: 48, borderRadius: 6}} />
                                     </View>
+                                    <View style={{marginTop: 8}}>
+                                        <View style={{width: '100%', height: 48, borderRadius: 6}} />
+                                    </View>
                                 </SkeletonPlaceholder>
                             </View>
                             :
                             <View>
                                 <View style={{marginTop: 24}}>
                                     <SelectFilterField  items={years} value={year} label={'Pilih Tahun'} onChangeValue={onChangeValueYear}/>
+                                </View>
+                                <View style={{marginTop: 8}}>
+                                    <SelectFilterField items={semesters} value={semester} label={'Pilih Semester'} onChangeValue={onChangeValueSemester}/>
                                 </View>
                             </View>
                         }
@@ -240,4 +263,4 @@ const style = StyleSheet.create({
 })
 
 
-export default YearlyReportLayout
+export default SemesterReportLayout

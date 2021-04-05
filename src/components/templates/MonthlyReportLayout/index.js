@@ -41,30 +41,24 @@ const MonthlyReportLayout = () => {
     }
 
     const getMasterData = async() => {
-        axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/data-master/getYears',
-            method: 'get'
-        })
-        .then(res => {
-            setMonths(getListMonth())
-            const lstYear = res.data.data.map(obj => ({label: obj.tahun, value: obj.tahun}))
-            setYears(lstYear)
+        const y = new Date().getFullYear()
+        const m = new Date().getMonth() + 1
 
-            const m = new Date().getMonth() + 1
-            const y  = ""+new Date().getFullYear()
-            setMonth(m)
-            setYear(y)
-        })
-        .catch(err => {
-            alert(err)
-        })
-        .finally(() => {
-            fetchData()
-            setIsMDFetched(true)
-        })
+        let lstYear = []
+        for(let x = y; x >= 1970; x--){
+            let temp = {label: ""+x, value: ""+x}
+            lstYear.push(temp)
+        }
+
+        setYears(lstYear)
+        setYear(""+y)
+        setMonths(getListMonth())
+        setMonth(m)
+        setIsMDFetched(true)
     }
 
     const fetchData = async() => {
+        console.log(`${month} - ${year}`)
         setIsFetched(false)
         axios({
             url: `https://api-mgbk.bgskr-project.my.id/report/by-month`,

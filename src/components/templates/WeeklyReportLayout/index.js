@@ -47,24 +47,15 @@ const WeeklyReportLayout = () => {
     }
 
     const getMasterData = async() => {
-        axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/data-master/getYears',
-            method: 'get'
-        })
-        .then(res => {
-            const lstYear = res.data.data.map(obj => ({label: obj.tahun, value: obj.tahun}))
-            setYears(lstYear)
+        const y = new Date().getFullYear()
+        let lstYear = []
+        for(let x = y; x >= 1970; x--){
+            let temp = {label: ""+x, value: ""+x}
+            lstYear.push(temp)
+        }
 
-            const y  = ""+new Date().getFullYear()
-            setYear(y)
-            getMasterDataWeeks()
-        })
-        .catch(err => {
-            alert(err)
-        })
-        .finally(() => {
-            setIsMDFetched(true)
-        })
+        setYears(lstYear)
+        setYear(""+y)
     }
 
     const getMasterDataWeeks = async() => {
@@ -77,52 +68,61 @@ const WeeklyReportLayout = () => {
             method: 'get'
         })
         .then(res => {
-            const lstWeeks = res.data.data.map(obj => ({label: obj.week, value: obj.id}))
-            setWeeks(lstWeeks)
-            const w = res.data.data[0].id
-            setWeek(w)
+            if(res.data.data){
+                const lstWeeks = res.data.data.map(obj => ({label: obj.week, value: obj.id}))
+                setWeeks(lstWeeks)
+                setWeek('')
+            }else{
+                setWeeks([])
+                setWeek('')
+            }
         })
         .catch(err => {
             alert(err)
         })
         .finally(() => {
+            setIsMDFetched(true)
             setIsMDWFetched(true)
         })
     }
 
     const fetchData = async() => {
-        setIsFetched(false)
-        axios({
-            url: `https://api-mgbk.bgskr-project.my.id/report/by-week`,
-            params: {
-                id_user: globalState.id_user,
-                id_sekolah: globalState.id_sekolah,
-                id_week: week, 
-                year: year
-            },
-            method: 'get',
-        })
-        .then(res => {
-            if(res.data.status){
-                const lstReport = res.data.data.map((obj, id) => 
-                    <View key={id} style={{marginTop: 24, zIndex: -1}}>
-                        <ReportCard title={obj.kegiatan} content={obj.uraian} date={getFullDate(new Date(obj.tgl_transaksi))}/>
-                    </View>   
-                )
-                setReports(lstReport)
-                setIsReportEmpty(false)
-            }else{
-                setIsReportEmpty(true)
-            }
-
-        })
-        .catch(err => {
-            alert(err)
-        })
-        .finally(() => {
+        if(week){
+            setIsFetched(false)
+            axios({
+                url: `https://api-mgbk.bgskr-project.my.id/report/by-week`,
+                params: {
+                    id_user: globalState.id_user,
+                    id_sekolah: globalState.id_sekolah,
+                    id_week: week, 
+                    year: year
+                },
+                method: 'get',
+            })
+            .then(res => {
+                if(res.data.status){
+                    const lstReport = res.data.data.map((obj, id) => 
+                        <View key={id} style={{marginTop: 24, zIndex: -1}}>
+                            <ReportCard title={obj.kegiatan} content={obj.uraian} date={getFullDate(new Date(obj.tgl_transaksi))}/>
+                        </View>   
+                    )
+                    setReports(lstReport)
+                    setIsReportEmpty(false)
+                }else{
+                    setIsReportEmpty(true)
+                }
+    
+            })
+            .catch(err => {
+                alert(err)
+            })
+            .finally(() => {
+                setIsFetched(true)
+            })
+        }else{
             setIsFetched(true)
-        })
-
+            setIsReportEmpty(true)
+        }
     }
 
     const printReport = async() => {
@@ -139,7 +139,6 @@ const WeeklyReportLayout = () => {
                 method: 'get'
             })
             .then(res => {
-                console.log(res)
                 const fileName = res.data.data.split('/')[3]
                 const android = RNFetchBlob.android
                 let dirs = RNFetchBlob.fs.dirs
