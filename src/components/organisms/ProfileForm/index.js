@@ -150,7 +150,8 @@ const ProfileForm = (props) => {
                     { cancelable: false }
                 );
             }else{
-                // console.log(res.data)
+                setIsLoader(false)
+                alert(res.data.message)
             }
         })
         .catch(err => {

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet, StatusBar } from 'react-native';
+import { Text, View, StyleSheet, StatusBar, Image } from 'react-native';
 import IsLoggedIn from '../../../config/storage/IsLoggedIn';
+import Logo from '../../../assets/images/splash_logo.svg'
 
 const SplashScreen = ({navigation}) => {
     setTimeout(async() => {
@@ -13,10 +14,10 @@ const SplashScreen = ({navigation}) => {
     }, 2000);
 
     return (
-        <View style={{backgroundColor: "#48CAE4", flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{backgroundColor: "#fff", flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <StatusBar hidden></StatusBar>
-            <Text style={styles.text}>MGBK SMA</Text>
-            <Text style={styles.text}>KOTA MALANG</Text>
+                <Image source={require('../../../assets/images/splash_logo.png')} style={{width: "100%"}} />
+                <Text style={styles.text}>MGBK Kota Malang</Text>
         </View>
     );
 }
@@ -24,9 +25,10 @@ const SplashScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     text: {
         fontFamily: "Lato",
-        color: "#fff",
+        color: "#4a4a4a",
         fontWeight: "600",
-        fontSize: 40
+        fontSize: 29,
+        marginTop: 81
     }
 })
 
