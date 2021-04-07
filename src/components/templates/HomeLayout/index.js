@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { ScrollView, View } from 'react-native'
+import { PermissionsAndroid, ScrollView, View } from 'react-native'
 import MenuHomeCard from '../../organisms/MenuHomeCard'
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -19,6 +19,7 @@ const HomeLayout = (props) => {
     useEffect(() => {
         console.log(globalState)
         hasProfile()
+        requestPermissions()
     }, [])
 
     const getDataProfile = (idUser) => {
@@ -68,6 +69,19 @@ const HomeLayout = (props) => {
             
         }
     }
+
+    const requestPermissions = async () => {
+        try {
+          const granted = await PermissionsAndroid.requestMultiple(['android.permission.CAMERA', 'android.permission.WRITE_EXTERNAL_STORAGE']);
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            console.log("You can use the file manager");
+          } else {
+            console.log("File Manager denied");
+          }
+        } catch (err) {
+          console.warn(err);
+        }
+      }
 
     return (
         <View>

@@ -20,6 +20,7 @@ const YearlyReportLayout = () => {
     const [isReportEmpty, setIsReportEmpty] = useState(false)
     const [isMDFetched, setIsMDFetched] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [isFirstLoadPage, setIsFirstLoadPage] = useState(false)
 
     const globalState = useSelector(state => state.ProfilesReducer.datas)
 
@@ -28,7 +29,10 @@ const YearlyReportLayout = () => {
     }, [])
 
     useEffect(() => {
-        fetchData()
+        if(isFirstLoadPage){
+            fetchData()
+            console.log(year)
+        }
     }, [year])
 
     const onChangeValueYear = value => {
@@ -46,6 +50,8 @@ const YearlyReportLayout = () => {
         setYears(lstYear)
         setYear(""+y)
         setIsMDFetched(true)
+        console.log('masuk')
+        setIsFirstLoadPage(true)
     }
 
     const fetchData = async() => {
