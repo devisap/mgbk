@@ -9,7 +9,6 @@ import axios from 'axios'
 import DocumentField from '../../molecules/forms/DocumentField'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Loader from '../../molecules/Loader'
-import DateFunction from '../../../utils/DateFunction'
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder'
 
 const CreateReportLayout = (props) => {
@@ -55,7 +54,38 @@ const CreateReportLayout = (props) => {
         })
     }
 
+    const confirmationAlert = () => {
+        Alert.alert(
+            "Konfirmasi",
+            "Apakah anda yakin untuk membuat laporan ?",
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Canceled')
+                },
+                {
+                    text: 'Ok',
+                    onPress: () => postData(),
+                    style: 'default'
+                }
+            ]
+        )
+    }
+
     const postData = async() => {
+        if(reportData.dokumen.length > 2){
+            alert('Data upload tidak boleh dari 2 dokumen !')
+            return true;
+        }
+        
+        const fileSizes = reportData.dokumen.map(item => item.size)
+        const maxSize   = Math.max(...fileSizes)
+        console.log(maxSize)
+        if(maxSize > 2000000){
+            alert('Data upload tidak boleh lebih dari 2 Mb !')
+            return true;
+        }
+
         const DATA_USER = await AsyncStorage.getItem('DATA_USER')
         const dataUser = JSON.parse(DATA_USER)
         
@@ -92,7 +122,7 @@ const CreateReportLayout = (props) => {
                     { cancelable: false }
                 );
             }else{
-                alert(res.data.status)
+                alert(res.data.message)
             }
         })
         .catch(err => {
@@ -102,7 +132,7 @@ const CreateReportLayout = (props) => {
             setIsLoading(false)
         })
 
-    } 
+    }
 
     return (
         <View style={{backgroundColor: '#fff', flex: 1}}>
@@ -159,7 +189,7 @@ const CreateReportLayout = (props) => {
                                         label={"Dokumen Kegiatan"} />
                                 </View>
                                 <View style={{marginTop: 24}}>
-                                    <ButtonSuccess text={"Simpan"} onPress={() => postData()} />
+                                    <ButtonSuccess text={"Simpan"} onPress={() => confirmationAlert()} />
                                 </View>
                             </View>
                         }

@@ -16,7 +16,7 @@ const DocumentField = (props) => {
         const results = await DocumentPicker.pickMultiple({
           type: [DocumentPicker.types.images, DocumentPicker.types.pdf],
         });
-        const resObj = results.map(obj => ({uri: obj.uri, type: obj.type, name: obj.name}))
+        const resObj = results.map(obj => ({uri: obj.uri, type: obj.type, name: obj.name, size: obj.size}))
         setValue(resObj)
       } catch (err) {
         if (DocumentPicker.isCancel(err)) {
