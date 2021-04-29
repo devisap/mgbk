@@ -68,8 +68,8 @@ const WeeklyReportLayout = () => {
             method: 'get'
         })
         .then(res => {
-            if(res.data.data){
-                const lstWeeks = res.data.data.map(obj => ({label: obj.week, value: obj.id}))
+            if(res.data){
+                const lstWeeks = res.data.map(obj => ({label: obj.week, value: obj.id_week}))
                 setWeeks(lstWeeks)
                 setWeek('')
             }else{
