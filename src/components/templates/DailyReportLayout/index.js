@@ -13,6 +13,7 @@ import ImgNoData from '../../../assets/images/no_data.svg'
 import Loader from '../../molecules/Loader'
 import RNFetchBlob from 'rn-fetch-blob'
 import { useSelector } from 'react-redux';
+import ButtonPrimary from '../../atoms/buttons/ButtonPrimary';
 
 const DailyReportLayout = () => {
     // set mode date
@@ -22,9 +23,9 @@ const DailyReportLayout = () => {
     const [dateString, setDateString] = useState(getFullDate(new Date()))
     const [show, setShow] = useState(false);
     
-    const [isFetched, setIsFetched] = useState(false)
+    const [isFetched, setIsFetched] = useState(true)
     const [reports, setReports] = useState()
-    const [isReportEmpty, setIsReportEmpty] = useState(false)
+    const [isReportEmpty, setIsReportEmpty] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
     
     const globalState = useSelector(state => state.ProfilesReducer.datas)
@@ -47,10 +48,6 @@ const DailyReportLayout = () => {
     const showDatepicker = () => {
         showMode('date');
     };
-
-    useEffect(() => {
-        getReport()
-    }, [date])
 
     const getReport = async() => {
         setIsFetched(false)
@@ -154,6 +151,9 @@ const DailyReportLayout = () => {
                                     </View>
                                 </View>
                             </TouchableOpacity>
+                            <View style={{marginTop: 8}}>
+                                <ButtonPrimary text={"Cari"} onPress={() => getReport()} />
+                            </View>
                         </View>
                         { show && (
                             <DateTimePicker

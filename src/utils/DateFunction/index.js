@@ -52,51 +52,51 @@ const getMonthName = (month) => {
 const getListMonth = () => {
     return [
         {
-            label: 'Januari',
+            label: 'Bulan Januari',
             value: 1,
         },
         {
-            label: 'Februari',
+            label: 'Bulan Februari',
             value: 2,
         },
         {
-            label: 'Maret',
+            label: 'Bulan Maret',
             value: 3,
         },
         {
-            label: 'April',
+            label: 'Bulan April',
             value: 4,
         },
         {
-            label: 'Mei',
+            label: 'Bulan Mei',
             value: 5,
         },
         {
-            label: 'Juni',
+            label: 'Bulan Juni',
             value: 6,
         },
         {
-            label: 'Juli',
+            label: 'Bulan Juli',
             value: 7,
         },
         {
-            label: 'Agustus',
+            label: 'Bulan Agustus',
             value: 8,
         },
         {
-            label: 'September',
+            label: 'Bulan September',
             value: 9,
         },
         {
-            label: 'Oktober',
+            label: 'Bulan Oktober',
             value: 10,
         },
         {
-            label: 'November',
+            label: 'Bulan November',
             value: 11,
         },
         {
-            label: 'Desember',
+            label: 'Bulan Desember',
             value: 12,
         }
     ]

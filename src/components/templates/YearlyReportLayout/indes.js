@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import SelectFilterField from '../../molecules/forms/SelectFilterField'
 import ButtonSubmit from '../../molecules/buttons/ButtonSubmit'
 import {getListMonth} from '../../../utils/DateFunction'
@@ -10,14 +10,15 @@ import axios from 'axios'
 import RNFetchBlob from 'rn-fetch-blob'
 import { useSelector } from 'react-redux'
 import Loader from '../../molecules/Loader'
+import ButtonPrimary from '../../atoms/buttons/ButtonPrimary'
 
 const YearlyReportLayout = () => {
     const [year, setYear] = useState('')
     const [years, setYears] = useState([])
     const [reports, setReports] = useState()
 
-    const [isFetched, setIsFetched] = useState(false)
-    const [isReportEmpty, setIsReportEmpty] = useState(false)
+    const [isFetched, setIsFetched] = useState(true)
+    const [isReportEmpty, setIsReportEmpty] = useState(true)
     const [isMDFetched, setIsMDFetched] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [isFirstLoadPage, setIsFirstLoadPage] = useState(false)
@@ -28,12 +29,12 @@ const YearlyReportLayout = () => {
         getMasterData()
     }, [])
 
-    useEffect(() => {
-        if(isFirstLoadPage){
-            fetchData()
-            console.log(year)
-        }
-    }, [year])
+    // useEffect(() => {
+    //     if(isFirstLoadPage){
+    //         fetchData()
+    //         console.log(year)
+    //     }
+    // }, [year])
 
     const onChangeValueYear = value => {
         setYear(value)
@@ -43,7 +44,7 @@ const YearlyReportLayout = () => {
         const y = new Date().getFullYear()
         let lstYear = []
         for(let x = y; x >= 1970; x--){
-            let temp = {label: ""+x, value: ""+x}
+            let temp = {label: `Tahun ${x}`, value: ""+x}
             lstYear.push(temp)
         }
 
@@ -171,12 +172,18 @@ const YearlyReportLayout = () => {
                                     <View style={{marginTop: 24}}>
                                         <View style={{width: '100%', height: 48, borderRadius: 6}} />
                                     </View>
+                                    <View style={{marginTop: 8}}>
+                                        <View style={{width: '100%', height: 48, borderRadius: 6}} />
+                                    </View>
                                 </SkeletonPlaceholder>
                             </View>
                             :
                             <View>
                                 <View style={{marginTop: 24}}>
                                     <SelectFilterField  items={years} value={year} label={'Pilih Tahun'} onChangeValue={onChangeValueYear}/>
+                                </View>
+                                <View style={{marginTop: 8}}>
+                                    <ButtonPrimary text={"Cari"} onPress={() => fetchData()} />
                                 </View>
                             </View>
                         }

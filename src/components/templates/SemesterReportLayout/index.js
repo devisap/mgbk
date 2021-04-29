@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import SelectFilterField from '../../molecules/forms/SelectFilterField'
 import ButtonSubmit from '../../molecules/buttons/ButtonSubmit'
 import {getListMonth} from '../../../utils/DateFunction'
@@ -10,6 +10,7 @@ import axios from 'axios'
 import RNFetchBlob from 'rn-fetch-blob'
 import { useSelector } from 'react-redux'
 import Loader from '../../molecules/Loader'
+import ButtonPrimary from '../../atoms/buttons/ButtonPrimary'
 
 const SemesterReportLayout = () => {
     const [semester, setSemester] = useState('1');
@@ -27,8 +28,8 @@ const SemesterReportLayout = () => {
     const [years, setYears] = useState([])
     const [reports, setReports] = useState()
 
-    const [isFetched, setIsFetched] = useState(false)
-    const [isReportEmpty, setIsReportEmpty] = useState(false)
+    const [isFetched, setIsFetched] = useState(true)
+    const [isReportEmpty, setIsReportEmpty] = useState(true)
     const [isMDFetched, setIsMDFetched] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
 
@@ -38,9 +39,9 @@ const SemesterReportLayout = () => {
         getMasterData()
     }, [])
 
-    useEffect(() => {
-        fetchData()
-    }, [semester, year])
+    // useEffect(() => {
+    //     fetchData()
+    // }, [semester, year])
 
     const onChangeValueSemester = value => {
         setSemester(value)
@@ -54,7 +55,7 @@ const SemesterReportLayout = () => {
 
         let lstYear = []
         for(let x = y; x >= 1970; x--){
-            let temp = {label: ""+x, value: ""+x}
+            let temp = {label: `Tahun ${x}`, value: ""+x}
             lstYear.push(temp)
         }
 
@@ -185,6 +186,9 @@ const SemesterReportLayout = () => {
                                     <View style={{marginTop: 8}}>
                                         <View style={{width: '100%', height: 48, borderRadius: 6}} />
                                     </View>
+                                    <View style={{marginTop: 8}}>
+                                        <View style={{width: '100%', height: 48, borderRadius: 6}} />
+                                    </View>
                                 </SkeletonPlaceholder>
                             </View>
                             :
@@ -194,6 +198,9 @@ const SemesterReportLayout = () => {
                                 </View>
                                 <View style={{marginTop: 8}}>
                                     <SelectFilterField items={semesters} value={semester} label={'Pilih Semester'} onChangeValue={onChangeValueSemester}/>
+                                </View>
+                                <View style={{marginTop: 8}}>
+                                    <ButtonPrimary text={"Cari"} onPress={() => fetchData()} />
                                 </View>
                             </View>
                         }

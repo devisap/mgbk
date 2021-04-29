@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import SelectFilterField from '../../molecules/forms/SelectFilterField'
 import ButtonSubmit from '../../molecules/buttons/ButtonSubmit'
 import {getFullDate} from '../../../utils/DateFunction'
@@ -11,6 +11,7 @@ import RNFetchBlob from 'rn-fetch-blob'
 import { useSelector } from 'react-redux'
 import Loader from '../../molecules/Loader'
 import ReportCard from '../../organisms/ReportCard'
+import ButtonPrimary from '../../atoms/buttons/ButtonPrimary'
 
 const WeeklyReportLayout = () => {
     const [week, setWeek] = useState('');
@@ -19,8 +20,8 @@ const WeeklyReportLayout = () => {
     const [years, setYears] = useState([])
     const [reports, setReports] = useState()
 
-    const [isFetched, setIsFetched] = useState(false)
-    const [isReportEmpty, setIsReportEmpty] = useState(false)
+    const [isFetched, setIsFetched] = useState(true)
+    const [isReportEmpty, setIsReportEmpty] = useState(true)
     const [isMDFetched, setIsMDFetched] = useState(false)
     const [isMDWFetched, setIsMDWFetched] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -35,9 +36,9 @@ const WeeklyReportLayout = () => {
         getMasterDataWeeks()
     }, [year])
 
-    useEffect(() => {
-        fetchData()
-    }, [week])
+    // useEffect(() => {
+    //     fetchData()
+    // }, [week])
 
     const onChangeValueWeek = value => {
         setWeek(value)
@@ -50,7 +51,7 @@ const WeeklyReportLayout = () => {
         const y = new Date().getFullYear()
         let lstYear = []
         for(let x = y; x >= 1970; x--){
-            let temp = {label: ""+x, value: ""+x}
+            let temp = {label: `Tahun ${x}`, value: ""+x}
             lstYear.push(temp)
         }
 
@@ -69,7 +70,7 @@ const WeeklyReportLayout = () => {
         })
         .then(res => {
             if(res.data){
-                const lstWeeks = res.data.map(obj => ({label: obj.week, value: obj.id_week}))
+                const lstWeeks = res.data.map(obj => ({label: `Minggu ke-${obj.week}`, value: obj.id_week}))
                 setWeeks(lstWeeks)
                 setWeek('')
             }else{
@@ -214,6 +215,22 @@ const WeeklyReportLayout = () => {
                             <View>
                                 <View style={{marginTop: 8}}>
                                     <SelectFilterField items={weeks} value={week} label={'Pilih Minggu'} onChangeValue={onChangeValueWeek}/>
+                                </View>
+                            </View>
+                        }
+                        {
+                            isMDFetched == false?
+                            <View>
+                                <SkeletonPlaceholder>
+                                    <View style={{marginTop: 8}}>
+                                        <View style={{width: '100%', height: 48, borderRadius: 6}} />
+                                    </View>
+                                </SkeletonPlaceholder>
+                            </View>
+                            :
+                            <View>
+                                <View style={{marginTop: 8}}>
+                                    <ButtonPrimary text={"Cari"} onPress={() => fetchData()} />
                                 </View>
                             </View>
                         }
