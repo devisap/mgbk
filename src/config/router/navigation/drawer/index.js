@@ -81,7 +81,7 @@ const CustomDrawerContent = (props) => {
     return (
         <DrawerContentScrollView {...props}>
           <View style={{marginVertical: 18, marginLeft: 20}}>
-              <Text style={{fontFamily: 'Lato', fontSize: 20, color: "#4a4a4a"}}>MGBK Malang</Text>
+              <Text style={{fontFamily: 'Lato', fontSize: 20, color: "#4a4a4a"}}>MGBK SMA Kota Malang</Text>
           </View>
           {/* <DrawerItemList {...props} /> */}
           

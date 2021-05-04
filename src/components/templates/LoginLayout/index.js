@@ -1,7 +1,6 @@
 import React from 'react'
-import { ScrollView, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import LoginCard from '../../organisms/LoginCard'
-import Footer from '../Footer'
 
 const LoginLayout = (props) => {
 
@@ -10,7 +9,7 @@ const LoginLayout = (props) => {
             <ScrollView>
                 <LoginCard navigation={props.navigation} />
                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 71, marginBottom: 24}}>
-                    <Footer />
+                    <Text style={{fontFamily: 'Lato', fontSize: 16, color: '#4a4a4a'}}>{'\u00A9'} MGBK SMA Kota Malang</Text>
                 </View>
             </ScrollView>
         </View>

@@ -17,7 +17,7 @@ const SplashScreen = ({navigation}) => {
         <View style={{backgroundColor: "#fff", flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <StatusBar hidden></StatusBar>
                 <Image source={require('../../../assets/images/splash_logo.png')} style={{width: "100%"}} />
-                <Text style={styles.text}>MGBK Kota Malang</Text>
+                <Text style={styles.text}>MGBK SMA Kota Malang</Text>
         </View>
     );
 }
