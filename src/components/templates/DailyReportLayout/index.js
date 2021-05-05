@@ -14,6 +14,7 @@ import Loader from '../../molecules/Loader'
 import RNFetchBlob from 'rn-fetch-blob'
 import { useSelector } from 'react-redux';
 import ButtonPrimary from '../../atoms/buttons/ButtonPrimary';
+import PrintAll from '../../organisms/PrintAll';
 
 const DailyReportLayout = () => {
     // set mode date
@@ -65,7 +66,7 @@ const DailyReportLayout = () => {
             if(res.data.status){
                 const lstData = res.data.data.map((obj, id) => 
                     <View key={id} style={{marginTop: 24}}>
-                        <ReportCard title={obj.kegiatan} content={obj.uraian} date={getFullDate(new Date(obj.tgl_transaksi))}/>
+                        <ReportCard title={obj.kegiatan} content={obj.uraian} date={getFullDate(new Date(obj.tgl_transaksi))} idReport={obj.id_laporan} onDelete={(id, title) => deleteReport(id, title)} />
                     </View>    
                 )
                 setReports(lstData)
@@ -130,6 +131,30 @@ const DailyReportLayout = () => {
             );
         }
     }
+
+    const deleteReport = (id, title) => {
+        Alert.alert(
+            "Konfirmasi",
+            `Apakah anda yakin mengahpus laporan "${title}"`,
+            [
+                { text: "Batal", onPress: () => '' },
+                {text: "Ok", onPress: () => {
+                    axios({
+                        url: 'https://api-mgbk.bgskr-project.my.id/report/destroy',
+                        method: `post`,
+                        data: { id_laporan: id }
+                    })
+                    .then(res => {
+                        getReport()
+                        alert('Berhasil menghapus laporan')
+                    })
+                    .catch(err => {
+                        alert(err)
+                    })
+                }}
+            ]
+        );
+    }
     
     return (
         <View style={{backgroundColor: '#fff', flex: 1}}>
@@ -169,19 +194,13 @@ const DailyReportLayout = () => {
                             isFetched == false?
                             <SkeletonPlaceholder>
                                 <View style={{marginTop: 24}}>
-                                    <View style={{width: '100%', height: 135, borderRadius: 8}} />
+                                    <View style={{width: '100%', height: 235, borderRadius: 8}} />
                                 </View>
                                 <View style={{marginTop: 24}}>
-                                    <View style={{width: '100%', height: 135, borderRadius: 8}} />
+                                    <View style={{width: '100%', height: 235, borderRadius: 8}} />
                                 </View>
                                 <View style={{marginTop: 24}}>
-                                    <View style={{width: '100%', height: 135, borderRadius: 8}} />
-                                </View>
-                                <View style={{marginTop: 24}}>
-                                    <View style={{width: '100%', height: 135, borderRadius: 8}} />
-                                </View>
-                                <View style={{marginTop: 24}}>
-                                    <View style={{width: '100%', height: 135, borderRadius: 8}} />
+                                    <View style={{width: '100%', height: 235, borderRadius: 8}} />
                                 </View>
                             </SkeletonPlaceholder>
                             :
@@ -203,9 +222,7 @@ const DailyReportLayout = () => {
                 </ScrollView>
             </View>
             <View style={{borderTopWidth: 1.5, borderTopColor: 'rgba(10, 10, 10, 0.15)'}}>
-                <View style={{marginVertical: 16, marginHorizontal: 32}}>
-                    <ButtonSubmit title={"Cetak Semua"} onPress={() => printReport()} />
-                </View>
+                <PrintAll onPress={() => printReport()} />
             </View>
         </View>
     )

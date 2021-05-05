@@ -1,9 +1,9 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import Heading2 from '../../atoms/texts/Heading2'
 import Heading3 from '../../atoms/texts/Heading3'
-import Paragraph from '../../atoms/texts/Paragraph'
-import LinkMulai from '../../molecules/links/LinkMulai'
+import LabelUnderline from '../../atoms/texts/LabelUnderline'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 const ReportCard = (props) => {
     return (
@@ -19,6 +19,17 @@ const ReportCard = (props) => {
                 </View>
                 <View style={{marginTop: 8, marginBottom: 26}}>
                     <Heading3 color={"#737373"} text={props.content? props.content : "Uraian kegiatan Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam eos ea et sit ad laborum ipsum earum sequi odio sed..."}/>
+                </View>
+                <View style={{flexDirection: 'column', marginTop: 16}}>
+                    <View style={{borderColor: "#4a4a4a", borderWidth: 1}} />
+                </View>
+                <View style={{flexDirection: 'row', justifyContent: 'center', marginVertical: 20}}>
+                    <TouchableOpacity activeOpacity={0.8} style={{flexDirection: 'row'}} onPress={() => props.onDelete? props.onDelete(props.idReport, props.title) : alert('klik')}>
+                        <View style={{marginRight: 8, justifyContent: 'center'}}>
+                            <Icon name={'trash'} size={18} color={'#4a4a4a'}/>
+                        </View>
+                        <LabelUnderline text={"Hapus"} />
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
