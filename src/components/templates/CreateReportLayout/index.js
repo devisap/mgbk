@@ -10,6 +10,7 @@ import DocumentField from '../../molecules/forms/DocumentField'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Loader from '../../molecules/Loader'
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder'
+import BasicField from '../../molecules/forms/BasicField'
 
 const CreateReportLayout = (props) => {
     const [listActivity, setListActivity] = useState({})
@@ -19,9 +20,9 @@ const CreateReportLayout = (props) => {
         tanggal: new Date(),
         kegiatan: '',
         detail: '',
-        dokumen: {}
+        upload_doc1: '',
+        upload_doc2: '',
     })
-    const [docFilename, setDocFilename] = useState('')
     
     useEffect(() => {
         axios({
@@ -45,9 +46,6 @@ const CreateReportLayout = (props) => {
     }, [reportData])
 
     const onChangeValue = (inputType, value) => {
-        if(inputType == 'dokumen'){
-            setDocFilename(value[0].name)
-        }
         setReportData({
             ...reportData,
             [inputType]: value
@@ -73,43 +71,23 @@ const CreateReportLayout = (props) => {
     }
 
     const postData = async() => {
-        if(reportData.dokumen.length > 2){
-            alert('Data upload tidak boleh dari 2 dokumen !')
-            return true;
-        }
-        
-        const fileSizes = reportData.dokumen.map(item => item.size)
-        const maxSize   = Math.max(...fileSizes)
-        console.log(maxSize)
-        if(maxSize > 2000000){
-            alert('Data upload tidak boleh lebih dari 2 Mb !')
-            return true;
-        }
 
         const DATA_USER = await AsyncStorage.getItem('DATA_USER')
         const dataUser = JSON.parse(DATA_USER)
-        
-        const formData = new FormData()
-        formData.append('id_user', await AsyncStorage.getItem('ID_USER'))
-        formData.append('id_sekolah', dataUser.id_sekolah)
-        formData.append('id_kegiatan', reportData.kegiatan)
-        formData.append('tgl_transaksi', `${reportData.tanggal.getFullYear()}-${reportData.tanggal.getMonth()+1}-${reportData.tanggal.getDate()}`)
-        formData.append('detail', reportData.detail)
 
-        let x = 1
-        for(const obj of reportData.dokumen){
-            formData.append('upload_doc_'+x, obj)
-            x++
-        }
         setIsLoading(true)
         axios({
             url: 'https://api-mgbk.bgskr-project.my.id/report',
             method: 'post',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'multipart/form-data'
-            },
-            data: formData
+            data: {
+                id_user: dataUser.id_user,
+                id_sekolah: dataUser.id_sekolah,
+                id_kegiatan: reportData.kegiatan,
+                tgl_transaksi: `${reportData.tanggal.getFullYear()}-${reportData.tanggal.getMonth()+1}-${reportData.tanggal.getDate()}`,
+                detail: reportData.detail,
+                upload_doc_1: reportData.upload_doc1,
+                upload_doc_2: reportData.upload_doc2
+            }
         })
         .then(res => {
             if(res.data.status == true){
@@ -159,7 +137,11 @@ const CreateReportLayout = (props) => {
                                 </View>
                                 <View style={{marginTop: 24}}>
                                     <View style={{width: 125, height: 25}} />
-                                    <View style={{marginTop:8, width:'100%', height: 45}} />
+                                    <View style={{marginTop:8, width:'100%', height: 35}} />
+                                </View>
+                                <View style={{marginTop: 24}}>
+                                    <View style={{width: 125, height: 25}} />
+                                    <View style={{marginTop:8, width:'100%', height: 35}} />
                                 </View>
                                 <View style={{marginTop: 24}}>
                                     <View style={{marginTop:8, width:'100%', height: 35}} />
@@ -181,12 +163,10 @@ const CreateReportLayout = (props) => {
                                     <TextAreaField value={reportData.detail} onChangeValue={onChangeValue} inputType={"detail"} />
                                 </View>
                                 <View style={{marginTop: 24}}>
-                                    <DocumentField
-                                        fileName={docFilename} 
-                                        // fileName={''} 
-                                        onChangeValue={onChangeValue} 
-                                        inputType={"dokumen"} 
-                                        label={"Dokumen Kegiatan"} />
+                                    <BasicField label={"Link Dokumen 1"} onChangeValue={onChangeValue} inputType={"upload_doc1"}/>
+                                </View>
+                                <View style={{marginTop: 24}}>
+                                    <BasicField label={"Link Dokumen 2"} onChangeValue={onChangeValue} inputType={"upload_doc2"}/>
                                 </View>
                                 <View style={{marginTop: 24}}>
                                     <ButtonSuccess text={"Simpan"} onPress={() => confirmationAlert()} />
