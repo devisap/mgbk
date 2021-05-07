@@ -1,11 +1,17 @@
 import CheckBox from '@react-native-community/checkbox'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import Heading3 from '../../atoms/texts/Heading3'
 import ButtonSubmit from '../../molecules/buttons/ButtonSubmit'
 
 const PrintAll = (props) => {
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
+
+    useEffect(() => {
+        if(props.onChangeUseHeader)
+            props.onChangeUseHeader(toggleCheckBox)
+    }, [toggleCheckBox])
+
     return (
         <View style={{marginVertical: 16, marginHorizontal: 32}}>
             <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 8}}>

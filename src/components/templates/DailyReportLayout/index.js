@@ -24,6 +24,7 @@ const DailyReportLayout = () => {
     const [dateString, setDateString] = useState(getFullDate(new Date()))
     const [show, setShow] = useState(false);
     
+    const [isUseHeader, setIsUseHeader] = useState("2")
     const [isFetched, setIsFetched] = useState(true)
     const [reports, setReports] = useState()
     const [isReportEmpty, setIsReportEmpty] = useState(true)
@@ -39,6 +40,13 @@ const DailyReportLayout = () => {
         setDate(currentDate);
         setDateString(getFullDate(currentDate));
     };
+
+    const onChangeUseHeader = isChecked => {
+        if(isChecked)
+            setIsUseHeader("1")
+        else
+            setIsUseHeader("2")
+    }
 
     const showMode = (currentMode) => {
         setShow(true);
@@ -66,7 +74,7 @@ const DailyReportLayout = () => {
             if(res.data.status){
                 const lstData = res.data.data.map((obj, id) => 
                     <View key={id} style={{marginTop: 24}}>
-                        <ReportCard title={obj.kegiatan} content={obj.uraian} date={getFullDate(new Date(obj.tgl_transaksi))} idReport={obj.id_laporan} onDelete={(id, title) => deleteReport(id, title)} />
+                        <ReportCard title={obj.kegiatan} content={obj.uraian} date={getFullDate(new Date(obj.tgl_transaksi))} idReport={obj.id_laporan} onDelete={(id, title) => deleteReport(id, title)}/>
                     </View>    
                 )
                 setReports(lstData)
@@ -88,7 +96,12 @@ const DailyReportLayout = () => {
             setIsLoading(true)
             const tglTransaksi = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
             axios({
-                url: `https://api-mgbk.bgskr-project.my.id/print-report/by-date/${tglTransaksi}?id_user=${globalState.id_user}&id_sekolah=${globalState.id_sekolah}`,
+                url: `https://api-mgbk.bgskr-project.my.id/print-report/by-date/${tglTransaksi}`,
+                params: {
+                    id_user: globalState.id_user,
+                    id_sekolah: globalState.id_sekolah,
+                    withHeader: isUseHeader 
+                },
                 method: 'get',
             })
             .then(res => {
@@ -222,7 +235,7 @@ const DailyReportLayout = () => {
                 </ScrollView>
             </View>
             <View style={{borderTopWidth: 1.5, borderTopColor: 'rgba(10, 10, 10, 0.15)'}}>
-                <PrintAll onPress={() => printReport()} />
+                <PrintAll onPress={() => printReport()}  onChangeUseHeader={onChangeUseHeader}  />
             </View>
         </View>
     )

@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import Loader from '../../molecules/Loader'
 import ReportCard from '../../organisms/ReportCard'
 import ButtonPrimary from '../../atoms/buttons/ButtonPrimary'
+import PrintAll from '../../organisms/PrintAll'
 
 const WeeklyReportLayout = () => {
     const [week, setWeek] = useState('');
@@ -21,6 +22,7 @@ const WeeklyReportLayout = () => {
     const [reports, setReports] = useState()
 
     const [isFetched, setIsFetched] = useState(true)
+    const [isUseHeader, setIsUseHeader] = useState("2")
     const [isReportEmpty, setIsReportEmpty] = useState(true)
     const [isMDFetched, setIsMDFetched] = useState(false)
     const [isMDWFetched, setIsMDWFetched] = useState(false)
@@ -45,6 +47,13 @@ const WeeklyReportLayout = () => {
     }
     const onChangeValueYear = value => {
         setYear(value)
+    }
+
+    const onChangeUseHeader = isChecked => {
+        if(isChecked)
+            setIsUseHeader("1")
+        else
+            setIsUseHeader("2")
     }
 
     const getMasterData = async() => {
@@ -135,6 +144,7 @@ const WeeklyReportLayout = () => {
                     id_user: globalState.id_user,
                     id_sekolah: globalState.id_sekolah,
                     id_week: week, 
+                    withHeader: isUseHeader ,
                     year: year
                 },
                 method: 'get'
@@ -254,9 +264,7 @@ const WeeklyReportLayout = () => {
                 </ScrollView>
             </View>
             <View style={{borderTopWidth: 1.5, borderTopColor: 'rgba(10, 10, 10, 0.15)'}}>
-                <View style={{marginVertical: 16, marginHorizontal: 32}}>
-                    <ButtonSubmit title={"Cetak Semua"} onPress={() => printReport()} />
-                </View>
+                <PrintAll onPress={() => printReport()}  onChangeUseHeader={onChangeUseHeader}  />
             </View>
         </View>
     )

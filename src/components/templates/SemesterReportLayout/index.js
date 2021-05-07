@@ -11,6 +11,7 @@ import RNFetchBlob from 'rn-fetch-blob'
 import { useSelector } from 'react-redux'
 import Loader from '../../molecules/Loader'
 import ButtonPrimary from '../../atoms/buttons/ButtonPrimary'
+import PrintAll from '../../organisms/PrintAll'
 
 const SemesterReportLayout = () => {
     const [semester, setSemester] = useState('1');
@@ -29,6 +30,7 @@ const SemesterReportLayout = () => {
     const [reports, setReports] = useState()
 
     const [isFetched, setIsFetched] = useState(true)
+    const [isUseHeader, setIsUseHeader] = useState("2")
     const [isReportEmpty, setIsReportEmpty] = useState(true)
     const [isMDFetched, setIsMDFetched] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -48,6 +50,13 @@ const SemesterReportLayout = () => {
     }
     const onChangeValueYear = value => {
         setYear(value)
+    }
+    
+    const onChangeUseHeader = isChecked => {
+        if(isChecked)
+            setIsUseHeader("1")
+        else
+            setIsUseHeader("2")
     }
 
     const getMasterData = async() => {
@@ -122,6 +131,7 @@ const SemesterReportLayout = () => {
                     id_user: globalState.id_user,
                     id_sekolah: globalState.id_sekolah,
                     semester: semester, 
+                    withHeader: isUseHeader ,
                     year: year
                 },
                 method: 'get'
@@ -242,9 +252,7 @@ const SemesterReportLayout = () => {
                 </ScrollView>
             </View>
             <View style={{borderTopWidth: 1.5, borderTopColor: 'rgba(10, 10, 10, 0.15)'}}>
-                <View style={{marginVertical: 16, marginHorizontal: 32}}>
-                    <ButtonSubmit title={"Cetak Semua"} onPress={() => printReport()} />
-                </View>
+                <PrintAll onPress={() => printReport()}  onChangeUseHeader={onChangeUseHeader}  />
             </View>
         </View>
     )
