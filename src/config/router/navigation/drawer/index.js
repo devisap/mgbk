@@ -7,7 +7,7 @@ import {
     YearlyReportStack, ProfileStack, SettingProfileStack, AddSchoolStack
 } from '../stack'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Alert, Text, View } from 'react-native';
+import { Alert, Image, Text, View } from 'react-native';
 import { useState } from 'react';
 import Collapsible from 'react-native-collapsible';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -178,6 +178,7 @@ const CustomDrawerContent = (props) => {
                 </View>
             </View>
           </TouchableOpacity>
+          <Image source={require('../../../../assets/images/logostiki.png')} style={{width: 40, height: 40, marginTop: 24, alignSelf: 'center'}} />
         </DrawerContentScrollView>
     );
 }
