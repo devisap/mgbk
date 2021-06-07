@@ -67,7 +67,7 @@ const YearlyReportLayout = () => {
     const fetchData = async() => {
         setIsFetched(false)
         axios({
-            url: `https://api-mgbk.bgskr-project.my.id/report/by-year`,
+            url: `https://api.mgbkkotamalang.my.id/report/by-year`,
             params: {
                 id_user: globalState.id_user,
                 id_sekolah: globalState.id_sekolah,
@@ -116,7 +116,7 @@ const YearlyReportLayout = () => {
         if(!isReportEmpty){
             setIsLoading(true)
             axios({
-                url: `https://api-mgbk.bgskr-project.my.id/print-report/by-year`,
+                url: `https://api.mgbkkotamalang.my.id/print-report/by-year`,
                 params: {
                     id_user: globalState.id_user,
                     id_sekolah: globalState.id_sekolah,
@@ -143,7 +143,7 @@ const YearlyReportLayout = () => {
                         path : `${dirs.DownloadDir}/${fileName}`
                     },
                   })
-                  .fetch('GET', `https://api-mgbk.bgskr-project.my.id/${res.data.data}`)
+                  .fetch('GET', `https://api.mgbkkotamalang.my.id/${res.data.data}`)
                   .then(res => {
                     alert('Berhasil mencetak laporan!')
                   })

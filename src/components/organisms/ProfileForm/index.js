@@ -48,13 +48,13 @@ const ProfileForm = (props) => {
                     id_user: ID_USER,
                     nama_lengkap: dataProfile.nama_lengkap,
                     foto_profil: {
-                        uri: `https://api-mgbk.bgskr-project.my.id/upload/fotoProfil/${dataProfile.foto_profil}`,
+                        uri: `https://api.mgbkkotamalang.my.id/upload/fotoProfil/${dataProfile.foto_profil}`,
                         name: dataProfile.foto_profil
                     },
                     id_sekolah: dataProfile.id_sekolah,
                     kelas_pengampu: dataProfile.kelas_pengampu,
                     logo_sekolah: {
-                        uri: `https://api-mgbk.bgskr-project.my.id/upload/logoSekolah/${dataProfile.logo_sekolah}`,
+                        uri: `https://api.mgbkkotamalang.my.id/upload/logoSekolah/${dataProfile.logo_sekolah}`,
                         name: dataProfile.logo_sekolah
                     },
                     alamat_sekolah: dataProfile.alamat_sekolah,
@@ -82,7 +82,7 @@ const ProfileForm = (props) => {
     }
 
     const getListSchool = async() => {
-        await axios.get('https://api-mgbk.bgskr-project.my.id/school')
+        await axios.get('https://api.mgbkkotamalang.my.id/school')
             .then(res => {
                 const list = res.data.data.map(obj => ({label: obj.nama_sekolah, value: obj.id_sekolah}))
                 setListSchool(list)
@@ -129,7 +129,7 @@ const ProfileForm = (props) => {
         }
         
         axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/user/profile',
+            url: 'https://api.mgbkkotamalang.my.id/user/profile',
             method: 'post',
             headers: {
                 Accept: 'application/json',
@@ -166,7 +166,7 @@ const ProfileForm = (props) => {
     const setProfile = async() => {
         const ID_USER = await AsyncStorage.getItem('ID_USER')
         axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/user/profile/'+ID_USER,
+            url: 'https://api.mgbkkotamalang.my.id/user/profile/'+ID_USER,
             method: 'get'
         })
         .then(async(res) => {

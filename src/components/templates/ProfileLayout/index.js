@@ -26,7 +26,7 @@ const ProfileLayout = (props) => {
     //     const EMAIL = await AsyncStorage.getItem('EMAIL')
     //     let dataUser = JSON.parse(DATA_USER)
     //     if(IS_PROFILE_VERIFIED == 't'){
-    //         setFotoProfil(`https://api-mgbk.bgskr-project.my.id/upload/fotoProfil/${dataUser.foto_profil}`)
+    //         setFotoProfil(`https://api.mgbkkotamalang.my.id/upload/fotoProfil/${dataUser.foto_profil}`)
     //         setNamaLengkap(dataUser.nama_lengkap)
     //         setEmail(EMAIL)
     //         setIsFetched(true)
@@ -55,7 +55,7 @@ const ProfileLayout = (props) => {
                         :
                         <View>
                             <View style={{flexDirection: "column", alignItems: 'center'}}>
-                                <CircleImage source={globalState.foto_profil?`https://api-mgbk.bgskr-project.my.id/upload/fotoProfil/${globalState.foto_profil}`: ''}/>
+                                <CircleImage source={globalState.foto_profil?`https://api.mgbkkotamalang.my.id/upload/fotoProfil/${globalState.foto_profil}`: ''}/>
                             </View>
                             <View style={{marginTop: 24}}>
                                 <InfoProfileCard namaLengkap={globalState.nama_lengkap? globalState.nama_lengkap : '---'} namaSekolah={globalState.nama_sekolah? globalState.nama_sekolah: '---'} email={globalState.email? globalState.email: '---'} />

@@ -71,7 +71,7 @@ const WeeklyReportLayout = () => {
     const getMasterDataWeeks = async() => {
         setIsMDWFetched(false)
         axios({
-            url: `https://api-mgbk.bgskr-project.my.id/report/load-weeks`,
+            url: `https://api.mgbkkotamalang.my.id/report/load-weeks`,
             params: {
                 year: year
             },
@@ -100,7 +100,7 @@ const WeeklyReportLayout = () => {
         if(week){
             setIsFetched(false)
             axios({
-                url: `https://api-mgbk.bgskr-project.my.id/report/by-week`,
+                url: `https://api.mgbkkotamalang.my.id/report/by-week`,
                 params: {
                     id_user: globalState.id_user,
                     id_sekolah: globalState.id_sekolah,
@@ -139,7 +139,7 @@ const WeeklyReportLayout = () => {
         if(!isReportEmpty){
             setIsLoading(true)
             axios({
-                url: `https://api-mgbk.bgskr-project.my.id/print-report/by-week`,
+                url: `https://api.mgbkkotamalang.my.id/print-report/by-week`,
                 params: {
                     id_user: globalState.id_user,
                     id_sekolah: globalState.id_sekolah,
@@ -166,7 +166,7 @@ const WeeklyReportLayout = () => {
                         path : `${dirs.DownloadDir}/${fileName}`
                     },
                   })
-                  .fetch('GET', `https://api-mgbk.bgskr-project.my.id/${res.data.data}`)
+                  .fetch('GET', `https://api.mgbkkotamalang.my.id/${res.data.data}`)
                   .then(res => {
                     alert('Berhasil mencetak laporan!')
                   })

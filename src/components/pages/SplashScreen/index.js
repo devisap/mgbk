@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, StatusBar, Image } from 'react-native';
 import IsLoggedIn from '../../../config/storage/IsLoggedIn';
-import Logo from '../../../assets/images/splash_logo.svg'
 
 const SplashScreen = ({navigation}) => {
     setTimeout(async() => {

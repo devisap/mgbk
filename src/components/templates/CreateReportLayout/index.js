@@ -26,7 +26,7 @@ const CreateReportLayout = (props) => {
     
     useEffect(() => {
         axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/activity',
+            url: 'https://api.mgbkkotamalang.my.id/activity',
             method: 'get'
         })
         .then(async res => {
@@ -77,7 +77,7 @@ const CreateReportLayout = (props) => {
 
         setIsLoading(true)
         axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/report',
+            url: 'https://api.mgbkkotamalang.my.id/report',
             method: 'post',
             data: {
                 id_user: dataUser.id_user,

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const loginApi = param => {
     return axios({
-        url: 'https://api-mgbk.bgskr-project.my.id/user/login',
+        url: 'https://api.mgbkkotamalang.my.id/user/login',
         method: 'post',
         data: {
             email: param.email,
@@ -13,7 +13,7 @@ const loginApi = param => {
 
 const registerApi = param => {
     return axios({
-        url: 'https://api-mgbk.bgskr-project.my.id/user/register',
+        url: 'https://api.mgbkkotamalang.my.id/user/register',
         method: 'post',
         data: {
             name: param.name,
@@ -26,7 +26,7 @@ const registerApi = param => {
 const getDataProfileApi = param => {
     console.log(param.id_user)
     return axios({
-        url: 'https://api-mgbk.bgskr-project.my.id/user/profile/'+param.id_user,
+        url: 'https://api.mgbkkotamalang.my.id/user/profile/'+param.id_user,
         method: 'get'
     })
 }

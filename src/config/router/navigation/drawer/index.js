@@ -178,7 +178,13 @@ const CustomDrawerContent = (props) => {
                 </View>
             </View>
           </TouchableOpacity>
-          <Image source={require('../../../../assets/images/logostiki.png')} style={{width: 40, height: 40, marginTop: 24, alignSelf: 'center'}} />
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingTop: 24}}>
+                <Image source={require('../../../assets/images/logo_mgbk.png')} style={{width: 50, height: 50}} />
+                <View>
+                    <View style={{flex: 1, borderWidth: 0.5, marginHorizontal: 16}}  />
+                </View>
+                <Image source={require('../../../assets/images/logostiki.png')} style={{width: 50, height: 50}} />
+            </View>
         </DrawerContentScrollView>
     );
 }

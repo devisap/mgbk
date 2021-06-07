@@ -9,7 +9,13 @@ const LoginLayout = (props) => {
                 <LoginCard navigation={props.navigation} />
                 <View style={{alignItems: 'center', marginTop: 71, marginBottom: 24}}>
                     <Text style={{fontFamily: 'Lato', fontSize: 16, color: '#4a4a4a'}}>{'\u00A9'} MGBK SMA Kota Malang</Text>
-                    <Image source={require('../../../assets/images/logostiki.png')} style={{width: 40, height: 40, marginTop: 24}} />
+                    <View style={{flexDirection: 'row', alignItems: 'center', paddingTop: 24}}>
+                        <Image source={require('../../../assets/images/logo_mgbk.png')} style={{width: 50, height: 50}} />
+                        <View>
+                            <View style={{flex: 1, borderWidth: 0.5, marginHorizontal: 16}}  />
+                        </View>
+                        <Image source={require('../../../assets/images/logostiki.png')} style={{width: 50, height: 50}} />
+                    </View>
                 </View>
             </ScrollView>
         </View>

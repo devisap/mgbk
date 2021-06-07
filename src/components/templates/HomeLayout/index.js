@@ -24,7 +24,7 @@ const HomeLayout = (props) => {
 
     const getDataProfile = (idUser) => {
         axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/user/profile/'+idUser,
+            url: 'https://api.mgbkkotamalang.my.id/user/profile/'+idUser,
             method: 'get'
         })
         .then(async(res) => {

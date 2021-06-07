@@ -70,7 +70,7 @@ const MonthlyReportLayout = () => {
         console.log(`${month} - ${year}`)
         setIsFetched(false)
         axios({
-            url: `https://api-mgbk.bgskr-project.my.id/report/by-month`,
+            url: `https://api.mgbkkotamalang.my.id/report/by-month`,
             params: {
                 id_user: globalState.id_user,
                 id_sekolah: globalState.id_sekolah,
@@ -120,7 +120,7 @@ const MonthlyReportLayout = () => {
         if(!isReportEmpty){
             setIsLoading(true)
             axios({
-                url: `https://api-mgbk.bgskr-project.my.id/print-report/by-month`,
+                url: `https://api.mgbkkotamalang.my.id/print-report/by-month`,
                 params: {
                     id_user: globalState.id_user,
                     id_sekolah: globalState.id_sekolah,
@@ -148,7 +148,7 @@ const MonthlyReportLayout = () => {
                         path : `${dirs.DownloadDir}/${fileName}`
                     },
                   })
-                  .fetch('GET', `https://api-mgbk.bgskr-project.my.id/${res.data.data}`)
+                  .fetch('GET', `https://api.mgbkkotamalang.my.id/${res.data.data}`)
                   .then(res => {
                     alert('Berhasil mencetak laporan!')
                   })

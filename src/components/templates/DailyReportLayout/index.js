@@ -63,7 +63,7 @@ const DailyReportLayout = () => {
         const dataUser = JSON.parse(await AsyncStorage.getItem('DATA_USER'))
         const tglTransaksi = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
         axios({
-            url: `https://api-mgbk.bgskr-project.my.id/report/by-date/${tglTransaksi}`,
+            url: `https://api.mgbkkotamalang.my.id/report/by-date/${tglTransaksi}`,
             method: 'get',
             params: {
                 id_user: dataUser.id_user,
@@ -96,7 +96,7 @@ const DailyReportLayout = () => {
             setIsLoading(true)
             const tglTransaksi = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
             axios({
-                url: `https://api-mgbk.bgskr-project.my.id/print-report/by-date/${tglTransaksi}`,
+                url: `https://api.mgbkkotamalang.my.id/print-report/by-date/${tglTransaksi}`,
                 params: {
                     id_user: globalState.id_user,
                     id_sekolah: globalState.id_sekolah,
@@ -121,7 +121,7 @@ const DailyReportLayout = () => {
                         path : `${dirs.DownloadDir}/${fileName}`
                     },
                   })
-                  .fetch('GET', `https://api-mgbk.bgskr-project.my.id/${res.data.data}`)
+                  .fetch('GET', `https://api.mgbkkotamalang.my.id/${res.data.data}`)
                   .then(res => {
                     alert('Berhasil mencetak laporan!')
                   })
@@ -153,7 +153,7 @@ const DailyReportLayout = () => {
                 { text: "Batal", onPress: () => '' },
                 {text: "Ok", onPress: () => {
                     axios({
-                        url: 'https://api-mgbk.bgskr-project.my.id/report/destroy',
+                        url: 'https://api.mgbkkotamalang.my.id/report/destroy',
                         method: `post`,
                         data: { id_laporan: id }
                     })

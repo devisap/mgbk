@@ -20,7 +20,7 @@ const AddSchoolLayout = (props) => {
     const postData = () => {
         setIsLoading(true)
         axios({
-            url: 'https://api-mgbk.bgskr-project.my.id/school',
+            url: 'https://api.mgbkkotamalang.my.id/school',
             method: 'post',
             data: {
                 nama_sekolah: dataSekolah.sekolah
