@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.mgbk"
+        applicationId "id.ac.stiki.doleno.mgbk"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
