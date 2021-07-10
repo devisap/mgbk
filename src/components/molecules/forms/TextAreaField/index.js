@@ -13,7 +13,7 @@ const TextAreaField = (props) => {
     
     return (
         <View style={{flex: 1}}>
-            <Label text={"Detail"} />
+            <Label text={"Detail"} required={props.required} />
             <View style={{marginTop: 8}}>
                 <TextInput 
                     style={isFocused == true? styles.focused : styles.notFocused} 

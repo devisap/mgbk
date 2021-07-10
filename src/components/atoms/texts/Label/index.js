@@ -1,13 +1,23 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 const Label = (props) => {
     if(props.color){
         if(props.color == "white"){
-            return <Text style={styles.textWhite}>{props.text? props.text : "Label"}</Text>
+            return (
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={styles.textWhite}>{props.text? props.text : "Label"}</Text>
+                    <Text>{props.required? '*' : ''}</Text>
+                </View>
+            )
         }
     }else{
-        return <Text style={styles.text}>{props.text? props.text : "Label"}</Text>
+        return (
+            <View style={{flexDirection: 'row'}}>
+                <Text style={styles.text}>{props.text? props.text : "Label"}</Text>
+                <Text style={styles.required}>{props.required? ' *' : ''}</Text>
+            </View>
+        )
     }
 }
 
@@ -25,6 +35,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         lineHeight: 24,
         color: "#fff"
+    },
+    required: {
+        color: '#FF0000'
     }
 })
 

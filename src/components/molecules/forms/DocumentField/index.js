@@ -5,7 +5,7 @@ import Label from '../../../atoms/texts/Label'
 import DocumentPicker from 'react-native-document-picker';
 
 const DocumentField = (props) => {
-    const [value, setValue] = useState([{name: ''}])
+    const [value, setValue] = useState({})
     useEffect(() => {
       if(props.onChangeValue)
         props.onChangeValue(props.inputType, value)
@@ -13,11 +13,11 @@ const DocumentField = (props) => {
 
     const pickFile = async() => {
       try {
-        const results = await DocumentPicker.pickMultiple({
+        const res = await DocumentPicker.pick({
           type: [DocumentPicker.types.images, DocumentPicker.types.pdf],
         });
-        const resObj = results.map(obj => ({uri: obj.uri, type: obj.type, name: obj.name, size: obj.size}))
-        setValue(resObj)
+        // const resObj = results.map(obj => ({uri: obj.uri, type: obj.type, name: obj.name, size: obj.size}))
+        setValue({uri: res.uri, type: res.type, name: res.name, size: res.size})
       } catch (err) {
         if (DocumentPicker.isCancel(err)) {
           // User cancelled the picker, exit any dialogs or menus and move on
@@ -28,7 +28,7 @@ const DocumentField = (props) => {
     }
     return(
         <View style={{flex: 1}}>
-            <Label text={props.label? props.label : ""} />
+            <Label text={props.label? props.label : ""} required={props.required && props.required} />
             <TouchableOpacity activeOpacity={0.8} onPress={() => pickFile()}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
                     <View style={{flex: 1, flexDirection: 'row', backgroundColor: "#F5F5F5", alignItems: 'center', borderTopLeftRadius: 4, borderBottomLeftRadius: 4, borderColor: '#DBDBDB', borderWidth: 1, height: 43, marginTop: 8, paddingHorizontal: 10}}>

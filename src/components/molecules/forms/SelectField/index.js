@@ -29,7 +29,7 @@ const SelectField = (props) => {
 
     return (
         <View>
-            <Label text={props.label? props.label : ''} />
+            <Label text={props.label? props.label : ''} required={props.required && props.required} />
             <View style={{marginTop: 8}}>
                 <DropDownPicker
                     items={items}

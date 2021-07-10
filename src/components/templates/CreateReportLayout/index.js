@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, TouchableOpacity, ScrollView, Alert } from 'react-native'
+import { View, TouchableOpacity, ScrollView, Alert, Text } from 'react-native'
 import Heading2 from '../../atoms/texts/Heading2'
 import DateField from '../../molecules/forms/DateField'
 import SelectField from '../../molecules/forms/SelectField'
@@ -20,9 +20,10 @@ const CreateReportLayout = (props) => {
         tanggal: new Date(),
         kegiatan: '',
         detail: '',
-        upload_doc1: '',
+        dokumen: {},
         upload_doc2: '',
     })
+    const [docFilename, setDocFilename] = useState('')
     
     useEffect(() => {
         axios({
@@ -42,10 +43,13 @@ const CreateReportLayout = (props) => {
     }, [])
 
     useEffect(() => {
-        // console.log(reportData)
+        console.log(reportData)
     }, [reportData])
 
     const onChangeValue = (inputType, value) => {
+        if(inputType == 'dokumen'){
+            setDocFilename(value.name)
+        }
         setReportData({
             ...reportData,
             [inputType]: value
@@ -71,23 +75,38 @@ const CreateReportLayout = (props) => {
     }
 
     const postData = async() => {
+        if(reportData.dokumen === {}){
+            alert('Dokumen Kegiatan Wajib diisi !')
+            console.log('masuk')
+            return true
+        }
+
+        const fileSize = reportData.dokumen.size
+        if(fileSize > 2000000){
+            alert('Data upload tidak boleh lebih dari 2 Mb !')
+            return true;
+        }
 
         const DATA_USER = await AsyncStorage.getItem('DATA_USER')
         const dataUser = JSON.parse(DATA_USER)
 
+        const formData = new FormData()
+        formData.append('id_user', await AsyncStorage.getItem('ID_USER'))
+        formData.append('id_sekolah', dataUser.id_sekolah)
+        formData.append('id_kegiatan', reportData.kegiatan)
+        formData.append('tgl_transaksi', `${reportData.tanggal.getFullYear()}-${reportData.tanggal.getMonth()+1}-${reportData.tanggal.getDate()}`)
+        formData.append('detail', reportData.detail)
+        formData.append('upload_doc_1', reportData.dokumen)
+        formData.append('upload_doc_2', reportData.upload_doc2)
         setIsLoading(true)
         axios({
             url: 'https://api.mgbkkotamalang.my.id/report',
             method: 'post',
-            data: {
-                id_user: dataUser.id_user,
-                id_sekolah: dataUser.id_sekolah,
-                id_kegiatan: reportData.kegiatan,
-                tgl_transaksi: `${reportData.tanggal.getFullYear()}-${reportData.tanggal.getMonth()+1}-${reportData.tanggal.getDate()}`,
-                detail: reportData.detail,
-                upload_doc_1: reportData.upload_doc1,
-                upload_doc_2: reportData.upload_doc2
-            }
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data'
+            },
+            data: formData
         })
         .then(res => {
             if(res.data.status == true){
@@ -157,16 +176,26 @@ const CreateReportLayout = (props) => {
                                     <DateField onChangeValue={onChangeValue} inputType={"tanggal"}  label={"Tanggal"} />
                                 </View>
                                 <View style={{marginTop: 24}}>
-                                    <SelectField value={reportData.kegiatan} items={listActivity} onChangeValue={onChangeValue} inputType={"kegiatan"} label={"Kegiatan"} />
+                                    <SelectField value={reportData.kegiatan} items={listActivity} onChangeValue={onChangeValue} inputType={"kegiatan"} label={"Kegiatan"} required={true} />
                                 </View>
                                 <View style={{marginTop: 24}}>
-                                    <TextAreaField value={reportData.detail} onChangeValue={onChangeValue} inputType={"detail"} />
+                                    <TextAreaField value={reportData.detail} onChangeValue={onChangeValue} inputType={"detail"} required={true} />
                                 </View>
                                 <View style={{marginTop: 24}}>
-                                    <BasicField label={"Link Dokumen 1"} onChangeValue={onChangeValue} inputType={"upload_doc1"}/>
+                                    <DocumentField 
+                                        label={"Dokumen Kegiatan"} 
+                                        onChangeValue={onChangeValue} 
+                                        inputType={"dokumen"}
+                                        fileName={docFilename} 
+                                        required={true}
+                                    />
                                 </View>
                                 <View style={{marginTop: 24}}>
                                     <BasicField label={"Link Dokumen 2"} onChangeValue={onChangeValue} inputType={"upload_doc2"}/>
+                                </View>
+                                <View style={{flexDirection: 'row', marginTop: 18}}>
+                                    <Text style={{color: '#FF0000'}}>*</Text>
+                                    <Text style={{fontFamily: 'Lato'}}> Isian wajib diisi</Text>
                                 </View>
                                 <View style={{marginTop: 24}}>
                                     <ButtonSuccess text={"Simpan"} onPress={() => confirmationAlert()} />
